@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href="/" class="navbar-brand">HHive</a>
+      <router-link to="/home" class="nav-brand"> HHive </router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/home" class="nav-link">
@@ -31,8 +31,8 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" @click.prevent="logOut">
-            <font-awesome-icon icon="sign-out-alt" /> LogOut
+          <a class="nav-link" @click.prevent="logout">
+            <font-awesome-icon icon="sign-out-alt" /> 로그아웃
           </a>
         </li>
       </div>
@@ -45,31 +45,22 @@
 </template>
 
 <script>
+import authService from "./services/auth.service";
+import userService from "./services/user.service";
+
 export default {
   computed: {
     currentUser() {
-      return this.$store.state.auth.user;
+      return userService.getUserInfo();
     },
-    showAdminBoard() {
-      if (this.currentUser && this.currentUser['roles']) {
-        return this.currentUser['roles'].includes('ROLE_ADMIN');
-      }
-
-      return false;
-    },
-    showModeratorBoard() {
-      if (this.currentUser && this.currentUser['roles']) {
-        return this.currentUser['roles'].includes('ROLE_MODERATOR');
-      }
-
-      return false;
-    }
   },
   methods: {
-    logOut() {
-      this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
-    }
-  }
+    logout() {
+      authService.logout();
+      // this.$store.dispatch("auth/logout");
+      this.$router.push("/home");
+      window.location.reload();
+    },
+  },
 };
 </script>

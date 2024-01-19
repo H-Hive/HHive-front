@@ -1,50 +1,40 @@
 <template>
   <div>
     <template v-for="(hiveData, index) in hiveDatas" :key="index">
-      <HiveForm 
-        :hiveData="hiveData"
-      />
+      <HiveCardForm :hiveData="hiveData" />
     </template>
   </div>
 </template>
 
 <script>
-import HiveForm from "../components/Hive.vue"
-import hiveService from "../services/hive.service"
-import commonService from "../services/common.service"
+import hiveService from "../services/hive.service";
+import HiveCardForm from "@/components/HiveCardForm.vue";
+import authService from "@/services/auth.service";
 
 export default {
   data() {
     return {
-      hiveDatas: '',
+      hiveDatas: "",
     };
   },
 
   components: {
-    HiveForm
+    HiveCardForm,
   },
 
   mounted() {
-    if (!this.$store.state.auth.user) {
-      this.$router.push('/login');
-    }
-    else {
-      hiveService.getAllHives().then(
-        response => {
-          this.hiveDatas = commonService.extractJSONFromProxy(response.data['payload']);
-          console.log(this.hiveDatas[0].hostName);
+    if (!authService.isLoggedIn()) {
+      this.$router.push("/login");
+    } else {
+      hiveService
+        .getAllHives()
+        .then((response) => {
+          this.hiveDatas = response.data["payload"];
         })
-      .catch(error => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }
-}
+  },
+};
 </script>
-
-
-<AlertModal
-      :is-visible="isModalVisible"
-      :message="modalMessage"
-      @closeAndRedirect="closeModalAndRedirect"
-  />

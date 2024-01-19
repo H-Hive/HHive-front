@@ -1,10 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "./components/Home.vue";
-import Login from "./components/Login.vue";
-import Register from "./components/Register.vue";
-import Profile from "./components/Profile.vue"
-import AllHivePage from "./views/AllHivePage.vue"
-import Cookies from "js-cookie";
+import Home from "./views/HomePage.vue";
+import LoginPage from "./views/LoginPage.vue";
+import SignupPage from "./views/SignupPage.vue";
+import AllHivePage from "./views/AllHivePage.vue";
+import HivePage from "./views/HivePage.vue";
+import ProfilePage from "./views/ProfilePage.vue";
+import authService from "./services/auth.service";
 // lazy-loaded
 // const Profile = () => import("./components/Profile.vue")
 
@@ -20,20 +21,25 @@ const routes = [
   },
   {
     path: "/login",
-    component: Login,
+    component: LoginPage,
   },
   {
     path: "/register",
-    component: Register,
+    component: SignupPage,
   },
   {
     path: "/profile",
     // lazy-loaded
-    component: Profile,
+    component: ProfilePage,
   },
   {
     path: "/hive",
     component: AllHivePage,
+  },
+  { 
+    path: "/hive/:id",
+    component: HivePage,
+    props: true
   }
 ];
 
@@ -42,22 +48,12 @@ const router = createRouter({
   routes,
 });
 
-//라우팅하기 전 유저정보 토큰이 존재하는지 확인
-let userInfoCookieName = 'userinfo';
-
-function isUserInfoCookieExist() {
-
-  return Cookies.get(userInfoCookieName);
-}
-
 //다른 페이지로 이동하기 전 로그인 여부 확인
 router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/register', '/home'];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = isUserInfoCookieExist() ? true : false;
+  const loggedIn = authService.isLoggedIn() ? true : false;
 
-  // trying to access a restricted page + not logged in
-  // redirect to login page
   if (authRequired && !loggedIn) {
     next('/login');
   } else {

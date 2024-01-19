@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const API_URL = 'http://localhost:8082/api/users/';
-const API_URL = 'http://15.165.158.12/api/users/';
+const API_URL = 'http://localhost:8082/api/users/';
+// const API_URL = 'http://15.165.158.12/api/users/';
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -26,7 +26,7 @@ class UserService {
 
   getMyHives(userId) {
 
-    return axios.get(API_URL + `/${userId}` + '/hives')
+    return axios.get(API_URL + `/${userId}` + '/hives');
   }
 
   //쿠키에서 유저 정보 추출 json 형식으로 반환.

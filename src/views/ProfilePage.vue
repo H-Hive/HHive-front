@@ -1,10 +1,13 @@
 <template>
-  <h2>ProfilePage</h2>
+  <ProfileForm />
 </template>
+
 <script>
+import ProfileForm from "@/components/ProfileForm.vue";
+
 export default {
-  setup() {
-    
+  components: {
+    ProfileForm,
   },
-}
+};
 </script>

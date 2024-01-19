@@ -1,36 +1,41 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-// const API_URL = 'http://localhost:8082/api/users'
-const API_URL = 'http://15.165.158.12/api/users'
+const API_URL = 'http://localhost:8082/api/users'
+// const API_URL = 'http://15.165.158.12:8080/api/users'
 
 let userInfoCookieName = 'userinfo';
 
-function isUserInfoCookieExist() {
-
-  return Cookies.get(userInfoCookieName);
-}
-
 class AuthService {
+
+  signup(user) {
+    return axios
+    .post(API_URL + '/signup', {
+      username: user.username,
+      password: user.password,
+      checkPassword: user.checkPassword,
+      email: user.email,
+      description: user.description,
+    })
+    .then(response => {
+      console.log(response);
+      return response;
+    })
+  }
+
   login(user) {
     return axios
       .post(API_URL + '/login', {
         username: user.username,
         password: user.password
-      })
+      }, {withCredentials: true})
       .then(response => {
-        if (response.headers) {
-          // console.log(response.data);
-          // localStorage.setItem('user', JSON.stringify(response.data['payload']));
-          // localStorage.setItem('Authorization', response.headers['authorization']);
-        }
-
-        return response.data;
+        return response;
       }); 
   }
 
   logout() {
-    console.log(document.cookie);
+
     // 모든 쿠키 가져오기
     var cookies = document.cookie.split(";");
 
@@ -43,19 +48,9 @@ class AuthService {
     }
   }
 
-  register(user) {
-    return axios.post(API_URL + '/signup', {
-      username: user.username,
-      password: user.password,
-      checkPassword: user.checkPassword,
-      email: user.email,
-      description: user.description
-    });
-  }
-
   isLoggedIn() {
     
-    return isUserInfoCookieExist();
+    return Cookies.get(userInfoCookieName);
   }
 }
 
