@@ -2,23 +2,23 @@
   <form v-on:submit.prevent="submitForm">
     <div>
       <label for="username">아이디: </label>
-      <input id="username" type="text" v-model="username" />
+      <input id="username" type="text" v-model="user.username" />
     </div>
     <div>
       <label for="password">비밀번호: </label>
-      <input id="password" type="password" v-model="password" />
+      <input id="password" type="password" v-model="user.password" />
     </div>
     <div>
       <label for="checkPassword">비밀번호 확인: </label>
-      <input id="checkPassword" type="password" v-model="checkPassword" />
+      <input id="checkPassword" type="password" v-model="user.checkPassword" />
     </div>
     <div>
       <label for="email">이메일: </label>
-      <input id="email" type="email" v-model="email" />
+      <input id="email" type="email" v-model="user.email" />
     </div>
     <div>
       <label for="description">자기소개: </label>
-      <input id="description" type="text" v-model="description" />
+      <input id="description" type="text" v-model="user.description" />
     </div>
 
     <button type="submit">회원가입</button>
@@ -28,23 +28,25 @@
   <AlertModal
     :is-visible="isModalVisible"
     :message="modalMessage"
-    @closeAndRedirect="closeModalAndRedirect"
+    @closeModalAndRedirect="closeModalAndRedirect"
   />
 </template>
 
 <script>
-import axios from "axios";
 import AlertModal from "@/components/AlertModal.vue";
+import authService from "@/services/auth.service";
 
 export default {
   data() {
     return {
       // 폼에 필요한 데이터들을 초기화
-      username: "",
-      password: "",
-      checkPassword: "",
-      email: "",
-      description: "",
+      user: {
+        username: "",
+        password: "",
+        checkPassword: "",
+        email: "",
+        description: "",
+      },
       isModalVisible: false,
       modalMessage: "",
       redirectPath: "/",
@@ -52,17 +54,8 @@ export default {
   },
   methods: {
     submitForm() {
-      const url = "/api/users/signup";
-      const data = {
-        username: this.username,
-        password: this.password,
-        checkPassword: this.checkPassword,
-        email: this.email,
-        description: this.description,
-      };
-
-      axios
-        .post(url, data)
+      authService
+        .signup(this.user)
         .then((response) => {
           if (response.status >= 200 && response.status < 300) {
             // 회원가입 성공 시 모달 표시

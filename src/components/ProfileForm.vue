@@ -4,15 +4,18 @@
       <h2>프로필</h2>
     </header>
     <div>
-      <img type="button" class="myimg" alt="HTML" src="../images/userlogo.png">
+      <img
+        type="button"
+        class="myimg"
+        alt="HTML"
+        src="../images/userlogo.png"
+      />
     </div>
-    <div class="userinfo">
+    <div class="userinfo" v-if="isEditMode">
       <h3>
         <strong>{{ profileData.username }}</strong>
       </h3>
-      <p>
-        서울특별시 / 1993.1.29
-      </p>
+      <p>서울특별시 / 1993.1.29</p>
       <h5>
         <strong>Email : </strong>
         {{ profileData.email }}
@@ -22,7 +25,16 @@
         {{ profileData.description }}
       </h5>
     </div>
-    
+
+    <div v-else>
+      <label>Email:</label>
+      <input v-model="profileData.email" />
+      <p></p>
+
+      <label>Description:</label>
+      <textarea v-model="profileData.description"></textarea>
+    </div>
+
     <br />
     <div>
       <div>
@@ -37,35 +49,67 @@
         회원가입으로 HHive 시작하기 (로그인 안된 상황에서 떠야함)
       </router-link>
     </div>
-
-
   </div>
+
+  <EditButton :isEditMode="isEditMode" @submitOrToggle="submitOrToggle" />
+  <button v-if="isEditMode" @click="cancelEdit">수정 취소</button>
 </template>
 
 <script>
 import userService from "@/services/user.service";
 import authService from "@/services/auth.service";
+import EditButton from "./EditButton.vue";
 
 export default {
   name: "profile-form",
+
   data() {
     return {
       profileData: {},
+      originProfileData: {},
+      isEditMode: false,
     };
   },
+
+  components: {
+    EditButton,
+  },
+
+  props: {
+    userId: Number,
+  },
+
   mounted() {
     if (!authService.isLoggedIn()) {
       this.$router.push("/login");
     } else {
+      console.log("id at profile: ", this.userId);
       userService
-        .getProfile()
+        .getProfile(this.userId)
         .then((response) => {
           this.profileData = response.data["payload"];
+          this.originProfileData = JSON.parse(JSON.stringify(this.profileData));
         })
         .catch((error) => {
           console.log(error);
         });
     }
+  },
+
+  methods: {
+    submitOrToggle() {
+      if (this.isEditMode) {
+        userService.modifyProfile(this.userId, this.profileData);
+        alert("수정이 완료되었습니다");
+        window.location.reload();
+      }
+      this.isEditMode = !this.isEditMode;
+    },
+
+    cancelEdit() {
+      this.isEditMode = !this.isEditMode;
+      this.profileData = JSON.parse(JSON.stringify(this.originProfileData));
+    },
   },
 };
 </script>
@@ -75,12 +119,10 @@ export default {
   width: 140px;
   height: 140px;
   float: left;
-
 }
 
 .userinfo {
   width: 500px;
-  margin: 5px 0px 0px 150px ;
-
+  margin: 5px 0px 0px 150px;
 }
 </style>

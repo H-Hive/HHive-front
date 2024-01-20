@@ -1,10 +1,11 @@
-<!-- AlertModal.vue -->
+// 예, 아니오 선택지가 있는 모달
 
 <template>
   <div class="modal" v-if="isVisible">
     <div class="modal-content">
       <p>{{ message }}</p>
-      <button @click="closeModalAndRedirect">확인</button>
+      <button @click="closeModalAndReload">예</button>
+      <button @click="justCloseModal">아니오</button>
     </div>
   </div>
 </template>
@@ -16,8 +17,11 @@ export default {
     message: String,
   },
   methods: {
-    closeModalAndRedirect() {
-      this.$emit("closeModalAndRedirect");
+    closeModalAndReload() {
+      this.$emit("closeModalAndReload");
+    },
+    justCloseModal() {
+      this.$emit("justCloseModal");
     },
   },
 };

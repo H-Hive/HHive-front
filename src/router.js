@@ -5,6 +5,7 @@ import SignupPage from "./views/SignupPage.vue";
 import AllHivePage from "./views/AllHivePage.vue";
 import HivePage from "./views/HivePage.vue";
 import ProfilePage from "./views/ProfilePage.vue";
+import PartyPage from "./views/PartyPage.vue"
 import authService from "./services/auth.service";
 // lazy-loaded
 // const Profile = () => import("./components/Profile.vue")
@@ -28,9 +29,10 @@ const routes = [
     component: SignupPage,
   },
   {
-    path: "/profile",
+    path: "/profile/:userId",
     // lazy-loaded
     component: ProfilePage,
+    props: true,
   },
   {
     path: "/hive",
@@ -39,6 +41,11 @@ const routes = [
   { 
     path: "/hive/:id",
     component: HivePage,
+    props: true
+  },
+  {
+    path: "/party/:id",
+    component: PartyPage,
     props: true
   }
 ];

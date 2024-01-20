@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8082/api/users/';
-// const API_URL = 'http://15.165.158.12/api/users/';
+const API_URL = 'http://localhost:8080/api/users';
+// const API_URL = 'https://hhive.shop/api/users';
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if(parts.length === 2) return parts.pop().split(';').shift();
-}
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if(parts.length === 2) return parts.pop().split(';').shift();
+// }
 
 class UserService {
   getPublicContent() {
@@ -15,13 +15,12 @@ class UserService {
     if(this.getUserInfo == null) return null;
 
     //추후 내가 가입된 하이브들만 가져오게끔
-    return axios.get(API_URL + 'all');
+    return axios.get(API_URL + '/all');
   }
 
-  getProfile() {
-    const userId = this.getUserInfo()['userId'];
+  getProfile(userId) {
     
-    return axios.get(API_URL + `${userId}`);
+    return axios.get(API_URL + `/${userId}`);
   }
 
   getMyHives(userId) {
@@ -29,22 +28,33 @@ class UserService {
     return axios.get(API_URL + `/${userId}` + '/hives');
   }
 
+  modifyProfile(userId, profileData) {
+
+    return axios.patch(API_URL + `/${userId}`, 
+     {
+      email: profileData.email,
+      description: profileData.description,
+    }, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
+
   //쿠키에서 유저 정보 추출 json 형식으로 반환.
   getUserInfo() {
-    const cookieName = 'userinfo';
-    const cookieValue = getCookie(cookieName);
+    // const cookieName = 'userinfo';
+    // const cookieValue = getCookie(cookieName);
 
-    if (cookieValue) {
-      // Base64 디코딩
-      const decodedUserInfo = atob(cookieValue);
+    // if (cookieValue) {
+    //   // Base64 디코딩
+    //   console.log("Success readCookie: ", cookieValue)
+    //   const decodedUserInfo = atob(cookieValue);
 
-      // JSON 파싱
-      const userInfoObject = JSON.parse(decodedUserInfo);
+    //   // JSON 파싱
+    //   const userInfoObject = JSON.parse(decodedUserInfo);
 
-      return userInfoObject;
-    } else {
-      return null;
-    }
+    //   return userInfoObject;
+    // } else {
+    //   return null;
+    // }
+    return JSON.parse(localStorage.getItem('userinfo'));
   }
 }
 

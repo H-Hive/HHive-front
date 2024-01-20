@@ -66,7 +66,7 @@
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-import AlertModal from '@/components/AlertModal.vue';
+import AlertModal from "@/components/AlertModal.vue";
 
 export default {
   name: "register-form",
@@ -82,7 +82,7 @@ export default {
       password: yup.string().required("필수 입력사항입니다.").min(4),
       checkPassword: yup.string().required("필수 입력사항입니다.").min(4),
       email: yup.string().required("필수 입력사항입니다.").email(),
-      description: yup.string().required("필수 입력사항입니다.")
+      description: yup.string().required("필수 입력사항입니다."),
     });
 
     return {
@@ -91,8 +91,8 @@ export default {
       message: "",
       schema,
       isModalVisible: false,
-      modalMessage: '',
-      redirectPath: '/',
+      modalMessage: "",
+      redirectPath: "/",
     };
   },
   computed: {
@@ -102,7 +102,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push("/profile");
+      this.$router.push("/home");
     }
   },
   methods: {
@@ -118,7 +118,7 @@ export default {
           this.message = data.message;
           this.successful = true;
           this.loading = false;
-          this.showModal('회원가입이 성공했습니다.', '/');
+          this.showModal("회원가입이 성공했습니다.", "/");
         },
         (error) => {
           this.message =
@@ -143,7 +143,7 @@ export default {
     closeModalAndRedirect() {
       // 모달 닫기
       this.isModalVisible = false;
-      this.$router.push({path: this.redirectPath});
+      this.$router.push({ path: this.redirectPath });
     },
   },
 };

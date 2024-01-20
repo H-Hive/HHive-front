@@ -57,9 +57,7 @@ export default {
   methods: {
     logout() {
       authService.logout();
-      // this.$store.dispatch("auth/logout");
       this.$router.push("/home");
-      window.location.reload();
     },
   },
 };
