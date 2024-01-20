@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="mainbody">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <router-link to="/home" class="nav-brand"> HHive </router-link>
       <div class="navbar-nav mr-auto">
@@ -64,3 +64,17 @@ export default {
   },
 };
 </script>
+<style scoped>
+ .mainbody {
+
+  width: 100%;
+  
+  
+  background-image: url("images/HiveBackground.png");
+  background-position: center;
+  background-size: cover;
+
+  
+  }
+
+</style>

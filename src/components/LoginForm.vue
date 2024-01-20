@@ -1,33 +1,30 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <form v-on:submit.prevent="handleLogin">
-        <div>
-          <label for="username">아이디: </label>
-          <input id="username" type="text" v-model="user.username" />
-        </div>
-        <div>
-          <label for="password">비밀번호: </label>
-          <input id="password" type="password" v-model="user.password" />
-        </div>
-        <button type="submit">로그인</button>
-        <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">
-            {{ message }}
+      <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+      <div id="loginBox">
+        <form v-on:submit.prevent="handleLogin">
+          <div class="input-form-box">
+            <label for="username">아이디 </label>
+            <input id="username" type="text" v-model="user.username" />
           </div>
-        </div>
-      </form>
+          <div class="input-form-box">
+            <label for="password">비밀번호 </label>
+            <input id="password" type="password" v-model="user.password" />
+          </div>
+          <div class="button-login-box">
+            <button type="button" class="btn btn-primary btn-xs" style="width: 100%" text-align: center>로그인</button>
+          </div>
+
+          <div class="form-group">
+            <div v-if="message" class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <AlertModal
-      :is-visible="isModalVisible"
-      :message="modalMessage"
-      @closeAndRedirect="closeModalAndRedirect"
-    />
+    <AlertModal :is-visible="isModalVisible" :message="modalMessage" @closeAndRedirect="closeModalAndRedirect" />
   </div>
 </template>
 
@@ -100,4 +97,30 @@ export default {
 </script>
 
 <style scoped>
+
+#loginBox {
+  width: 300px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+
+.input-form-box {
+  border: 0px solid #ff0000;
+  display: flex;
+  margin: 10px 10px 10px 10px;
+
+}
+
+.input-form-box > label {
+  display: block;
+  text-align: left;
+  padding-top: 5px;
+  min-width: 90px;
+}
+
+.button-login-box {
+  margin: 10px 10px 10px 10px;
+
+}
 </style>

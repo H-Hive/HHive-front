@@ -2,14 +2,19 @@
 // 로그인 되어있다면 내 하이브들과 새로운 하이브 가입하기 버튼이 뜨고
 // 로그인 되어있지 않다면 어플리케이션 소개와 사진 + 회원가입 버튼이 뜬다.
 
-<template>
-  <div class="container">
+<template >
+  <div class="body">
     <header class="jumbotron">
-      <h3>MainPage</h3>
+      <img class="mainlogo" alt="HTML" src="../images/HHiveMainlogo.png">
     </header>
-    <router-link to="/hive" class="nav-link">
-      클릭 시 모든 하이브들이 나오는 페이지로 이동
-    </router-link>
+    <div>
+      <button type="button" class="btn btn-secondary">
+        <router-link to="/hive" class="nav-link">
+          모임 찾으려 가기!!
+        </router-link>
+      </button>
+    </div>
+
     <div></div>
     <br />
 
@@ -45,3 +50,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.mainlogo {
+  margin: 0px 0px 0px 0px;
+}
+
+.body {
+
+  width: 100%;
+  height: 100%;
+
+
+}
+</style>
