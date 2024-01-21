@@ -13,7 +13,7 @@ class HiveService {
 
   getHive(hiveId) {
 
-    return axios.get(API_URL + `/${hiveId}`);
+    return axios.get(API_URL + `/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
   joinHive(hiveId) {
@@ -22,9 +22,22 @@ class HiveService {
 
     return axios.post(API_URL + `/${hiveId}`, {
       email: email
-    })
+    }, {headers: {'Authorization': localStorage.getItem("token")}})
   }
 
+  resignHive(hiveId) {
+
+    const username = userService.getUserInfo()['username'];
+
+    return axios.delete(API_URL + `/${hiveId}` + "/hiveUsers" + `?=${username}`, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
+
+  getHiveUserInHive(hiveId) {
+
+    const username = userService.getUserInfo()['username'];
+
+    axios.get(API_URL + `/${hiveId}` + "/hiveUsers" + "/search" + `?=${username}`, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
 }
 
 export default new HiveService();

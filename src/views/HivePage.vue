@@ -13,7 +13,7 @@
     <div v-if="hiveData">
       <h1 class="title">{{ hiveData.title }}</h1>
       <p class="hostName">방장 : {{ hiveData.hostName }}</p>
-      <h5 class="Data">{{ hiveData.id }}</h5>
+      <h5 class="Data">{{ hiveData.introduction }}</h5>
     </div>
     <div class="container">
       <div class="row row-cols-2">
@@ -91,21 +91,20 @@
               </button>
             </div>
           </div>
+          <div>
+            <JoinButton :property="'Hive'" :id="hiveData.id" />
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 -->
-    <!-- <div v-for="(partyData, index) in partyDatas" :key="index">
-      <PartyCardForm :partyData="partyData" />
-    </div> -->
-    <div>
+    <div v-for="(partyData, index) in partyDatas" :key="index">
+      <PartyCardForm :partyData="partyData" :hiveId="this.id" />
+    </div>
+    <!-- <div>
       <PartyCardForm :partyData="this.partyDatas" />
-    </div>
-
-    <div>
-      <JoinButton :property="'Hive'" :id="hiveData.id" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -144,7 +143,7 @@ export default {
           console.log(error);
         });
       partyService
-        .getParty(1)
+        .getAllPartiesByHiveId(this.id)
         .then((response) => {
           this.partyDatas = response.data["payload"];
           console.log("partyDatas = ", this.partyDatas);

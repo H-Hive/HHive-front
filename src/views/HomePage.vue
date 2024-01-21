@@ -5,7 +5,7 @@
 <template >
   <div class="body">
     <header class="jumbotron">
-      <img class="mainlogo" alt="HTML" src="../images/HHiveMainlogo.png">
+      <img class="mainlogo" alt="HTML" src="../images/HHiveMainlogo.png" />
     </header>
     <div>
       <button type="button" class="btn btn-secondary">
@@ -57,10 +57,7 @@ export default {
 }
 
 .body {
-
   width: 100%;
   height: 100%;
-
-
 }
 </style>

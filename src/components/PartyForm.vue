@@ -24,7 +24,7 @@ export default {
     };
   },
 
-  props: ["id"],
+  props: ["hiveId", "partyId"],
 
   components: {},
 
@@ -33,7 +33,7 @@ export default {
       this.$router.push("/login");
     } else {
       partyService
-        .getParty(this.id)
+        .getParty(this.hiveId, this.partyId)
         .then((response) => {
           this.partyData = response.data["payload"];
           console.log("partyDatas = ", JSON.stringify(this.partyData, null, 2));

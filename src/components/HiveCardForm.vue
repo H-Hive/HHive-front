@@ -1,11 +1,13 @@
 <template>
   <div class="hivecardform">
     <div class="card-grid">
-      <div class="card " style="width: 18rem">
+      <div class="card" style="width: 18rem">
         <img src="" class="card-img-top" alt="..." /> 여기 사진 들어갈 듯
         <div class="card-body">
           <h5 class="card-title" @click="goToHivePage(hiveData.id)">
-            <button type="button" class="btn btn-outline-danger">{{ hiveData.title }}</button>
+            <button type="button" class="btn btn-outline-danger">
+              {{ hiveData.title }}
+            </button>
           </h5>
         </div>
         <ul class="list-group list-group-flush">
@@ -22,10 +24,7 @@
 export default {
   name: "hive-card-form",
   props: {
-    hiveData: {
-      type: Array,
-      default: () => [],
-    },
+    hiveData: {},
   },
 
   methods: {
@@ -34,24 +33,20 @@ export default {
     },
   },
 
-  mounted() { },
+  mounted() {},
 };
 </script>
 
 <style scoped>
-
-
 .btn {
   width: 95%;
   color: black;
   border: 2px solid brown;
   border-radius: 5px;
   margin: 4px 5px;
-
 }
 
 .list-group-item {
-
   color: black;
 
   background-color: rgb(199, 154, 32, 0.5);
@@ -71,8 +66,6 @@ export default {
   grid-template-columns: repeat(4, 1fr); /* 4열 그리드로 설정 */
   gap: 20px; /* 카드 사이의 간격 설정 */
 }
-
-
 
 .card {
   margin: 15px auto 0px auto;

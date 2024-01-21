@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="mainbody">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+  <!-- <div id="app" class="mainbody"> -->
+  <!-- <nav class="navbar navbar-expand navbar-white bg-white">
       <router-link to="/home" class="nav-brand"> HHive </router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -13,12 +13,12 @@
       <div v-if="!currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/register" class="nav-link">
-            <font-awesome-icon icon="user-plus" /> Sign Up
+            <font-awesome-icon icon="user-plus" /> 회원가입
           </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/login" class="nav-link">
-            <font-awesome-icon icon="sign-in-alt" /> Login
+            <font-awesome-icon icon="sign-in-alt" /> 로그인
           </router-link>
         </li>
       </div>
@@ -36,19 +36,24 @@
           </a>
         </li>
       </div>
-    </nav>
-
-    <div class="container">
-      <router-view />
-    </div>
+    </nav> -->
+  <div id="app">
+    <v-app>
+      <AppBar />
+      <SideBar v-if="currentUser" />
+      <router-view></router-view>
+    </v-app>
   </div>
 </template>
 
 <script>
+import SideBar from "./components/Bar/SideBar.vue";
+import AppBar from "./components/Bar/AppBar.vue";
 import authService from "./services/auth.service";
 import userService from "./services/user.service";
 
 export default {
+  components: { SideBar, AppBar },
   computed: {
     currentUser() {
       return userService.getUserInfo();
@@ -62,17 +67,15 @@ export default {
   },
 };
 </script>
-<style scoped>
- .mainbody {
-
+<style>
+.mainbody {
   width: 100%;
-  
-  
+
   background-image: url("images/HiveBackground.png");
   background-position: center;
   background-size: cover;
-
-  
-  }
-
+}
+.test {
+  background-color: black;
+}
 </style>

@@ -6,6 +6,7 @@ import AllHivePage from "./views/AllHivePage.vue";
 import HivePage from "./views/HivePage.vue";
 import ProfilePage from "./views/ProfilePage.vue";
 import PartyPage from "./views/PartyPage.vue"
+import MyHivePage from "./views/MyHivePage.vue"
 import authService from "./services/auth.service";
 // lazy-loaded
 // const Profile = () => import("./components/Profile.vue")
@@ -29,13 +30,13 @@ const routes = [
     component: SignupPage,
   },
   {
-    path: "/profile/:userId",
+    // path: "/profile/:userId",
+    path: "/profile",
     // lazy-loaded
-    component: ProfilePage,
-    props: true,
+    component: ProfilePage
   },
   {
-    path: "/hive",
+    path: "/hives",
     component: AllHivePage,
   },
   { 
@@ -44,10 +45,14 @@ const routes = [
     props: true
   },
   {
-    path: "/party/:id",
+    path: "/party/:hiveId/:partyId",
     component: PartyPage,
     props: true
-  }
+  },
+  {
+    path: "/myhives",
+    component: MyHivePage
+  },
 ];
 
 const router = createRouter({
@@ -57,7 +62,7 @@ const router = createRouter({
 
 //다른 페이지로 이동하기 전 로그인 여부 확인
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home'];
+  const publicPages = ['/','/login', '/register', '/home'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = authService.isLoggedIn() ? true : false;
 

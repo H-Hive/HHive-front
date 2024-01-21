@@ -56,6 +56,10 @@ class UserService {
     // }
     return JSON.parse(localStorage.getItem('userinfo'));
   }
+
+  getUserId() {
+    return this.getUserInfo()['userId'];
+  }
 }
 
 export default new UserService();

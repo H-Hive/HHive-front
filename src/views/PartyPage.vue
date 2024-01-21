@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <PartyForm :id="this.id" />
+    <PartyForm :hiveId="this.hiveId" :partyId="this.partyId" />
   </div>
   <div>
     <JoinButton :property="'Party'" :id="this.id" />
@@ -21,7 +21,7 @@ export default {
     return {};
   },
 
-  props: ["id"],
+  props: ["hiveId", "partyId"],
 
   components: {
     PartyForm,

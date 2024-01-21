@@ -6,13 +6,19 @@
   <div class="card" style="width: 18rem">
     <img src="" class="card-img-top" alt="..." /> 여기 사진 들어갈 듯
     <div class="card-body">
-      <h5 class="card-title" @click="goToPartyPage(partyData.id)">
-        {{ partyData.title }} 여기 누르면 이동
+      <h5
+        class="card-title"
+        @click="goToPartyPage(partyData.partyList[0].id, hiveId)"
+      >
+        {{ partyData.partyList[0].title }}
       </h5>
+      {{ partyData.partyList[0].content }}
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ partyData.dateTime }}</li>
-      <li class="list-group-item">Host:</li>
+      <li class="list-group-item">
+        약속 일시: {{ partyData.partyList[0].dateTime }}
+      </li>
+      <li class="list-group-item">Host:{{ partyData.user.username }}</li>
     </ul>
   </div>
 </template>
@@ -20,15 +26,12 @@
 <script>
 export default {
   name: "party-card-form",
-  props: {
-    partyData: {
-      type: Object,
-    },
-  },
+
+  props: ["hiveId", "partyData"],
 
   methods: {
-    goToPartyPage(partyId) {
-      this.$router.push(`/party/${partyId}`);
+    goToPartyPage(partyId, hiveId) {
+      this.$router.push(`/party/${hiveId}/${partyId}`);
     },
   },
 

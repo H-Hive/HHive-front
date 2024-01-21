@@ -73,7 +73,7 @@ export default {
 
   created() {
     if (authService.isLoggedIn()) {
-      this.$router.push(`/profile/${userService.getUserInfo()["userId"]}`);
+      this.$router.push(`/profile`);
     }
   },
 
@@ -113,8 +113,10 @@ export default {
       this.isModalVisible = false;
       if (this.userId) {
         this.$router.push({
-          path: `/profile/${this.userId}`,
-          // query: { userId: this.userId },
+          path: this.redirectPath,
+          params: {
+            userId: this.userId,
+          },
         });
         window.location.reload();
       } else {
@@ -161,6 +163,6 @@ input {
 button {
   width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
   margin-top: 10px;
-  margin-bottom: 30px; /* 버튼 아래쪽에 30px의 여백 추가  */ 
+  margin-bottom: 30px; /* 버튼 아래쪽에 30px의 여백 추가 */
 }
 </style>

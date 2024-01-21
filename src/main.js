@@ -4,35 +4,28 @@ import router from "./router";
 // import store from "./store";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from './plugins/font-awesome'
+import { FontAwesomeIcon } from './plugins/font-awesome';
+import mitt from 'mitt';
 
-// import 'vuetify/styles'
-// import { createVuetify } from 'vuetify'
-// import * as components from 'vuetify/components'
-// import * as directives from 'vuetify/directives'
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-// const vuetify = createVuetify({
-//   components,
-//   directives,
-// })
+const vuetify = createVuetify({
+  components,
+  directives,
+})
 
+const emitter = mitt();
 const app = createApp(App);
+
+app.config.globalProperties.emitter = emitter;
 
 app
   .use(router)
-  // .use(vuetify)
+  .use(vuetify)
   // .use(store)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");
-
-  
-
-// window.GLOBAL_API_URL = "https://hhive.shop";
-/*
-App
-  HomePage
-    SignupPage
-      SignupForm
-    LoginPage
-      LoginForm
-*/
