@@ -3,7 +3,7 @@
     <div class="card card-container">
       <img
         id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Fb58a9f1f-1dcc-48f5-8afd-dcc826e54d4d%2FHHive.png?table=block&id=56f99240-35a3-4b94-ae3b-5e4ec4d1421a&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=250&userId=&cache=v2"
         class="profile-img-card"
       />
       <div id="loginBox">
@@ -18,11 +18,12 @@
           </div>
           <div class="button-login-box">
             <button
-              type="button"
-              class="btn btn-primary btn-xs"
+              type="submit"
+              class="btn btn-warning"
               style="width: 100%"
               text-align:
               center
+              @click="handleLogin"
             >
               로그인
             </button>
@@ -125,26 +126,41 @@ export default {
 </script>
 
 <style scoped>
-#loginBox {
-  width: 300px;
-  text-align: center;
-  background-color: #ffffff;
+.profile-img-card {
+  width: 500px;
+  height: 450px;
+  object-fit: cover; /* 이미지 비율을 유지하면서 컨테이너를 완전히 채움 */
 }
-
-.input-form-box {
-  border: 0px solid #ff0000;
-  display: flex;
-  margin: 10px 10px 10px 10px;
+.card-container {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  width: 100%; /* 컨테이너의 너비 (필요에 따라 조정 가능) */
+  margin: auto; /* 자동 마진으로 페이지 중앙에 위치 */
+  max-width: 800px; /* 최대 너비 설정 */
+  flex-direction: column; /* 항목들을 세로로 나열 */
+  align-items: center; /* 가로 방향에서 중앙 정렬 */
+  justify-content: center; /* 세로 방향에서 중앙 정렬 */
+  text-align: center; /* 텍스트를 가운데 정렬 */
+  margin-top: 50px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  border: 1px solid black; /* 테두리 추가 */
+  border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
 }
-
-.input-form-box > label {
-  display: block;
-  text-align: left;
-  padding-top: 5px;
-  min-width: 90px;
+form > div {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: space-between; /* 요소들 사이에 공간을 균등하게 분배 */
+  align-items: center; /* 가로 방향에서 요소들을 중앙 정렬 */
+  width: 100%; /* div의 너비를 폼의 너비에 맞춤 */
+  margin-bottom: 30px; /* 각 입력 필드와 버튼 사이의 간격 */
 }
-
-.button-login-box {
-  margin: 10px 10px 10px 10px;
+label {
+  width: 30%; /* label의 너비 (필요에 따라 조정) */
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+}
+input {
+  width: 50%; /* input의 너비 (필요에 따라 조정) */
+}
+button {
+  width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
+  margin-top: 10px;
+  margin-bottom: 30px; /* 버튼 아래쪽에 30px의 여백 추가 */
 }
 </style>

@@ -11,7 +11,7 @@
         src="../images/userlogo.png"
       />
     </div>
-    <div class="userinfo" v-if="isEditMode">
+    <div class="userinfo" v-if="!isEditMode">
       <h3>
         <strong>{{ profileData.username }}</strong>
       </h3>
@@ -124,5 +124,28 @@ export default {
 .userinfo {
   width: 500px;
   margin: 5px 0px 0px 150px;
+}
+
+.container {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 항목들을 세로로 나열 */
+  align-items: center; /* 가로 방향에서 중앙 정렬 */
+  justify-content: center; /* 세로 방향에서 중앙 정렬 */
+  width: 100%; /* 컨테이너의 너비 (필요에 따라 조정 가능) */
+  max-width: 600px; /* 최대 너비 설정 */
+  margin: auto; /* 자동 마진으로 페이지 중앙에 위치 */
+  margin-top: 50px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  padding: 50px; /* 컨테이너 내부의 여백 */
+  border: 1px solid black; /* 테두리 추가 */
+  border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
+}
+.jumbotron {
+  width: 100%; /* jumbotron의 너비 */
+  text-align: center; /* 텍스트를 가운데 정렬 */
+  margin-bottom: 40px; /* 하단 마진 추가 */
+}
+p {
+  text-align: left; /* 단락 내의 텍스트를 가운데 정렬 */
+  width: 100%; /* 단락의 너비 */
 }
 </style>
