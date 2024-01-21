@@ -160,6 +160,14 @@ label {
 input {
   width: 50%; /* input의 너비 (필요에 따라 조정) */
 }
+#username {
+  border: 2px solid rgb(206, 159, 159);
+  border-radius: 5px;
+}
+#password {
+  border: 2px solid rgb(206, 159, 159);
+  border-radius: 5px;
+}
 button {
   width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
   margin-top: 10px;

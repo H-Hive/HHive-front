@@ -27,30 +27,22 @@
               <h4>참석 : 4/20</h4>
             </div>
             <div class="d-grid gap-2 d-md-block">
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="
+              <button type="button" class="btn btn-primary" style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 30px;
                   width: auto;
-                "
-              >
+                ">
                 참여하기 !!
               </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="
+              <button type="button" class="btn btn-primary" style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
-                "
-              >
+                ">
                 다음 기회에...
               </button>
             </div>
@@ -76,25 +68,31 @@
               </div>
             </div>
             <div>
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="
+              <button type="button" class="btn btn-primary" style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
-                "
-              >
+                ">
                 더 보러가기
               </button>
             </div>
           </div>
-          <div>
-            <JoinButton :property="'Hive'" :id="hiveData.id" />
-          </div>
         </div>
+      </div>
+    </div>
+    <div class="joinbtnform">
+      <div>
+        <button type="button" class="btn btn-info " style="
+                  --bs-btn-padding-y: 0.5rem;
+                  --bs-btn-padding-x: 1rem;
+                  --bs-btn-font-size: 1rem;
+                  margin: 10px 10px 10px 10px;
+                  width: 300px auto;
+                ">
+          <JoinButton :property="'Hive'" :id="hiveData.id" />
+        </button>
       </div>
     </div>
 
@@ -165,7 +163,7 @@ export default {
 .body {
   width: 100%;
   color: rgb(0, 0, 0);
-
+  padding: 0px 50px 0px 100px;
   background-image: url("../images/HiveBackground.png");
   background-position: center;
   background-size: cover;
@@ -212,5 +210,11 @@ export default {
 .card-body {
   margin: auto;
   padding: auto;
+}
+
+.joinbtnform {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
 }
 </style>
