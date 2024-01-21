@@ -145,7 +145,7 @@ export default {
   margin-bottom: 40px; /* 하단 마진 추가 */
 }
 p {
-  text-align: left; /* 단락 내의 텍스트를 가운데 정렬 */
+  text-align: left; /* 단락 내의 텍스트를 가운데 정렬  */
   width: 100%; /* 단락의 너비 */
 }
 </style>

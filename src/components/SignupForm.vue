@@ -118,7 +118,7 @@ label {
   text-align: left; /* 텍스트를 왼쪽 정렬 */
 }
 input {
-  width: 50%; /* input의 너비 (필요에 따라 조정) */
+  width: 50%; /* input의 너비 (필요에 따라 조정)  */
 }
 button {
   width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
