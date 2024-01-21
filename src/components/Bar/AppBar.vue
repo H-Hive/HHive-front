@@ -1,7 +1,7 @@
 <template>
   <v-app-bar fixed v-if="!isLoggedIn">
     <v-app-bar-title style="cursor: pointer" @click="$router.push('/')"
-      >HHive</v-app-bar-title
+      >H-Hive</v-app-bar-title
     >
     <v-icon> <font-awesome-icon icon="user-plus" /></v-icon>
     <router-link to="/register">
@@ -15,7 +15,7 @@
 
   <v-app-bar fixed v-else>
     <v-app-bar-title style="cursor: pointer" @click="$router.push('/')"
-      >HHive</v-app-bar-title
+      >H-Hive</v-app-bar-title
     >
     <button @click="openNotificationModal">
       <v-icon><font-awesome-icon icon="bell" /></v-icon>알림

@@ -27,22 +27,30 @@
               <h4>참석 : 4/20</h4>
             </div>
             <div class="d-grid gap-2 d-md-block">
-              <button type="button" class="btn btn-primary" style="
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 30px;
                   width: auto;
-                ">
+                "
+              >
                 참여하기 !!
               </button>
-              <button type="button" class="btn btn-primary" style="
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
-                ">
+                "
+              >
                 다음 기회에...
               </button>
             </div>
@@ -68,29 +76,45 @@
               </div>
             </div>
             <div>
-              <button type="button" class="btn btn-primary" style="
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
-                ">
+                "
+              >
                 더 보러가기
               </button>
             </div>
+          </div>
+          <div>
+            <JoinButton
+              :property="'Hive'"
+              :id="hiveData.id"
+              v-if="!isHiveUser"
+            />
+            <ResignButton :property="'Hive'" :id="hiveData.id" v-else />
           </div>
         </div>
       </div>
     </div>
     <div class="joinbtnform">
       <div>
-        <button type="button" class="btn btn-info " style="
-                  --bs-btn-padding-y: 0.5rem;
-                  --bs-btn-padding-x: 1rem;
-                  --bs-btn-font-size: 1rem;
-                  margin: 10px 10px 10px 10px;
-                  width: 300px auto;
-                ">
+        <button
+          type="button"
+          class="btn btn-info"
+          style="
+            --bs-btn-padding-y: 0.5rem;
+            --bs-btn-padding-x: 1rem;
+            --bs-btn-font-size: 1rem;
+            margin: 10px 10px 10px 10px;
+            width: 300px auto;
+          "
+        >
           <JoinButton :property="'Hive'" :id="hiveData.id" />
         </button>
       </div>
@@ -112,12 +136,14 @@ import hiveService from "../services/hive.service";
 import authService from "@/services/auth.service";
 import partyService from "@/services/party.service";
 import JoinButton from "@/components/JoinButton.vue";
+import ResignButton from "@/components/ResignButton.vue";
 
 export default {
   data() {
     return {
       hiveData: {},
       partyDatas: {},
+      isHiveUser: false,
     };
   },
 
@@ -126,6 +152,17 @@ export default {
   components: {
     PartyCardForm,
     JoinButton,
+    ResignButton,
+  },
+
+  created() {
+    hiveService.isHiveUser(this.id).then((result) => {
+      if (result) {
+        this.isHiveUser = true;
+      } else {
+        this.isHiveUser = false;
+      }
+    });
   },
 
   mounted() {
