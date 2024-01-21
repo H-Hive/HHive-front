@@ -39,7 +39,12 @@
     </nav> -->
   <div id="app">
     <v-app>
-      <AppBar />
+      <button  class="custom-button">
+            <font-awesome-icon icon="bell" /> 알림
+          </button>
+      <AppBar>
+  
+      </AppBar>
       <SideBar v-if="currentUser" />
       <router-view></router-view>
     </v-app>
