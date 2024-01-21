@@ -59,5 +59,6 @@ export default {
 .body {
   width: 100%;
   height: 100%;
+  padding: 0px 50px 0px 100px;
 }
 </style>

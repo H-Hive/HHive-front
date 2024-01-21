@@ -1,26 +1,28 @@
 <template>
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username"
-      aria-describedby="button-addon2">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2">조회</button>
-  </div>
-  <div>
-    <button type="button" class="btn btn-outline-dark">전체</button>
-    <button type="button" class="btn btn-outline-dark">운동</button>
-    <button type="button" class="btn btn-outline-dark">아웃도어/여행</button>
-    <button type="button" class="btn btn-outline-dark">음악/악기</button>
-    <button type="button" class="btn btn-outline-dark">봉사활동</button>
-    <button type="button" class="btn btn-outline-dark">댄스/무용</button>
-    <button type="button" class="btn btn-outline-dark">사교/인맥</button>
-    <button type="button" class="btn btn-outline-dark">사진/영상</button>
-    <button type="button" class="btn btn-outline-dark">반려동물</button>
-  </div>
   <div class="body">
-    <template v-for="(hiveData, index) in hiveDatas" :key="index">
-      <div class="hive-card">
-        <HiveCardForm :hiveData="hiveData" />
-      </div>
-    </template>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username"
+        aria-describedby="button-addon2">
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2">조회</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-outline-dark">전체</button>
+      <button type="button" class="btn btn-outline-dark">운동</button>
+      <button type="button" class="btn btn-outline-dark">아웃도어/여행</button>
+      <button type="button" class="btn btn-outline-dark">음악/악기</button>
+      <button type="button" class="btn btn-outline-dark">봉사활동</button>
+      <button type="button" class="btn btn-outline-dark">댄스/무용</button>
+      <button type="button" class="btn btn-outline-dark">사교/인맥</button>
+      <button type="button" class="btn btn-outline-dark">사진/영상</button>
+      <button type="button" class="btn btn-outline-dark">반려동물</button>
+    </div>
+    <div class="hives">
+      <template v-for="(hiveData, index) in hiveDatas" :key="index">
+        <div class="hive-card">
+          <HiveCardForm :hiveData="hiveData" />
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -71,7 +73,7 @@ export default {
 
 }
 
-.body {
+.hives {
   width: 100%;
   height: 100%;
   display: flex;
@@ -80,6 +82,10 @@ export default {
 
   background-size: contain;
 
+}
+
+.body {
+  padding: 0px 50px 0px 100px;
 }
 
 .hive-card {
