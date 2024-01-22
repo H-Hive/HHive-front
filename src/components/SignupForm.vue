@@ -26,9 +26,9 @@
     <!-- 모달 사용 -->
   </form>
   <AlertModal
-    :is-visible="isModalVisible"
-    :message="modalMessage"
-    @closeModalAndRedirect="closeModalAndRedirect"
+      :is-visible="isModalVisible"
+      :message="modalMessage"
+      @closeModalAndRedirect="closeModalAndRedirect"
   />
 </template>
 
@@ -55,20 +55,20 @@ export default {
   methods: {
     submitForm() {
       authService
-        .signup(this.user)
-        .then((response) => {
-          if (response.status >= 200 && response.status < 300) {
-            // 회원가입 성공 시 모달 표시
-            this.showModal("회원가입이 성공했습니다.", "/");
-          } else {
-            console.error("서버 응답 오류:", response.status);
-          }
-        })
-        .catch((error) => {
-          // 에러 핸들링 및 모달 표시
-          this.showModal("회원가입 오류");
-          console.error("회원가입 오류:", error);
-        });
+          .signup(this.user)
+          .then((response) => {
+            if (response.status >= 200 && response.status < 300) {
+              // 회원가입 성공 시 모달 표시
+              this.showModal("회원가입이 성공했습니다.", "/");
+            } else {
+              console.error("서버 응답 오류:", response.status);
+            }
+          })
+          .catch((error) => {
+            // 에러 핸들링 및 모달 표시
+            this.showModal("회원가입 오류");
+            console.error("회원가입 오류:", error);
+          });
     },
     showModal(message, redirectPath) {
       // 모달을 표시하고 메시지 설정
@@ -101,7 +101,7 @@ form {
   width: 100%; /* 폼의 너비 (필요에 따라 조정) */
   max-width: 500px; /* 최대 너비를 설정하여 너무 넓게 퍼지는 것을 방지 */
   margin: auto; /* 자동 마진으로 페이지 중앙에 위치 */
-  margin-top: 50px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  margin-top: 100px; /* 컨테이너 위쪽에 50px의 여백 추가 */
   padding: 55px; /* 폼 내부의 여백 */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
@@ -119,6 +119,8 @@ label {
 }
 input {
   width: 50%; /* input의 너비 (필요에 따라 조정)  */
+  border: 1px solid black; /* 테두리 추가 */
+  border-radius: 5px;
 }
 button {
   width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
