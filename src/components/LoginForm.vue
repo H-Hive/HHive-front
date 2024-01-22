@@ -3,7 +3,7 @@
     <div class="card card-container">
       <img
           id="profile-img"
-          src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Fb58a9f1f-1dcc-48f5-8afd-dcc826e54d4d%2FHHive.png?table=block&id=56f99240-35a3-4b94-ae3b-5e4ec4d1421a&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=250&userId=&cache=v2"
+          src="../images/HiveLogo.png"
           class="profile-img-card"
       />
       <div id="loginBox">
@@ -129,8 +129,7 @@ export default {
 
 <style scoped>
 .profile-img-card {
-  width: 500px;
-  height: 450px;
+  width: 400px;
   object-fit: cover; /* 이미지 비율을 유지하면서 컨테이너를 완전히 채움 */
 }
 .card-container {

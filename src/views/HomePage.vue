@@ -6,7 +6,7 @@
   <!-- 로그인 되어있다면 내가 가입한 하이브들 보여주기 -->
   <div class="body" v-if="isLoggedIn">
     <header class="jumbotron">
-      <img class="mainlogo" alt="HTML" src="../images/HHiveMainlogo.png" />
+      <img class="mainlogo" alt="HTML" src="../images/HiveLogo.png" />
     </header>
     <div class="button-container">
       <button type="button" class="btn btn-warning" >
@@ -26,7 +26,7 @@
   <!-- 로그인되어있지 않다면 로고와 회원가입 링크 보여주기 -->
   <div class="body" v-if="!isLoggedIn">
     <header class="jumbotron">
-      <img class="mainlogo" alt="HTML" src="../images/HHiveMainlogo.png" />
+      <img class="mainlogo" alt="HTML" src="../images/HiveLogo.png" />
     </header>
 
     <div></div>
@@ -81,6 +81,8 @@ export default {
 
 .mainlogo {
   margin-top: 100px; /* 상단 여백 조정, 필요에 따라 조정 */
+  width: 300px;
+  object-fit: cover; /* 이미지 비율을 유지하면서 컨테이너를 완전히 채움 */
 }
 
 .button-container {
