@@ -8,10 +8,10 @@
     <header class="jumbotron">
       <img class="mainlogo" alt="HTML" src="../images/HHiveMainlogo.png" />
     </header>
-    <div>
+    <div class="button-container">
       <button type="button" class="btn btn-secondary">
         <router-link to="/hives" class="nav-link">
-          모임 찾으려 가기!!
+          모임 찾으러 가기!!
         </router-link>
       </button>
     </div>
@@ -71,14 +71,28 @@ export default {
 </script>
 
 <style scoped>
+.jumbotron {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
 .mainlogo {
-  margin: 100px 0px 0px 0px;
+  margin-top: 100px; /* 상단 여백 조정, 필요에 따라 조정 */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* 가로 방향에서 중앙 정렬 */
+  margin-top: 20px; /* 로고와 버튼 사이의 여백, 필요에 따라 조정 */
 }
 
 .body {
   width: 100%;
-  height: 40%;
-  background-color: orange;
+  height: 100%;
+  background-color: rgb(255, 243, 161);
 }
 
 .fixed-bottom {
