@@ -5,10 +5,10 @@
     </header>
     <div>
       <img
-        type="button"
-        class="myimg"
-        alt="HTML"
-        src="../images/userlogo.png"
+          type="button"
+          class="myimg"
+          alt="HTML"
+          src="../images/userlogo.png"
       />
     </div>
     <div class="userinfo" v-if="!isEditMode">
@@ -34,15 +34,16 @@
       <label>Description:</label>
       <textarea v-model="profileData.description"></textarea>
     </div>
-    <EditButton :isEditMode="isEditMode" @submitOrToggle="submitOrToggle" />
+    <EditButton :isEditMode="isEditMode" @submitOrToggle="submitOrToggle" class="btn btn-warning"/>
     <button v-if="isEditMode" @click="cancelEdit">수정 취소</button>
     <br />
-  </div>
 
-  <div>
     <div>
-      <h6>내가 참여한 모임들</h6>
+      <div v-if="!isEditMode">
+        <h6>내가 참여한 모임들</h6>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -76,14 +77,14 @@ export default {
     } else {
       console.log("id at profile: ", this.userId);
       userService
-        .getProfile(this.userId)
-        .then((response) => {
-          this.profileData = response.data["payload"];
-          this.originProfileData = JSON.parse(JSON.stringify(this.profileData));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .getProfile(this.userId)
+          .then((response) => {
+            this.profileData = response.data["payload"];
+            this.originProfileData = JSON.parse(JSON.stringify(this.profileData));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
   },
 
@@ -105,7 +106,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .myimg {
   width: 140px;
   height: 140px;
@@ -115,17 +117,16 @@ export default {
 .userinfo {
   width: 500px;
   margin: 5px 0px 0px 150px;
+  margin-bottom: 20px;
 }
 
 .container {
   display: flex; /* Flexbox 레이아웃 사용 */
   flex-direction: column; /* 항목들을 세로로 나열 */
   align-items: center; /* 가로 방향에서 중앙 정렬 */
-  justify-content: center; /* 세로 방향에서 중앙 정렬 */
   width: 100%; /* 컨테이너의 너비 (필요에 따라 조정 가능) */
   max-width: 600px; /* 최대 너비 설정 */
-  margin: auto; /* 자동 마진으로 페이지 중앙에 위치 */
-  margin-top: 50px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  margin-top: 100px; /* 자동 마진으로 페이지 중앙에 위치 */
   padding: 50px; /* 컨테이너 내부의 여백 */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
