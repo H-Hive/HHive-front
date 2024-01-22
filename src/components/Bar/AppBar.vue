@@ -88,7 +88,7 @@ export default {
    },
 
     setupSSE() {
-      if (userService.getUserInfo) {
+      if (userService.getUserInfo()) {
         this.eventSource = this.createEventSource();
 
         this.eventSource.onmessage = (event) => {
@@ -98,6 +98,7 @@ export default {
         };
 
         this.eventSource.onerror = (error) => {
+          this.closeSSE();
           console.error('SSE 에러', error);
           this.retrySSE();
         };
