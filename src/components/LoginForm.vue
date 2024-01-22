@@ -142,12 +142,9 @@ export default {
   align-items: center; /* 가로 방향에서 중앙 정렬 */
   justify-content: center; /* 세로 방향에서 중앙 정렬 */
   text-align: center; /* 텍스트를 가운데 정렬 */
-  margin-top: 100px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  margin-top: 100px; /* 컨테이너 위쪽에 여백 추가 */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
-}
-body{
-  background-color: rgb(255, 243, 161);
 }
 form > div {
   display: flex; /* Flexbox 레이아웃 사용 */
