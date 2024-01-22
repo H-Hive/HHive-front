@@ -20,7 +20,7 @@
     <button @click="openNotificationModal">
       <v-icon><font-awesome-icon icon="bell" /></v-icon>알림
     </button>
-    <NotificationNumBox :value=NotificationCount />
+    <NotificationNumBox :value="NotificationCount" />
     <v-icon> <font-awesome-icon icon="magnifying-glass" /></v-icon>
     <router-link to="/hives">
       <v-list-item>새로운 하이브 찾기</v-list-item>
@@ -30,8 +30,15 @@
       <v-list-item @click="logout">로그아웃</v-list-item>
     </button>
   </v-app-bar>
-  <notification-modal v-if="showNotificationModal" @close-modal="closeNotificationModal" />
-    <new-notification-modal v-if="showNewNotificationModal" :notifications="notifications" @close-modal="closeNewNotificationModal"/>
+  <notification-modal
+    v-if="showNotificationModal"
+    @close-modal="closeNotificationModal"
+  />
+  <new-notification-modal
+    v-if="showNewNotificationModal"
+    :notifications="notifications"
+    @close-modal="closeNewNotificationModal"
+  />
 </template>
 
 <script>
@@ -48,8 +55,8 @@ export default {
       showNotificationModal: false,
       notifications: [],
       showNewNotificationModal: false,
-      sseRetryDelay: 1000, 
-      eventSource: null, 
+      sseRetryDelay: 1000,
+      eventSource: null,
       sseSetupCompleted: false,
       NotificationCount: 0,
     };
@@ -62,9 +69,8 @@ export default {
   methods: {
     logout() {
       this.sseSetupCompleted = false;
-      this.closeSSE(); 
+      this.closeSSE();
       return authService.logout();
-      
     },
     openNotificationModal() {
       this.closeNewNotificationModal();
@@ -83,9 +89,12 @@ export default {
       NotificationService.readNotification();
     },
     createEventSource() {
-      const userId=userService.getUserId();
-    return new EventSource('http://localhost:8080/api/notifications'+`/${userId}`+'/get');
-   },
+      const userId = userService.getUserId();
+      return new EventSource(
+        // "https://hhive.shop/api/notifications" + `/${userId}` + "/get"
+        "http://localhost:8080/api/notifications" + `/${userId}` + "/get"
+      );
+    },
 
     setupSSE() {
       if (userService.getUserInfo()) {
@@ -99,13 +108,13 @@ export default {
 
         this.eventSource.onerror = (error) => {
           this.closeSSE();
-          console.error('SSE 에러', error);
+          console.error("SSE 에러", error);
           this.retrySSE();
         };
 
         this.eventSource.onclose = () => {
-          console.log('SSE 연결 종료');
-          this.retrySSE(); 
+          console.log("SSE 연결 종료");
+          this.retrySSE();
         };
       }
     },
@@ -116,34 +125,33 @@ export default {
       }
     },
     retrySSE() {
-      if(!this.eventSource){
-      setTimeout(() => {
-        console.log('SSE 재시도 중...');
-        this.setupSSE(); 
-      }, this.sseRetryDelay);
-    }
+      if (!this.eventSource) {
+        setTimeout(() => {
+          console.log("SSE 재시도 중...");
+          this.setupSSE();
+        }, this.sseRetryDelay);
+      }
     },
-    setNotCount(){
-            NotificationService
-            .getAllNotificationsCount()
-            .then((Response)=>{
-                this.NotificationCount = Response.data["payload"];
-            })
-            .catch((error)=>{
-                console.log(error);
-            })
-  }
+    setNotCount() {
+      NotificationService.getAllNotificationsCount()
+        .then((Response) => {
+          this.NotificationCount = Response.data["payload"];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   components: {
     NotificationNumBox,
-    'notification-modal': NotificationModal,
-    NewNotificationModal
+    "notification-modal": NotificationModal,
+    NewNotificationModal,
   },
   mounted() {
     if (userService.getUserInfo && !this.sseSetupCompleted) {
       this.setNotCount();
       this.setupSSE();
-      this.sseSetupCompleted = true; 
+      this.sseSetupCompleted = true;
     }
   },
   beforeUnmount() {

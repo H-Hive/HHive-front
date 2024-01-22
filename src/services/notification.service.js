@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL = 'http://localhost:8080/api/notifications'
-// const API_URL = 'http://15.165.158.12/api/notifications'
+// const API_URL = 'https://hhive.shop/api/notifications'
 
 class notificationService{
 
