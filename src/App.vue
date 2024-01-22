@@ -27,16 +27,6 @@ export default {
   },
 };
 </script>
-<style>
-.mainbody {
-  width: 100%;
+<style scoped>
 
-  background-image: url("images/HiveBackground.png");
-  background-position: center;
-  background-size: cover;
-}
-.v-main {
-  --v-layout-top: 0px;
-  margin-top: -150px;
-}
 </style>
