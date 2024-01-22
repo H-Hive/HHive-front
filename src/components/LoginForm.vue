@@ -2,9 +2,9 @@
   <div class="col-md-12">
     <div class="card card-container">
       <img
-        id="profile-img"
-        src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Fb58a9f1f-1dcc-48f5-8afd-dcc826e54d4d%2FHHive.png?table=block&id=56f99240-35a3-4b94-ae3b-5e4ec4d1421a&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=250&userId=&cache=v2"
-        class="profile-img-card"
+          id="profile-img"
+          src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Fb58a9f1f-1dcc-48f5-8afd-dcc826e54d4d%2FHHive.png?table=block&id=56f99240-35a3-4b94-ae3b-5e4ec4d1421a&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=250&userId=&cache=v2"
+          class="profile-img-card"
       />
       <div id="loginBox">
         <form v-on:submit.prevent="handleLogin">
@@ -18,12 +18,12 @@
           </div>
           <div class="button-login-box">
             <button
-              type="submit"
-              class="btn btn-warning"
-              style="width: 100%"
-              text-align:
-              center
-              @click="handleLogin"
+                type="submit"
+                class="btn btn-warning"
+                style="width: 100%"
+                text-align:
+                center
+                @click="handleLogin"
             >
               로그인
             </button>
@@ -38,9 +38,9 @@
       </div>
     </div>
     <AlertModal
-      :is-visible="isModalVisible"
-      :message="modalMessage"
-      @closeModalAndRedirect="closeModalAndRedirect"
+        :is-visible="isModalVisible"
+        :message="modalMessage"
+        @closeModalAndRedirect="closeModalAndRedirect"
     />
   </div>
 </template>
@@ -80,25 +80,25 @@ export default {
   methods: {
     handleLogin() {
       authService
-        .login(this.user)
-        .then((response) => {
-          console.log(response.status);
-          if (response.status >= 200 && response.status < 300) {
-            // 회원가입 성공 시 모달 표시
-            // this.userId = userService.getUserInfo()["userId"];
-            this.userId = userService.getUserInfo()["userId"];
-            console.log(userService.getUserInfo());
-            console.log(this.userId);
-            this.showModal("로그인에 성공하셨습니다.", `/profile`);
-          } else {
-            console.error("서버 응답 오류:", response.data);
-          }
-        })
-        .catch((error) => {
-          // 에러 핸들링 및 모달 표시
-          this.showModal("로그인 오류", "/home");
-          console.error("로그인 오류:", error);
-        });
+          .login(this.user)
+          .then((response) => {
+            console.log(response.status);
+            if (response.status >= 200 && response.status < 300) {
+              // 회원가입 성공 시 모달 표시
+              // this.userId = userService.getUserInfo()["userId"];
+              this.userId = userService.getUserInfo()["userId"];
+              console.log(userService.getUserInfo());
+              console.log(this.userId);
+              this.showModal("로그인에 성공하셨습니다.", `/profile`);
+            } else {
+              console.error("서버 응답 오류:", response.data);
+            }
+          })
+          .catch((error) => {
+            // 에러 핸들링 및 모달 표시
+            this.showModal("로그인 오류", "/home");
+            console.error("로그인 오류:", error);
+          });
     },
 
     showModal(message, redirectPath) {
@@ -142,9 +142,12 @@ export default {
   align-items: center; /* 가로 방향에서 중앙 정렬 */
   justify-content: center; /* 세로 방향에서 중앙 정렬 */
   text-align: center; /* 텍스트를 가운데 정렬 */
-  margin-top: 50px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  margin-top: 100px; /* 컨테이너 위쪽에 50px의 여백 추가 */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
+}
+body{
+  background-color: rgb(255, 243, 161);
 }
 form > div {
   display: flex; /* Flexbox 레이아웃 사용 */
@@ -159,15 +162,10 @@ label {
 }
 input {
   width: 50%; /* input의 너비 (필요에 따라 조정) */
-}
-#username {
-  border: 2px solid rgb(206, 159, 159);
+  border: 1px solid black; /* 테두리 추가 */
   border-radius: 5px;
 }
-#password {
-  border: 2px solid rgb(206, 159, 159);
-  border-radius: 5px;
-}
+
 button {
   width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
   margin-top: 10px;
