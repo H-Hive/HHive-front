@@ -29,14 +29,24 @@ class HiveService {
 
     const username = userService.getUserInfo()['username'];
 
-    return axios.delete(API_URL + `/${hiveId}` + "/hiveUsers" + `?=${username}`, {headers: {'Authorization': localStorage.getItem("token")}});
+    return axios.delete(API_URL + `/${hiveId}` + "/hiveUsers" + `?username=${username}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
-  getHiveUserInHive(hiveId) {
+  isHiveUser(hiveId) {
 
     const username = userService.getUserInfo()['username'];
 
-    axios.get(API_URL + `/${hiveId}` + "/hiveUsers" + "/search" + `?=${username}`, {headers: {'Authorization': localStorage.getItem("token")}});
+    return axios.get(API_URL + `/${hiveId}` + "/hiveUsers" + "/search" + `?username=${username}`, {
+      headers: {'Authorization': localStorage.getItem("token")}
+    })
+    .then(response => {
+      console.log("data = ", response.data);
+      return true;
+    })
+    .catch(error => {
+      console.error(error);
+      return false;
+    });
   }
 }
 
