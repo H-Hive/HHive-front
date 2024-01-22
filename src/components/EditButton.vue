@@ -1,6 +1,6 @@
 <template>
   <button @click="submitOrToggle">
-    {{ isEditMode ? "수정완료" : "수정하기" }}
+    {{ isEditMode ? "수정 완료" : "프로필 수정" }}
   </button>
 </template>
 
