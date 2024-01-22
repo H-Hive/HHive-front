@@ -35,7 +35,7 @@
       <textarea v-model="profileData.description"></textarea>
     </div>
     <EditButton :isEditMode="isEditMode" @submitOrToggle="submitOrToggle" class="btn btn-warning"/>
-    <button v-if="isEditMode" @click="cancelEdit">수정 취소</button>
+    <button v-if="isEditMode" @click="cancelEdit" class="profileBtn">수정 취소</button>
     <br />
 
     <div>
@@ -140,4 +140,17 @@ p {
   text-align: left; /* 단락 내의 텍스트를 가운데 정렬  */
   width: 100%; /* 단락의 너비 */
 }
+
+.profileBtn{
+  margin-top: 10px;
+}
+
+input, textarea {
+  border: 2px solid #cccccc; /* 테두리 색상 및 두께 설정 */
+  border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
+  padding: 10px; /* 입력 필드 내부의 여백 설정 */
+  width: 100%; /* 입력 필드 너비 설정 */
+  margin-bottom: 20px; /* 입력 필드 아래쪽 여백 설정 */
+}
+
 </style>
