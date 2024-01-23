@@ -1,18 +1,18 @@
 <template>
-  <ProfileForm :userId="userId" />
-  <div v-if="isMine">
-    <li v-for="(hiveData, index) in hiveDatas" :key="index">
-      <div class="hive-card">
-        <HiveCardForm :hiveData="hiveData" />
-      </div>
-    </li>
-  </div>
+<!--  <ProfileForm :userId="userId" />-->
+<!--  <div v-if="isMine">-->
+<!--    <li v-for="(hiveData, index) in hiveDatas" :key="index">-->
+<!--      <div class="hive-card">-->
+<!--        <HiveCardForm :hiveData="hiveData" />-->
+<!--      </div>-->
+<!--    </li>-->
+<!--  </div>-->
+  <ProfileForm :userId="userId" :hiveDatas="hiveDatas" />
 </template>
 
 <script>
 import ProfileForm from "@/components/ProfileForm.vue";
 import userService from "@/services/user.service";
-import HiveCardForm from "@/components/HiveCardForm.vue";
 
 export default {
   // props: ["userId"],
@@ -25,7 +25,6 @@ export default {
 
   components: {
     ProfileForm,
-    HiveCardForm,
   },
 
   computed: {
@@ -46,7 +45,9 @@ export default {
     if (this.isMine) {
       userService.getMyHives(this.userId).then((response) => {
         this.hiveDatas = response.data["payload"];
-        console.log("내 하이브들: ", this.hiveDatas);
+        //     console.log("내 하이브들: ", this.hiveDatas);
+        // 이제 hiveDatas를 ProfileForm 컴포넌트에 prop으로 전달합니다.
+
       });
     }
   },
@@ -65,7 +66,4 @@ export default {
 </script>
 
 <style scoped>
-.hive-card {
-  display: inline-block;
-}
 </style>

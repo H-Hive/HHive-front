@@ -40,17 +40,25 @@
 
     <div>
       <div v-if="!isEditMode">
-        <h6>내가 참여한 모임들</h6>
+        <h6 class="hive-section-title">내가 참여한 모임들</h6>
+        <!-- HiveCard 렌더링을 위한 컨테이너 -->
+        <div class="hive-card-container">
+          <div v-for="(hiveData, index) in hiveDatas" :key="index" class="hive-card">
+            <HiveCardForm :hiveData="hiveData" />
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
+
 </template>
 
 <script>
 import userService from "@/services/user.service";
 import authService from "@/services/auth.service";
 import EditButton from "./EditButton.vue";
+import HiveCardForm from "@/components/HiveCardForm.vue";
+
 
 export default {
   name: "profile-form",
@@ -65,10 +73,12 @@ export default {
 
   components: {
     EditButton,
+    HiveCardForm,
   },
 
   props: {
     userId: Number,
+    hiveDatas: Array,
   },
 
   mounted() {
@@ -125,7 +135,7 @@ export default {
   flex-direction: column; /* 항목들을 세로로 나열 */
   align-items: center; /* 가로 방향에서 중앙 정렬 */
   width: 100%; /* 컨테이너의 너비 (필요에 따라 조정 가능) */
-  max-width: 600px; /* 최대 너비 설정 */
+  max-width: 800px; /* 최대 너비 설정 */
   margin-top: 100px; /* 자동 마진으로 페이지 중앙에 위치 */
   padding: 50px; /* 컨테이너 내부의 여백 */
   border: 1px solid black; /* 테두리 추가 */
@@ -151,6 +161,22 @@ input, textarea {
   padding: 10px; /* 입력 필드 내부의 여백 설정 */
   width: 100%; /* 입력 필드 너비 설정 */
   margin-bottom: 20px; /* 입력 필드 아래쪽 여백 설정 */
+}
+
+.hive-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* 카드들 사이에 공간을 균등하게 분배 */
+  gap: 20px; /* 카드 사이의 간격을 조정 */
+  padding: 0 30px; /* 컨테이너 양쪽에 15px의 패딩을 추가 */
+}
+
+.hive-section-title {
+  width: 100%;
+  text-align: center; /* 왼쪽 정렬 */
+  font-size: 1.4em; /* 글씨 크기를 1.5em으로 설정 */
+  margin-bottom: 20px; /* 하단 여백 설정 */
+  margin-top: 40px;
 }
 
 </style>
