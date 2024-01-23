@@ -16,9 +16,6 @@
       </button>
     </div>
 
-    <div></div>
-    <br />
-
     <div class="content-container">
       <MyHivePage />
     </div>
@@ -84,10 +81,7 @@ export default {
 .content-container {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin-top: 35px;
-  align-items: center;
-  width: 100%;
+  margin-top: -50px;
 }
 
 .mainlogo {

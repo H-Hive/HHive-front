@@ -46,7 +46,7 @@ export default {
 .myHive{
   display: flex;
   flex-direction: column;
-  margin-top: 150px;
+  margin-top: 130px;
   margin-bottom: 150px;
   align-items: center;
 }

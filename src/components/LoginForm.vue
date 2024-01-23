@@ -138,8 +138,8 @@ export default {
   margin: auto; /* 자동 마진으로 페이지 중앙에 위치 */
   max-width: 800px; /* 최대 너비 설정 */
   flex-direction: column; /* 항목들을 세로로 나열 */
-  align-items: center; /* 가로 방향에서 중앙 정렬 */
-  justify-content: center; /* 세로 방향에서 중앙 정렬 */
+  align-items: center; /* 세로 방향에서 중앙 정렬 */
+  justify-content: center;  /* 가로 방향에서 중앙 정렬 */
   text-align: center; /* 텍스트를 가운데 정렬 */
   margin-top: 100px; /* 컨테이너 위쪽에 여백 추가 */
   border: 1px solid black; /* 테두리 추가 */
