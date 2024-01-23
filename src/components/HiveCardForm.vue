@@ -5,7 +5,7 @@
         <img src="" class="card-img-top" alt="..." /> 여기 사진 들어갈 듯
         <div class="card-body">
           <h5 class="card-title" @click="goToHivePage(hiveData.id)">
-            <button type="button" class="btn btn-outline-danger">
+            <button type="button" class="btn btn-warning">
               {{ hiveData.title }}
             </button>
           </h5>
@@ -41,40 +41,21 @@ export default {
 .btn {
   width: 95%;
   color: black;
-  border: 2px solid brown;
-  border-radius: 5px;
   margin: 4px 5px;
 }
 
 .list-group-item {
   color: black;
-
-  background-color: rgb(199, 154, 32, 0.5);
-  border: 2px solid brown;
+  background-color: ivory;
   border-radius: 5px;
-  margin: 4px 5px;
-}
-
-.card-body {
-  background-color: transparent;
-}
-
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-
-  grid-template-columns: repeat(4, 1fr); /* 4열 그리드로 설정 */
-  gap: 20px; /* 카드 사이의 간격 설정 */
+  margin: 5px 6px;
 }
 
 .card {
-  margin: 15px auto 0px auto;
-
+  margin-top: 40px;
   color: rgb(0, 0, 0);
-
-  background-color: rgb(20, 59, 59);
-
-  background-image: url("../images/HiveBackground.png");
+  border: 1px solid orange;
+  background-color: rgb(255, 243, 161);
   background-position: center;
   background-size: cover;
 }
@@ -85,7 +66,7 @@ export default {
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   background-size: cover;
   background-position: center;
-  background: rgb(37, 118, 124);
+  background: white;
   margin: 15px auto 0;
   position: relative;
 }

@@ -19,8 +19,10 @@
     <div></div>
     <br />
 
-    <div v-if="loggedIn">로그인 되어있기 않기 때문에 내 하이브들이 뜬다</div>
-    <MyHivePage v-if="isLoggedIn" />
+    <div class="content-container">
+      <MyHivePage />
+    </div>
+
   </div>
 
   <!-- 로그인되어있지 않다면 로고와 회원가입 링크 보여주기 -->
@@ -77,6 +79,15 @@ export default {
   align-items: center;
   flex-direction: column;
   margin-top: 30px;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 35px;
+  align-items: center;
+  width: 100%;
 }
 
 .mainlogo {

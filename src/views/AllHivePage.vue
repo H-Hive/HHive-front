@@ -3,7 +3,7 @@
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username"
         aria-describedby="button-addon2">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">조회</button>
+      <button class="btn-search" type="button" id="button-addon2">조회</button>
     </div>
     <div>
       <button type="button" class="btn btn-outline-dark">전체</button>
@@ -60,37 +60,57 @@ export default {
 </script>
 
 <style scoped>
-.form-control {
-  margin: auto;
-
-  background-color: rgba(247, 246, 243, 0.5);
-  ;
-}
-
 
 .btn {
-  margin: 5px 5px;
-
+  margin-top: 15px;
+  margin-right: 15px;
 }
-
-.hives {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-
-  background-size: contain;
-
+.btn-search{
+  padding: 10px;
+  background-color: #ffc944;
+  border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
 }
 
 .body {
-  padding: 0px 50px 0px 100px;
+  padding: 100px;
+  width: 100%;
+}
+
+.hives {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 카드들을 왼쪽 정렬 */
+  align-items: flex-start; /* 카드들을 위쪽 정렬 */
 }
 
 .hive-card {
-  flex: 0 0 24%;
-  max-width: 24%;
-  margin: 1%;
+  padding: 40px;
+  flex: 1 0 21%; /* 화면 크기에 따라 카드가 줄어들 수 있도록 설정 */
+  max-width: calc(25% - 20px); /* gap 고려한 최대 너비 설정 */
 }
+
+/* 화면이 중간 크기일 때, 한 줄에 3개의 카드를 표시 (예: 가로 크기가 768px 미만일 때) */
+@media (max-width: 1450px) {
+  .hive-card {
+    flex: 1 0 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+  }
+}
+
+/* 화면이 더 작을 때, 한 줄에 2개의 카드를 표시 (예: 가로 크기가 600px 미만일 때) */
+@media (max-width: 1150px) {
+  .hive-card {
+    flex: 1 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+/* 모바일 화면 크기일 때, 한 줄에 1개의 카드만 표시 (예: 가로 크기가 480px 미만일 때) */
+@media (max-width: 850px) {
+  .hive-card {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+}
+
 </style>

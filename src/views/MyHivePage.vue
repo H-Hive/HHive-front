@@ -1,7 +1,7 @@
 // 내 하이브들만 보여주는 페이지
 
 <template>
-  <div>
+  <div class="myHive">
     <template v-for="(hiveData, index) in hiveDatas" :key="index">
       <HiveForm :hiveData="hiveData" />
     </template>
@@ -42,3 +42,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.myHive{
+  display: flex;
+  flex-direction: column;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  align-items: center;
+}
+</style>
