@@ -91,8 +91,8 @@ export default {
     createEventSource() {
       const userId = userService.getUserId();
       return new EventSource(
-        // "https://hhive.shop/api/notifications" + `/${userId}` + "/get"
-        "http://localhost:8080/api/notifications" + `/${userId}` + "/get"
+        "https://hhive.shop/api/notifications" + `/${userId}` + "/get"
+        // "http://localhost:8080/api/notifications" + `/${userId}` + "/get"
       );
     },
 

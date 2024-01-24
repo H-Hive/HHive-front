@@ -5,10 +5,10 @@
     </header>
     <div>
       <img
-          type="button"
-          class="myimg"
-          alt="HTML"
-          src="../images/userlogo.png"
+        type="button"
+        class="myimg"
+        alt="HTML"
+        src="../images/userlogo.png"
       />
     </div>
     <div class="userinfo" v-if="!isEditMode">
@@ -19,6 +19,9 @@
       <h5>
         <strong>Email : </strong>
         {{ profileData.email }}
+        <button v-if="isLoggedInUser" @click="doEmailConfirm">
+          이메일 인증
+        </button>
       </h5>
       <h5>
         <strong>자기소개 : </strong>
@@ -34,23 +37,40 @@
       <label>Description:</label>
       <textarea v-model="profileData.description"></textarea>
     </div>
-    <EditButton :isEditMode="isEditMode" @submitOrToggle="submitOrToggle" class="btn btn-warning"/>
-    <button v-if="isEditMode" @click="cancelEdit" class="profileBtn">수정 취소</button>
-    <br />
 
+    <!-- 로그인한 유저에게만 보이는 프로필 수정, 비밀번호 변경, 탈퇴 버튼 -->
+    <div v-if="isLoggedInUser">
+      <EditButton
+        :isEditMode="isEditMode"
+        @submitOrToggle="submitOrToggle"
+        class="btn btn-warning"
+      />
+      <button v-if="isEditMode" @click="cancelEdit" class="profileBtn">
+        수정 취소
+      </button>
+      <button @click="showUpdatePasswordModal">비밀번호 변경</button>
+      <UpdatePasswordModal
+        :is-visible="isUpdatePasswordModalVisible"
+        @justCloseModal="justCloseUpdatePasswordModal"
+      />
+      <ResignButton :property="'User'" />
+    </div>
     <div>
       <div v-if="!isEditMode">
         <h6 class="hive-section-title">내가 참여한 모임들</h6>
         <!-- HiveCard 렌더링을 위한 컨테이너 -->
         <div class="hive-card-container">
-          <div v-for="(hiveData, index) in hiveDatas" :key="index" class="hive-card">
+          <div
+            v-for="(hiveData, index) in hiveDatas"
+            :key="index"
+            class="hive-card"
+          >
             <HiveCardForm :hiveData="hiveData" />
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -58,7 +78,8 @@ import userService from "@/services/user.service";
 import authService from "@/services/auth.service";
 import EditButton from "./EditButton.vue";
 import HiveCardForm from "@/components/HiveCardForm.vue";
-
+import UpdatePasswordModal from "./UpdatePasswordModal.vue";
+import ResignButton from "./ResignButton.vue";
 
 export default {
   name: "profile-form",
@@ -68,17 +89,26 @@ export default {
       profileData: {},
       originProfileData: {},
       isEditMode: false,
+      isUpdatePasswordModalVisible: false,
     };
   },
 
   components: {
     EditButton,
     HiveCardForm,
+    UpdatePasswordModal,
+    ResignButton,
   },
 
   props: {
     userId: Number,
     hiveDatas: Array,
+  },
+
+  computed: {
+    isLoggedInUser() {
+      return userService.getUserId() === this.userId;
+    },
   },
 
   mounted() {
@@ -87,14 +117,14 @@ export default {
     } else {
       console.log("id at profile: ", this.userId);
       userService
-          .getProfile(this.userId)
-          .then((response) => {
-            this.profileData = response.data["payload"];
-            this.originProfileData = JSON.parse(JSON.stringify(this.profileData));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        .getProfile(this.userId)
+        .then((response) => {
+          this.profileData = response.data["payload"];
+          this.originProfileData = JSON.parse(JSON.stringify(this.profileData));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   },
 
@@ -112,12 +142,24 @@ export default {
       this.isEditMode = !this.isEditMode;
       this.profileData = JSON.parse(JSON.stringify(this.originProfileData));
     },
+
+    showUpdatePasswordModal() {
+      this.isUpdatePasswordModalVisible = true;
+    },
+
+    justCloseUpdatePasswordModal() {
+      this.isUpdatePasswordModalVisible = false;
+    },
+
+    doEmailConfirm() {
+      console.log("clicked");
+      authService.doEmailConfirm(this.profileData.email);
+    },
   },
 };
 </script>
 
 <style scoped>
-
 .myimg {
   width: 140px;
   height: 140px;
@@ -151,11 +193,12 @@ p {
   width: 100%; /* 단락의 너비 */
 }
 
-.profileBtn{
+.profileBtn {
   margin-top: 10px;
 }
 
-input, textarea {
+input,
+textarea {
   border: 2px solid #cccccc; /* 테두리 색상 및 두께 설정 */
   border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
   padding: 10px; /* 입력 필드 내부의 여백 설정 */
@@ -178,5 +221,4 @@ input, textarea {
   margin-bottom: 20px; /* 하단 여백 설정 */
   margin-top: 40px;
 }
-
 </style>

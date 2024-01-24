@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="submitForm">
+  <form>
     <div>
       <label for="username">아이디: </label>
       <input id="username" type="text" v-model="user.username" />
@@ -22,13 +22,15 @@
     </div>
 
     <button type="submit" class="btn btn-warning">회원가입</button>
+    <button @click="kakaoLogin">카카오 계정으로 회원가입</button>
 
     <!-- 모달 사용 -->
   </form>
+
   <AlertModal
-      :is-visible="isModalVisible"
-      :message="modalMessage"
-      @closeModalAndRedirect="closeModalAndRedirect"
+    :is-visible="isModalVisible"
+    :message="modalMessage"
+    @closeModalAndRedirect="closeModalAndRedirect"
   />
 </template>
 
@@ -55,21 +57,22 @@ export default {
   methods: {
     submitForm() {
       authService
-          .signup(this.user)
-          .then((response) => {
-            if (response.status >= 200 && response.status < 300) {
-              // 회원가입 성공 시 모달 표시
-              this.showModal("회원가입이 성공했습니다.", "/");
-            } else {
-              console.error("서버 응답 오류:", response.status);
-            }
-          })
-          .catch((error) => {
-            // 에러 핸들링 및 모달 표시
-            this.showModal("회원가입 오류");
-            console.error("회원가입 오류:", error);
-          });
+        .signup(this.user)
+        .then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            // 회원가입 성공 시 모달 표시
+            this.showModal("회원가입이 성공했습니다.", "/");
+          } else {
+            console.error("서버 응답 오류:", response.status);
+          }
+        })
+        .catch((error) => {
+          // 에러 핸들링 및 모달 표시
+          this.showModal("회원가입 오류");
+          console.error("회원가입 오류:", error);
+        });
     },
+
     showModal(message, redirectPath) {
       // 모달을 표시하고 메시지 설정
       this.isModalVisible = true;
