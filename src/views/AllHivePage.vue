@@ -16,13 +16,19 @@
       <button type="button" class="btn btn-outline-dark">사진/영상</button>
       <button type="button" class="btn btn-outline-dark">반려동물</button>
     </div>
-    <div class="hives">
-      <template v-for="(hiveData, index) in hiveDatas" :key="index">
-        <div class="hive-card">
-          <HiveCardForm :hiveData="hiveData" />
-        </div>
-      </template>
+    <div class="content-wrapper"> <!-- 새로운 wrapper 추가 -->
+      <div class="hives">
+        <template v-for="(hiveData, index) in hiveDatas" :key="index">
+          <div class="hive-card">
+            <HiveCardForm :hiveData="hiveData" />
+          </div>
+        </template>
+      </div>
+      <div class="kakao-map">
+        <KakaoMap />
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -30,6 +36,7 @@
 import hiveService from "../services/hive.service";
 import HiveCardForm from "@/components/HiveCardForm.vue";
 import authService from "@/services/auth.service";
+import KakaoMap from "@/components/KakaoMap.vue";
 
 export default {
   data() {
@@ -37,8 +44,8 @@ export default {
       hiveDatas: "",
     };
   },
-
   components: {
+    KakaoMap,
     HiveCardForm,
   },
 
@@ -76,41 +83,44 @@ export default {
   width: 100%;
 }
 
+.content-wrapper {
+  display: flex; /* Flexbox를 적용 */
+  align-items: start; /* 자식 요소들을 위쪽으로 정렬 */
+  height: 1000px; /* 높이를 적절하게 설정 */
+  width: 100%;
+  margin-top: 40px;
+}
+
 .hives {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start; /* 카드들을 왼쪽 정렬 */
-  align-items: flex-start; /* 카드들을 위쪽 정렬 */
+  flex-grow: 1; /* 사용 가능한 공간을 채움 */
+  padding-left: 70px; /* 오른쪽 패딩으로 간격을 조정 */
+  margin-top: 10px;
+  max-height: 1000px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
 }
 
-.hive-card {
-  padding: 40px;
-  flex: 1 0 21%; /* 화면 크기에 따라 카드가 줄어들 수 있도록 설정 */
-  max-width: calc(25% - 20px); /* gap 고려한 최대 너비 설정 */
+.kakao-map{
+  width: 80%; /* 너비 고정 */
+  height: 100%; /* 높이를 적절하게 설정 */
+  margin-top: 30px;
+  padding-left: 70px; /* 오른쪽 패딩으로 간격을 조정 */
 }
 
-/* 화면이 중간 크기일 때, 한 줄에 3개의 카드를 표시 (예: 가로 크기가 768px 미만일 때) */
-@media (max-width: 1450px) {
-  .hive-card {
-    flex: 1 0 calc(33.333% - 20px);
-    max-width: calc(33.333% - 20px);
+/* 미디어 쿼리로 화면 크기에 따른 반응형 레이아웃 조정 */
+@media (max-width: 1500px) {
+  .content-wrapper {
+    flex-direction: column; /* 화면이 작을 때 세로로 배치 */
+  }
+
+  .kakao-map {
+    width: 100%; /* 화면이 작을 때 너비를 100%로 설정 */
+    order: 1; /* kakao-map을 hive-cards 아래로 배치 */
+  }
+
+  .hives {
+    order: 2; /* hives를 kakao-map 위로 배치 */
   }
 }
 
-/* 화면이 더 작을 때, 한 줄에 2개의 카드를 표시 (예: 가로 크기가 600px 미만일 때) */
-@media (max-width: 1150px) {
-  .hive-card {
-    flex: 1 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-}
-
-/* 모바일 화면 크기일 때, 한 줄에 1개의 카드만 표시 (예: 가로 크기가 480px 미만일 때) */
-@media (max-width: 850px) {
-  .hive-card {
-    flex: 1 0 100%;
-    max-width: 100%;
-  }
-}
 
 </style>
