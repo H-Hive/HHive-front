@@ -39,21 +39,23 @@
     </div>
 
     <!-- 로그인한 유저에게만 보이는 프로필 수정, 비밀번호 변경, 탈퇴 버튼 -->
-    <div v-if="isLoggedInUser">
+    <div v-if="isLoggedInUser" class="profile-btn">
       <EditButton
         :isEditMode="isEditMode"
         @submitOrToggle="submitOrToggle"
         class="btn btn-warning"
       />
-      <button v-if="isEditMode" @click="cancelEdit" class="profileBtn">
-        수정 취소
-      </button>
-      <button @click="showUpdatePasswordModal">비밀번호 변경</button>
-      <UpdatePasswordModal
-        :is-visible="isUpdatePasswordModalVisible"
-        @justCloseModal="justCloseUpdatePasswordModal"
-      />
-      <ResignButton :property="'User'" />
+      <div v-if="isEditMode" class="profileBtn">
+        <button @click="showUpdatePasswordModal">비밀번호 변경</button>
+        <UpdatePasswordModal
+            :is-visible="isUpdatePasswordModalVisible"
+            @justCloseModal="justCloseUpdatePasswordModal"
+        />
+        <ResignButton :property="'User'" />
+        <button @click="cancelEdit" class="cancel-edit-btn">
+          수정 취소
+        </button>
+      </div>
     </div>
     <div>
       <div v-if="!isEditMode">
@@ -188,13 +190,22 @@ export default {
   text-align: center; /* 텍스트를 가운데 정렬 */
   margin-bottom: 40px; /* 하단 마진 추가 */
 }
+
+.profileBtn{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.profileBtn button {
+  margin-bottom: 5px; /* 모든 버튼의 아래쪽에 10px의 마진 추가 */
+}
+.cancel-edit-btn {
+  margin-top: 5px; /* 버튼 상단에 10px의 간격 추가 */
+}
+
 p {
   text-align: left; /* 단락 내의 텍스트를 가운데 정렬  */
   width: 100%; /* 단락의 너비 */
-}
-
-.profileBtn {
-  margin-top: 10px;
 }
 
 input,
@@ -212,6 +223,8 @@ textarea {
   justify-content: space-around; /* 카드들 사이에 공간을 균등하게 분배 */
   gap: 20px; /* 카드 사이의 간격을 조정 */
   padding: 0 30px; /* 컨테이너 양쪽에 15px의 패딩을 추가 */
+  max-height: 800px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
 }
 
 .hive-section-title {

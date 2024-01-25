@@ -21,8 +21,13 @@
       <input id="description" type="text" v-model="user.description" />
     </div>
 
-    <button type="submit" class="btn btn-warning">회원가입</button>
-    <button @click="kakaoLogin">카카오 계정으로 회원가입</button>
+    <button type="submit" class="btn btn-outline-warning">회원가입</button>
+    <img
+        src="../images/kakao_login_medium_wide.png"
+        alt="카카오 계정으로 회원가입"
+        @click="kakaoLogin"
+        class="kakao-login-button"
+    />
 
     <!-- 모달 사용 -->
   </form>
@@ -126,7 +131,13 @@ input {
   border-radius: 5px;
 }
 button {
-  width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
-  margin-top: 20px;
+  width: 300px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
+  margin-top: 30px;
 }
+
+.kakao-login-button {
+  cursor: pointer; /* 마우스 오버 시 커서를 포인터로 변경 */
+  margin-top: 20px; /* 버튼과의 상단 간격 조정 */
+}
+
 </style>

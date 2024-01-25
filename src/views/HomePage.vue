@@ -81,7 +81,8 @@ export default {
 .content-container {
   display: flex;
   justify-content: center;
-  margin-top: -50px;
+  margin-top: 90px;
+  margin-bottom: 120px;
 }
 
 .mainlogo {

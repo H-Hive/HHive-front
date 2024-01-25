@@ -4,7 +4,7 @@
   <div class="modal" v-if="isVisible">
     <div class="modal-content">
       <p>{{ message }}</p>
-      <button @click="closeModalAndRedirect">확인</button>
+      <button @click="closeModalAndRedirect" class="btn btn-outline-dark">확인</button>
     </div>
   </div>
 </template>
@@ -50,13 +50,9 @@ export default {
 
 /* 모달 내부 버튼 스타일링 */
 .modal-content button {
-  padding: 10px 20px; /* 버튼의 패딩 */
-  border: black; /* 버튼의 테두리 제거 */
-  background: rgb(128, 128, 128); /* 버튼의 배경색 */
   width: 20%; /* 모달의 너비 */
-  padding: 5px;
   margin: auto;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 
 </style>

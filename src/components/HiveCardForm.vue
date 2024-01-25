@@ -2,7 +2,7 @@
   <div class="hivecardform">
     <div class="card-grid">
       <div class="card" style="width: 18rem">
-        <img src="" class="card-img-top" alt="..." /> 여기 사진 들어갈 듯
+        <img src="" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title" @click="goToHivePage(hiveData.id)">
             <button type="button" class="btn btn-warning">
@@ -52,7 +52,8 @@ export default {
 }
 
 .card {
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   color: rgb(0, 0, 0);
   border: 1px solid orange;
   background-color: rgb(255, 243, 161);

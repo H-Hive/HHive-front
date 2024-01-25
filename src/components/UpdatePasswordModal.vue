@@ -27,8 +27,10 @@
             required
           />
         </form>
-        <button @click="closeModalAndReload">제출</button>
-        <button @click="justCloseModal">취소</button>
+        <div class="button-container">
+          <button @click="closeModalAndReload" class="btn btn-outline-dark">수정</button>
+          <button @click="justCloseModal" class="btn btn-outline-dark">취소</button>
+        </div>
       </div>
     </div>
   </div>
@@ -92,5 +94,29 @@ export default {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 60%; /* 모달의 너비 */
+  max-width: 500px; /* 모달의 최대 너비 */
+  padding: 50px;
+}
+
+label {
+  width: 100%; /* label의 너비 (필요에 따라 조정) */
+}
+input {
+  width: 100%; /* input의 너비 (필요에 따라 조정) */
+  border: 1px solid black; /* 테두리 추가 */
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.button-container {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: center; /* 가로 방향에서 버튼들을 중앙 정렬 */
+  align-items: center; /* 세로 방향에서 버튼들을 중앙 정렬 */
+  margin-top: 15px; /* 버튼 컨테이너 상단에 여백 추가 */
+}
+
+.modal-content button {
+  width: 30%; /* 버튼의 너비 설정 */
+  margin: 5px; /* 버튼 사이의 간격 설정 */
 }
 </style>

@@ -3,7 +3,9 @@
 <template>
   <div class="myHive">
     <template v-for="(hiveData, index) in hiveDatas" :key="index">
-      <HiveForm :hiveData="hiveData" />
+      <div class="hive-form">
+        <HiveForm :hiveData="hiveData" />
+      </div>
     </template>
   </div>
 </template>
@@ -46,8 +48,13 @@ export default {
 .myHive{
   display: flex;
   flex-direction: column;
-  margin-top: 130px;
-  margin-bottom: 150px;
-  align-items: center;
+  margin: auto;
+  width: 800px;
+  max-height: 800px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
+}
+
+.hive-form{
+  margin: auto;
 }
 </style>

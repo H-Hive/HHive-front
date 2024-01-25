@@ -8,7 +8,7 @@
         </div>
         <div>
         <span class="close" @click="closeModal" style="position: absolute; top: 0%; right: 3%; cursor: pointer;">&times;</span>
-        <div>
+        <div class="notification-box">
           <template v-for="(notificationData, index) in notificationDatas" :key="index">
             <div>
                 <NotificationForm :notificationData="notificationData" />
@@ -64,21 +64,24 @@
   <style scoped>
   .notification-modal {
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     width: 100%;
     height: 100%;
-    overflow: auto;
   }
   
   .modal-content {
-    background-color: #ffffff;
-    margin: 15% auto;
+    background-color: white;
     padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     width: 25%;
-    top:-23.7%;
-    left: 21%;
-    position: relative; 
+    position: fixed; /* 요소를 페이지 내에서 고정된 위치에 배치 */
+    top: 70px; /* 상단으로부터 20px 떨어진 위치에 배치 */
+    right: 60px; /* 오른쪽으로부터 20px 떨어진 위치에 배치 */
+  }
+
+  .notification-box{
+    max-height: 600px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
   }
   
   .close {
@@ -92,11 +95,9 @@
     color: black;
     text-decoration: none;
   }
-  .space{
-    height: 20px;
-  }
+
   .line {
-  border-bottom: 1px solid #777777; 
+  border-bottom: 1px solid black;
 }
 .notification-title{
   text-align: center;

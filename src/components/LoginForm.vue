@@ -19,7 +19,7 @@
           <div class="button-login-box">
             <button
                 type="submit"
-                class="btn btn-warning"
+                class="btn btn-outline-warning"
                 style="width: 100%"
                 text-align:
                 center
