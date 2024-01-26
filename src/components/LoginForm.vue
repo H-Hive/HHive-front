@@ -148,7 +148,7 @@ export default {
 form > div {
   display: flex; /* Flexbox 레이아웃 사용 */
   justify-content: space-between; /* 요소들 사이에 공간을 균등하게 분배 */
-  align-items: center; /* 가로 방향에서 요소들을 중앙 정렬 */
+  align-items: center; /* 세로 방향에서 요소들을 중앙 정렬 */
   width: 100%; /* div의 너비를 폼의 너비에 맞춤 */
   margin-bottom: 30px; /* 각 입력 필드와 버튼 사이의 간격 */
 }

@@ -15,11 +15,11 @@
       <button type="button" class="btn btn-outline-dark">사교/인맥</button>
       <button type="button" class="btn btn-outline-dark">사진/영상</button>
       <button type="button" class="btn btn-outline-dark">반려동물</button>
-      <button type="button" @click="openCreateHiveModal" class="btn btn-outline-dark hive-btn">모임 만들기</button>
-      <CreateHiveForm-Modal v-if="showCreateHiveModal" @modal-Closed="closeCreateHiveModal" @create-Success = "handleModalClosed"/>
-      <Alert-Modal v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
+      <button type="button" @click="openCreateHiveModal" class="btn btn-warning">모임 만들기</button>
+      <CreateHiveForm-Modal class="create-modal" v-if="showCreateHiveModal" @modal-Closed="closeCreateHiveModal" @create-Success = "handleModalClosed"/>
+      <Alert-Modal class="close-modal" v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
     </div>
-    <div class="content-wrapper"> <!-- 새로운 wrapper 추가 -->
+    <div class="content-wrapper">
       <div class="hives">
         <template v-for="(hiveData, index) in hiveDatas" :key="index">
           <div class="hive-card">
@@ -39,9 +39,9 @@ import hiveService from "../services/hive.service";
 import HiveCardForm from "@/components/HiveCardForm.vue";
 import authService from "@/services/auth.service";
 import KakaoMap from "@/components/KakaoMap.vue";
-
 import CreateHiveFormModal from "@/components/CreateHiveFormModal.vue"
 import AlertModal from "@/components/AlertModal.vue";
+
 export default {
 
   data() {
@@ -127,7 +127,7 @@ export default {
 
 .hives {
   flex-grow: 1; /* 사용 가능한 공간을 채움 */
-  padding-left: 70px; /* 오른쪽 패딩으로 간격을 조정 */
+  padding: 0px 50px; /* 왼쪽 패딩으로 간격을 조정 */
   margin-top: 10px;
   max-height: 1000px; /* 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */

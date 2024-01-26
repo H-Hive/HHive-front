@@ -6,12 +6,15 @@
         <!-- 모달 내용을 여기에 추가하세요 -->
         <h2>모임 생성</h2>
         <div class="line"></div>
-        <label for="hiveTitle">모임 이름:</label>
-        <input type="text" id="hiveTitle" v-model="hiveTitle" />
-        <CategoryForm @categories-selected="handleCategories" />
-
-        <p :class="{ 'hidden': !errorMessage, 'red': errorMessage }">{{ errorMessage }}</p>
-        <button @click="createHive" class="btn btn-outline-dark">모임 생성</button>
+        <div class="content-top">
+          <label for="hiveTitle">모임 이름:</label>
+          <input type="text" id="hiveTitle" v-model="hiveTitle" />
+          <CategoryForm @categories-selected="handleCategories" />
+        </div>
+        <div class="content-bottom">
+          <p :class="{ 'hidden': !errorMessage, 'red': errorMessage }">{{ errorMessage }}</p>
+          <button @click="createHive" class="btn btn-outline-dark">모임 생성</button>
+        </div>
       </div>
     </div>
   </div>
@@ -67,8 +70,9 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
-  width: 300px; /* 모달의 너비 조절 */
+  z-index: 1000;
+  width: 500px; /* 모달의 너비 조절 */
+  height: 400px;
   padding: 20px;
   background-color: white;
   border: 1px solid #ccc;
@@ -97,9 +101,26 @@ export default {
   margin-bottom: 15px;
 }
 
-.btn {
-  margin-top: 20%;
+.content-top {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
 }
+
+.content-top input{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+.content-bottom {
+  width: 100%;
+}
+
 .hidden {
   margin-top: 40px;
 }

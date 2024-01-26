@@ -4,7 +4,7 @@
 
 <template >
   <div class="body">
-    <div>
+    <div class="category-btn">
       <button type="button" class="btn btn-outline-dark">홈</button>
       <button type="button" class="btn btn-outline-dark">게시판</button>
       <button type="button" class="btn btn-outline-dark">사진첩</button>
@@ -13,21 +13,32 @@
     <UpdateHive-Modal :id="hiveData.id" v-if="showUpdateHiveModal" @modal-Closed="closeUpdateHiveModal" @update-Success= "handleModalClosed"/>
       <Alert-Modal v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
       <deleteModal v-if="showDeleteModal" :is-visible="showDeleteModal" :id="this.id" @delete-Success="closeDeleteModalAndRedirect" @closeModal="closeDeleteModal"/>
-    <div v-if="hiveData">
-      <h1 class="title">
-        <span>{{ hiveData.title }}</span>
-        <button type="button" v-if="(hiveData.hostId==userId)" @click="openUpdateHiveModal" class="btn btn-outline-dark">수정</button>
-        <button type="button" v-if="(hiveData.hostId==userId)" @click="openDeleteModal" class="btn btn-outline-dark">모임 삭제</button>
-      </h1>
+    <div v-if="hiveData" class="hive-top">
+      <div class="title-container">
+        <h1 class="title">
+          {{ hiveData.title }}
+        </h1>
+        <div class="title-buttons">
+          <button type="button" v-if="(hiveData.hostId==userId)" @click="openUpdateHiveModal" class="btn btn-outline-dark">수정</button>
+          <button type="button" v-if="(hiveData.hostId==userId)" @click="openDeleteModal" class="btn btn-outline-dark">모임 삭제</button>
+        </div>
+      </div>
       <p class="hostName">방장 : {{ hiveData.hostName }}</p>
       <h5 class="Data">{{ hiveData.introduction }}</h5>
-      구성원
-      <template v-for="(user, index) in userList" :key="index">
+
+      <div class="people-container">
+        <h6 class="people">구성원</h6>
+        <div class="line"></div>
+        <div class="people-contents">
+          <template v-for="(user, index) in userList" :key="index">
             <div>
               <UserInfoForm :userInfo="user" />
             </div>
             <div class="space"></div>
-            </template>
+          </template>
+        </div>
+      </div>
+
     </div>
     <div class="container">
       <div class="row row-cols-2">
@@ -128,6 +139,7 @@
             margin: 10px 10px 10px 10px;
             width: 300px auto;
           "
+          v-if="!isHiveUser"
         >
           <JoinButton :property="'Hive'" :id="hiveData.id" />
         </button>
@@ -274,31 +286,100 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-  width: 100px;
-  margin: 10px 30px;
-}
 
 .body {
   width: 100%;
+  height: 100%;
+  margin-top: 65px;
   color: rgb(0, 0, 0);
-  padding: 0px 50px 0px 100px;
+  padding: 10px;
   background-color: rgb(255, 243, 161);
-  background-position: center;
-  background-size: cover;
+  justify-content: center;
 }
 
-.btn {
+.category-btn {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+  margin-left: 130px;
+  flex-direction: row;
+}
+
+.category-btn button{
   margin: 10px 10px 10px 10px;
+}
+
+.hive-top{
+  display: flex;
+  margin: 50px auto;
+  background-color: ivory;
+  flex-direction: column;
+  align-items: center;
+  width: 800px;
+  padding: 30px;
+  border: 2px solid grey;
+  border-radius: 8px;
+;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 10px; /* 제목과 버튼 사이의 간격을 줄입니다. */
+}
+
+.title-buttons button{
+  margin: 10px 10px 10px 10px;
+}
+
+.hostName{
+  margin-top: 10px;
+}
+
+.Data{
+  padding: 20px 55px;
+  max-height: 160px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
+  border: 1px solid #313131;
+  border-radius: 5px;
+  color: #434343;
+}
+
+.people-container{
+  margin-top: 30px;
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #313131;
+  border-radius: 5px;
+  background-color: #fffcd9;
+}
+.people{
+  width: 100%;
+  margin: 10px 0px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.line {
+  border-bottom: 1px solid #313131;
+  width: 100%;
+}
+
+.people-contents{
+  padding: 15px 100px;
+  max-height: 100px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
+  color: #434343;
 }
 
 .regularmeeting {
   width: 90%;
   height: auto;
-
   border-radius: 5px;
-  margin: 0x 10px 10px 15px;
-
   background-color: rgb(212, 206, 231);
 }
 

@@ -58,14 +58,22 @@ export default {
  },
 };
 </script>
+
 <style scoped>
-.major-category {
- margin-right: 10px;
- padding: 8px; 
- font-size: 14px; 
+.major-category{
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid grey; /* 기본 테두리 적용 */
+  border-radius: 4px; /* 테두리 둥글기 */
+  outline: none; /* 클릭 시 기본 윤곽선 제거 */
 }
 .sub-category {
- padding: 8px; 
- font-size: 14px; 
+  padding: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+  border: 1px solid grey; /* 기본 테두리 적용 */
+  border-radius: 4px; /* 테두리 둥글기 */
+  outline: none; /* 클릭 시 기본 윤곽선 제거 */
 }
+
 </style>

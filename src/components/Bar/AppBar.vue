@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar fixed v-if="!isLoggedIn">
-    <v-app-bar-title style="cursor: pointer" @click="$router.push('/')"
-      >H-Hive</v-app-bar-title
+  <v-app-bar class="app-bar" fixed v-if="!isLoggedIn">
+    <v-app-bar-title class="title-name" @click="$router.push('/')"
+      >H-HIVE</v-app-bar-title
     >
     <v-icon> <font-awesome-icon icon="user-plus" /></v-icon>
     <router-link to="/register">
@@ -13,9 +13,9 @@
     </router-link>
   </v-app-bar>
 
-  <v-app-bar fixed v-else>
-    <v-app-bar-title style="cursor: pointer" @click="$router.push('/')"
-      >H-Hive</v-app-bar-title
+  <v-app-bar class="app-bar" fixed v-else>
+    <v-app-bar-title class="title-name" @click="$router.push('/')"
+      >H-HIVE</v-app-bar-title
     >
     <button @click="openNotificationModal">
       <v-icon><font-awesome-icon icon="bell" /></v-icon>알림
@@ -159,4 +159,16 @@ export default {
 };
 </script>
 <style scoped>
+.app-bar{
+  height: 70px;
+}
+
+.title-name{
+  cursor: pointer;
+  width: 200px;
+  color: orange;
+  font-size: 30px;
+  font-weight: 700;
+}
+
 </style>

@@ -49,6 +49,8 @@ export default {
   background-color: ivory;
   border-radius: 5px;
   margin: 5px 6px;
+  max-height: 41px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
 }
 
 .card {

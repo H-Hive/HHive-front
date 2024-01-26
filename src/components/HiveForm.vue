@@ -33,7 +33,6 @@ export default {
 <style scoped>
   .container {
     width: 500px;
-    height: 150px;
     border: 2px solid orange;
     border-radius: 15px;
     margin: 20px 10px 10px 10px;
