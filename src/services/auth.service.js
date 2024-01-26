@@ -23,6 +23,8 @@ class AuthService {
     })
   }
 
+  kakaoSignup
+
   login(user) {
     return axios
       .post(API_URL + '/login', {
@@ -30,6 +32,7 @@ class AuthService {
         password: user.password
       })
       .then(response => {
+        console.log(response);
         localStorage.setItem(
           "userinfo",
           JSON.stringify(response.data["payload"])
@@ -59,6 +62,14 @@ class AuthService {
     //     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     // }
     window.location.reload();
+  }
+
+  doEmailConfirm(email) {
+    return axios.post(API_URL + "/emailConfirm", {email: email}).then((response) => {
+      console.log(response);
+      alert("메일이 발송되었습니다!");
+      window.location.reload();
+    })
   }
 
   isLoggedIn() {

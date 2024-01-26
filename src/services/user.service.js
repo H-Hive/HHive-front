@@ -23,6 +23,11 @@ class UserService {
     return axios.get(API_URL + `/${userId}`);
   }
 
+  updatePassword(userId, data) {
+
+    return axios.patch(API_URL + `/${userId}` + "/password", data, {headers: {'Authorization': localStorage.getItem("token")}})
+  }
+
   getMyHives(userId) {
 
     return axios.get(API_URL + `/${userId}` + '/hives');
@@ -35,6 +40,11 @@ class UserService {
       email: profileData.email,
       description: profileData.description,
     }, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
+
+  deleteUser(userId) {
+
+    return axios.delete(API_URL + `/${userId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
   //쿠키에서 유저 정보 추출 json 형식으로 반환.

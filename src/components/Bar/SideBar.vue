@@ -1,12 +1,13 @@
 <template>
   <v-navigation-drawer expand-on-hover rail fixed>
     <v-list>
-      <v-list-item prepend-avatar=""
-      >{{ currentUser.username }}<br />{{ currentUser.email }}</v-list-item
-      >
+      <v-list-item prepend-avatar="../src/images/userlogo.png">
+        {{ currentUser.username }}
+        <br/>
+        {{ currentUser.email }}</v-list-item>
     </v-list>
 
-    <v-divider></v-divider>
+<!--    <v-divider></v-divider>-->
 
     <v-list density="compact" nav>
       <router-link to="/profile">

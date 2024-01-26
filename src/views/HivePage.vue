@@ -282,8 +282,8 @@ export default {
 .body {
   width: 100%;
   color: rgb(0, 0, 0);
-  padding:200px 50px 0px 100px;
-  background-image: url("../images/HiveBackground.png");
+  padding: 0px 50px 0px 100px;
+  background-color: rgb(255, 243, 161);
   background-position: center;
   background-size: cover;
 }

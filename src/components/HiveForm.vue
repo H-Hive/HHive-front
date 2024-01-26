@@ -33,12 +33,14 @@ export default {
 <style scoped>
   .container {
     width: 500px;
-    height: 100%;
-    border: 2px solid brown;
+    height: 150px;
+    border: 2px solid orange;
     border-radius: 15px;
-    margin: 10px 10px 10px 10px;
-
-    
-    
+    margin: 20px 10px 10px 10px;
+    background-color: ivory;
   }
+  .jumbotron{
+    padding: 10px;
+  }
+
 </style>
