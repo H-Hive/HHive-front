@@ -15,6 +15,30 @@ class HiveService {
 
     return axios.get(API_URL + `/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
+  createHive(hiveTitle,MajorCategory,SubCategory) {
+    return axios.post(
+      API_URL,
+      {
+        title: hiveTitle,
+        majorCategoryName: MajorCategory,
+        subCategoryName: SubCategory
+      },
+      { headers: { 'Authorization': localStorage.getItem("token") } }
+    );
+  }
+  updateHive(hiveId,hiveTitle,hiveIntroduction){
+    const updateRequest = {
+      title: hiveTitle,
+      introduction: hiveIntroduction
+    }
+    return axios.patch(API_URL+`/${hiveId}`+"/update",updateRequest , {headers: {'Authorization': localStorage.getItem("token")}})
+  }
+  deleteHive(hiveId){
+    return axios.delete(API_URL+`/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}})
+  }
+  getHiveUsers(hiveId){
+    return axios.get(API_URL+`/${hiveId}`+"/hiveUsers",{headers: {'Authorization': localStorage.getItem("token")}})
+  }
 
   joinHive(hiveId) {
 
