@@ -10,17 +10,31 @@
       <button type="button" class="btn btn-outline-dark">사진첩</button>
       <button type="button" class="btn btn-outline-dark">채팅</button>
     </div>
+    <UpdateHive-Modal :id="hiveData.id" v-if="showUpdateHiveModal" @modal-Closed="closeUpdateHiveModal" @update-Success= "handleModalClosed"/>
+      <Alert-Modal v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
+      <deleteModal v-if="showDeleteModal" :is-visible="showDeleteModal" :id="this.id" @delete-Success="closeDeleteModalAndRedirect" @closeModal="closeDeleteModal"/>
     <div v-if="hiveData">
-      <h1 class="title">{{ hiveData.title }}</h1>
+      <h1 class="title">
+        <span>{{ hiveData.title }}</span>
+        <button type="button" v-if="(hiveData.hostId==userId)" @click="openUpdateHiveModal" class="btn btn-outline-dark">수정</button>
+        <button type="button" v-if="(hiveData.hostId==userId)" @click="openDeleteModal" class="btn btn-outline-dark">모임 삭제</button>
+      </h1>
       <p class="hostName">방장 : {{ hiveData.hostName }}</p>
       <h5 class="Data">{{ hiveData.introduction }}</h5>
+      구성원
+      <template v-for="(user, index) in userList" :key="index">
+            <div>
+              <UserInfoForm :userInfo="user" />
+            </div>
+            <div class="space"></div>
+            </template>
     </div>
     <div class="container">
       <div class="row row-cols-2">
         <div class="col">
           <h2 class="title text-center">정기모임</h2>
           <div class="regularmeeting">
-            <div class="regularmeetingdetail">
+            <div class="regularmeetingdetail"> 
               <h4>일시 : 2024.03.05</h4>
               <h4>내용 : 스파르타 수료파티</h4>
               <h4>위치 : 서울시 강남구 한신포차</h4>
@@ -137,13 +151,25 @@ import authService from "@/services/auth.service";
 import partyService from "@/services/party.service";
 import JoinButton from "@/components/JoinButton.vue";
 import ResignButton from "@/components/ResignButton.vue";
+import UpateHiveModal from "@/components/UpdateHiveFormModal.vue"
+import AlertModal from "@/components/AlertModal.vue";
+import deleteModal from "@/components/DeleteHiveModal.vue"
+import UserInfoForm from "@/components/UserInfoForm.vue";
+import userService from "@/services/user.service";
 
 export default {
   data() {
     return {
       hiveData: {},
       partyDatas: {},
+      userList: [],
       isHiveUser: false,
+      modalMessage:"",
+      showUpdateHiveModal: false,
+      showAlertModal:false,
+      showDeleteModal:false,
+      viewHostMenu:false,
+      userId:"",
     };
   },
 
@@ -153,6 +179,10 @@ export default {
     PartyCardForm,
     JoinButton,
     ResignButton,
+    deleteModal,
+    "UpdateHive-Modal": UpateHiveModal,
+    "Alert-Modal": AlertModal,
+    UserInfoForm,
   },
 
   created() {
@@ -163,6 +193,56 @@ export default {
         this.isHiveUser = false;
       }
     });
+  },
+  methods: {
+    getUserInfo(){
+      hiveService.getHiveUsers(this.id)
+      .then((Response)=>{
+      this.userList = Response.data.payload;            
+    })         
+    .catch((error)=>{        
+      console.log(error);     
+    })
+    },
+    openDeleteModal(){
+      this.showDeleteModal = true;
+    },
+    closeDeleteModal(){
+      this.showDeleteModal = false;
+    },
+    closeAlertModal() {
+      this.showAlertModal = false;  
+    },
+    openUpdateHiveModal() {
+      this.showUpdateHiveModal = true;
+    },
+    checkDeleteModal() {
+      this.modalMessage = "정말 모임을 삭제 하시겠습니까?";
+      this.showAlertModal = true;  
+    },
+    closeUpdateHiveModal() {
+      this.showUpdateHiveModal = false;
+    },
+    handleModalClosed(modalMessage) {
+      this.modalMessage = modalMessage;
+      this.closeUpdateHiveModal();
+      this.showAlertModal = true;
+    },
+    closeModalAndRedirect() {
+      // 모달 닫기
+      this.showAlertModal = false;
+      if(this.modalMessage =="삭제가 완료 되었습니다")
+      {
+        this.$router.push("/hives");
+      }else{
+      this.$router.go(0);
+      }
+    },
+    closeDeleteModalAndRedirect(){
+      this.showDeleteModal = false;
+      this.modalMessage = "삭제가 완료 되었습니다"
+      this.showAlertModal = true;
+    },
   },
 
   mounted() {
@@ -186,7 +266,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+        this.userId=userService.getUserId();
     }
+    this.getUserInfo();
   },
 };
 </script>
@@ -200,7 +282,7 @@ export default {
 .body {
   width: 100%;
   color: rgb(0, 0, 0);
-  padding: 0px 50px 0px 100px;
+  padding:200px 50px 0px 100px;
   background-image: url("../images/HiveBackground.png");
   background-position: center;
   background-size: cover;

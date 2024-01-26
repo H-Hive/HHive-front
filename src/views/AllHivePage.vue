@@ -15,11 +15,15 @@
       <button type="button" class="btn btn-outline-dark">사교/인맥</button>
       <button type="button" class="btn btn-outline-dark">사진/영상</button>
       <button type="button" class="btn btn-outline-dark">반려동물</button>
+      <button type="button" @click="openCreateHiveModal" class="btn btn-outline-dark hive-btn">모임 만들기</button>
+      <CreateHiveForm-Modal v-if="showCreateHiveModal" @modal-Closed="closeCreateHiveModal" @create-Success = "handleModalClosed"/>
+      <Alert-Modal v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
     </div>
     <div class="hives">
       <template v-for="(hiveData, index) in hiveDatas" :key="index">
         <div class="hive-card">
           <HiveCardForm :hiveData="hiveData" />
+          
         </div>
       </template>
     </div>
@@ -30,18 +34,44 @@
 import hiveService from "../services/hive.service";
 import HiveCardForm from "@/components/HiveCardForm.vue";
 import authService from "@/services/auth.service";
-
+import CreateHiveFormModal from "@/components/CreateHiveFormModal.vue"
+import AlertModal from "@/components/AlertModal.vue";
 export default {
   data() {
     return {
       hiveDatas: "",
+      showCreateHiveModal: false,
+      showAlertModal: false,  
+      modalMessage: "",
+      redirectPath: "",
     };
   },
-
+  methods: {
+    closeAlertModal() {
+      this.showAlertModal = false;  
+    },
+    openCreateHiveModal() {
+      this.showCreateHiveModal = true;
+    },
+    closeCreateHiveModal() {
+      this.showCreateHiveModal = false;
+    },
+    handleModalClosed(message,redirectPath) {
+      this.modalMessage = message;
+      this.redirectPath = redirectPath;
+      this.showAlertModal=true;
+    },
+    closeModalAndRedirect() {
+      // 모달 닫기
+      this.showAlertModal = false;
+      this.$router.push({ path: this.redirectPath });
+    },
+  },
   components: {
     HiveCardForm,
+    "CreateHiveForm-Modal": CreateHiveFormModal,
+    "Alert-Modal": AlertModal,
   },
-
   mounted() {
     if (!authService.isLoggedIn()) {
       this.$router.push("/login");
@@ -85,7 +115,7 @@ export default {
 }
 
 .body {
-  padding: 0px 50px 0px 100px;
+  padding: 100px 50px 0px 100px;
 }
 
 .hive-card {
@@ -93,4 +123,9 @@ export default {
   max-width: 24%;
   margin: 1%;
 }
+
+.hive-btn {
+  margin-left: 600px;
+}
+
 </style>

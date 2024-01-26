@@ -127,7 +127,6 @@ export default {
     retrySSE() {
       if (!this.eventSource) {
         setTimeout(() => {
-          console.log("SSE 재시도 중...");
           this.setupSSE();
         }, this.sseRetryDelay);
       }
@@ -145,7 +144,7 @@ export default {
   components: {
     NotificationNumBox,
     "notification-modal": NotificationModal,
-    NewNotificationModal,
+    "new-notification-modal":NewNotificationModal,
   },
   mounted() {
     if (userService.getUserInfo && !this.sseSetupCompleted) {
