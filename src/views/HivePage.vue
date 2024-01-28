@@ -439,6 +439,6 @@ export default {
 }
 
 .join-btn{
-  margin: 10px auto;
+  margin: 20px auto;
 }
 </style>
