@@ -1,34 +1,35 @@
 <template>
   <v-app-bar class="app-bar" fixed v-if="!isLoggedIn">
     <v-app-bar-title class="title-name" @click="$router.push('/')"
-      >H-HIVE</v-app-bar-title
-    >
-    <v-icon> <font-awesome-icon icon="user-plus" /></v-icon>
-    <router-link to="/register">
-      <v-list-item> 회원가입</v-list-item>
-    </router-link>
-    <v-icon><font-awesome-icon icon="sign-in-alt" /></v-icon>
-    <router-link to="/login">
-      <v-list-item :to="login">로그인</v-list-item>
-    </router-link>
+      >H-HIVE 🍯</v-app-bar-title>
+    <div class="app-container">
+      <v-icon> <font-awesome-icon icon="user-plus" /></v-icon>
+      <router-link to="/register" class="custom-router-link">
+        <v-list-item> 회원가입</v-list-item>
+      </router-link>
+      <v-icon><font-awesome-icon icon="sign-in-alt" /></v-icon>
+      <router-link to="/login" class="custom-router-link">
+        <v-list-item :to="login">로그인</v-list-item>
+      </router-link>
+    </div>
   </v-app-bar>
 
   <v-app-bar class="app-bar" fixed v-else>
     <v-app-bar-title class="title-name" @click="$router.push('/')"
-      >H-HIVE</v-app-bar-title
-    >
-    <button @click="openNotificationModal">
-      <v-icon><font-awesome-icon icon="bell" /></v-icon>알림
-    </button>
-    <NotificationNumBox :value="NotificationCount" />
-    <v-icon> <font-awesome-icon icon="magnifying-glass" /></v-icon>
-    <router-link to="/hives">
-      <v-list-item>새로운 하이브 찾기</v-list-item>
-    </router-link>
-    <v-icon><font-awesome-icon icon="sign-in-alt" /></v-icon>
-    <button>
-      <v-list-item @click="logout">로그아웃</v-list-item>
-    </button>
+      >H-HIVE 🍯</v-app-bar-title>
+    <div class="app-container">
+      <button @click="openNotificationModal">
+        <v-icon><font-awesome-icon icon="bell" /></v-icon>
+      </button>
+      <NotificationNumBox :value="NotificationCount" />
+      <router-link to="/hives" class="custom-router-link">
+        <v-list-item class="findbtn">모임 찾기</v-list-item>
+      </router-link>
+      <v-icon><font-awesome-icon icon="sign-in-alt" /></v-icon>
+      <button>
+        <v-list-item @click="logout">로그아웃</v-list-item>
+      </button>
+    </div>
   </v-app-bar>
   <notification-modal
     v-if="showNotificationModal"
@@ -159,16 +160,34 @@ export default {
 };
 </script>
 <style scoped>
-.app-bar{
-  height: 70px;
+
+.app-container{
+  display: flex;
+  align-items: center;
+  margin-right: 5%;
+}
+
+.custom-router-link, .custom-router-link:visited, .custom-router-link:hover, .custom-router-link:active {
+  text-decoration: none;
+  color: black;
+}
+
+.findbtn{
+  padding: 0px 10px;
+  margin: 20px;
+  color: black;
+  background-color: #ffc944;
+  border: 1px solid #ffc944;
+  border-radius: 5px;
 }
 
 .title-name{
   cursor: pointer;
-  width: 200px;
   color: orange;
   font-size: 30px;
   font-weight: 700;
+  position: relative; /* 또는 absolute, fixed 중 선택 */
+  left: 5%; /* 왼쪽에서부터의 거리 */
 }
 
 </style>

@@ -5,7 +5,7 @@
         aria-describedby="button-addon2">
       <button class="btn-search" type="button" id="button-addon2">조회</button>
     </div>
-    <div>
+    <div class="btn-container">
       <button type="button" class="btn btn-outline-dark">전체</button>
       <button type="button" class="btn btn-outline-dark">운동</button>
       <button type="button" class="btn btn-outline-dark">아웃도어/여행</button>
@@ -102,19 +102,24 @@ export default {
 
 <style scoped>
 
+.body {
+  padding: 110px;
+  width: 100%;
+}
+
 .btn {
   margin-top: 15px;
   margin-right: 15px;
 }
+
 .btn-search{
   padding: 10px;
   background-color: #ffc944;
   border-radius: 5px; /* 테두리 모서리 둥글게 설정 */
 }
 
-.body {
-  padding: 100px;
-  width: 100%;
+.btn-container{
+  margin-left: 0.5%;
 }
 
 .content-wrapper {
@@ -127,7 +132,7 @@ export default {
 
 .hives {
   flex-grow: 1; /* 사용 가능한 공간을 채움 */
-  padding: 0px 50px; /* 왼쪽 패딩으로 간격을 조정 */
+  padding: 0px 30px; /* 왼쪽 패딩으로 간격을 조정 */
   margin-top: 10px;
   max-height: 1000px; /* 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
@@ -137,24 +142,7 @@ export default {
   width: 80%; /* 너비 고정 */
   height: 100%; /* 높이를 적절하게 설정 */
   margin-top: 30px;
-  padding-left: 70px; /* 오른쪽 패딩으로 간격을 조정 */
+  padding-left: 70px;
 }
-
-/* 미디어 쿼리로 화면 크기에 따른 반응형 레이아웃 조정 */
-@media (max-width: 1500px) {
-  .content-wrapper {
-    flex-direction: column; /* 화면이 작을 때 세로로 배치 */
-  }
-
-  .kakao-map {
-    width: 100%; /* 화면이 작을 때 너비를 100%로 설정 */
-    order: 1; /* kakao-map을 hive-cards 아래로 배치 */
-  }
-
-  .hives {
-    order: 2; /* hives를 kakao-map 위로 배치 */
-  }
-}
-
 
 </style>

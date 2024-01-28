@@ -11,7 +11,7 @@
     <div class="button-container">
       <button type="button" class="btn btn-warning" >
         <router-link to="/hives" class="nav-link">
-          모임 찾으러 가기!!
+          모임 찾으러 가기
         </router-link>
       </button>
     </div>

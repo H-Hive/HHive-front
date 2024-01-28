@@ -21,7 +21,7 @@
       <input id="description" type="text" v-model="user.description" />
     </div>
 
-    <button type="submit" class="btn btn-outline-warning">회원가입</button>
+    <button type="submit" class="btn btn-outline-warning" style="color:black;">회원가입</button>
     <img
         src="../images/kakao_login_medium_wide.png"
         alt="카카오 계정으로 회원가입"

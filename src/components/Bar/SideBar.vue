@@ -1,22 +1,26 @@
 <template>
   <v-navigation-drawer expand-on-hover rail fixed>
     <v-list>
-      <v-list-item prepend-avatar="../src/images/userlogo.png">
-        {{ currentUser.username }}
-        <br/>
-        {{ currentUser.email }}</v-list-item>
+      <!-- 프로필 정보 표시 -->
+      <v-list-item
+          class="profile-container"
+          :prepend-avatar="require('@/images/userlogo.png')"
+      :title="currentUser.username"
+      :subtitle="currentUser.email"
+      ></v-list-item>
     </v-list>
 
-<!--    <v-divider></v-divider>-->
+    <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <router-link to="/profile">
-        <v-list-item prepend-icon="mdi-account" title="프로필"></v-list-item>
+      <router-link to="/profile" class="custom-router-link">
+        <v-list-item prepend-icon="mdi-account" class="icon-btn" title="프로필"></v-list-item>
       </router-link>
-      <router-link to="/myhives">
+      <router-link to="/myhives" class="custom-router-link">
         <v-list-item
             prepend-icon="mdi-beehive-outline"
             title="내 하이브들"
+            class="icon-btn"
         ></v-list-item>
       </router-link>
       <!-- <router-link to="/myparties">
@@ -27,6 +31,7 @@
       </router-link> -->
     </v-list>
   </v-navigation-drawer>
+
 </template>
 
 <script>
@@ -47,4 +52,17 @@ export default {
 };
 </script>
 <style scoped>
+
+.profile-container {
+  margin-top: 20px;
+}
+
+.custom-router-link, .custom-router-link:visited, .custom-router-link:hover, .custom-router-link:active {
+  text-decoration: none;
+}
+
+.icon-btn{
+  color: #434343;
+}
+
 </style>

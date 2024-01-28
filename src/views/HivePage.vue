@@ -13,138 +13,129 @@
     <UpdateHive-Modal :id="hiveData.id" v-if="showUpdateHiveModal" @modal-Closed="closeUpdateHiveModal" @update-Success= "handleModalClosed"/>
       <Alert-Modal v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
       <deleteModal v-if="showDeleteModal" :is-visible="showDeleteModal" :id="this.id" @delete-Success="closeDeleteModalAndRedirect" @closeModal="closeDeleteModal"/>
-    <div v-if="hiveData" class="hive-top">
-      <div class="title-container">
-        <h1 class="title">
-          {{ hiveData.title }}
-        </h1>
-        <div class="title-buttons">
-          <button type="button" v-if="(hiveData.hostId==userId)" @click="openUpdateHiveModal" class="btn btn-outline-dark">수정</button>
-          <button type="button" v-if="(hiveData.hostId==userId)" @click="openDeleteModal" class="btn btn-outline-dark">모임 삭제</button>
+
+    <div class="main-content">
+      <div class="left-section">
+        <div v-if="hiveData" class="hive-top">
+          <div class="title-container">
+            <h1 class="title">
+              {{ hiveData.title }}
+            </h1>
+            <div class="title-buttons">
+              <button type="button" v-if="(hiveData.hostId==userId)" @click="openUpdateHiveModal" class="btn btn-outline-dark">수정</button>
+              <button type="button" v-if="(hiveData.hostId==userId)" @click="openDeleteModal" class="btn btn-outline-dark">모임 삭제</button>
+            </div>
+          </div>
+          <p class="hostName">방장 : {{ hiveData.hostName }}</p>
+          <h5 class="Data">{{ hiveData.introduction }}</h5>
+
+          <div class="people-container">
+            <h6 class="people">구성원</h6>
+            <div class="line"></div>
+            <div class="people-contents">
+              <template v-for="(user, index) in userList" :key="index">
+                <div>
+                  <UserInfoForm :userInfo="user" />
+                </div>
+                <div class="space"></div>
+              </template>
+            </div>
+          </div>
+        </div>
+        <div class="join-btn">
+          <div>
+            <JoinButton
+                :property="'Hive'"
+                :id="hiveData.id"
+                v-if="!isHiveUser"
+            />
+            <ResignButton :property="'Hive'" :id="hiveData.id" v-else/>
+          </div>
         </div>
       </div>
-      <p class="hostName">방장 : {{ hiveData.hostName }}</p>
-      <h5 class="Data">{{ hiveData.introduction }}</h5>
 
-      <div class="people-container">
-        <h6 class="people">구성원</h6>
-        <div class="line"></div>
-        <div class="people-contents">
-          <template v-for="(user, index) in userList" :key="index">
-            <div>
-              <UserInfoForm :userInfo="user" />
-            </div>
-            <div class="space"></div>
-          </template>
-        </div>
-      </div>
 
-    </div>
-    <div class="container">
-      <div class="row row-cols-2">
-        <div class="col">
-          <h2 class="title text-center">정기모임</h2>
-          <div class="regularmeeting">
-            <div class="regularmeetingdetail"> 
-              <h4>일시 : 2024.03.05</h4>
-              <h4>내용 : 스파르타 수료파티</h4>
-              <h4>위치 : 서울시 강남구 한신포차</h4>
-              <h4>참석 : 4/20</h4>
-            </div>
-            <div class="d-grid gap-2 d-md-block">
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="
+          <div class="all-meeting">
+            <div class="r-meeting">
+              <div class="regular-meeting">
+                <h2 class="title text-center">정기모임</h2>
+                <div class="regularmeetingdetail">
+                  <h4>일시 : 2024.03.05</h4>
+                  <h4>내용 : 스파르타 수료파티</h4>
+                  <h4>위치 : 서울시 강남구 한신포차</h4>
+                  <h4>참석 : 4/20</h4>
+                </div>
+                <div class="meet-btn">
+                  <button
+                      type="button"
+                      class="btn btn-warning"
+                      style="
+
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 30px;
                   width: auto;
                 "
-              >
-                참여하기 !!
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="
+                  >
+                    참여하기
+                  </button>
+                  <button
+                      type="button"
+                      class="btn btn-warning"
+                      style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
                 "
-              >
-                다음 기회에...
-              </button>
+                  >
+                    불참 🥲
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <h2 class="title text-center">게시판</h2>
+            <div class="board-container">
+              <h2 class="title text-center">게시판</h2>
 
-          <div class="board">
-            <div class="card">
-              <div type="button" class="card-body">
-                [공지] 우리동네 모임에 오신걸 환영합니다!
-              </div>
-            </div>
-            <div class="card">
-              <div type="button" class="card-body">
-                [공지] 모임 시 주의사항!!!
-              </div>
-            </div>
-            <div class="card">
-              <div type="button" class="card-body">
-                [공지] 이번주 행운의 주인공!!!
-              </div>
-            </div>
-            <div>
-              <button
-                type="button"
-                class="btn btn-primary"
-                style="
+              <div class="board">
+                <div class="card">
+                  <div type="button" class="card-body">
+                    [공지] 우리동네 모임에 오신걸 환영합니다!
+                  </div>
+                </div>
+                <div class="card">
+                  <div type="button" class="card-body">
+                    [공지] 모임 시 주의사항!!!
+                  </div>
+                </div>
+                <div class="card">
+                  <div type="button" class="card-body">
+                    [공지] 이번주 행운의 주인공!!!
+                  </div>
+                </div>
+                <div class="board-btn">
+                  <button
+                      type="button"
+                      class="btn btn-warning"
+                      style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
                 "
-              >
-                더 보러가기
-              </button>
+                  >
+                    더 보러가기
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <div>
-            <JoinButton
-              :property="'Hive'"
-              :id="hiveData.id"
-              v-if="!isHiveUser"
-            />
-            <ResignButton :property="'Hive'" :id="hiveData.id" v-else />
-          </div>
-        </div>
-      </div>
     </div>
-    <div class="joinbtnform">
-      <div>
-        <button
-          type="button"
-          class="btn btn-info"
-          style="
-            --bs-btn-padding-y: 0.5rem;
-            --bs-btn-padding-x: 1rem;
-            --bs-btn-font-size: 1rem;
-            margin: 10px 10px 10px 10px;
-            width: 300px auto;
-          "
-          v-if="!isHiveUser"
-        >
-          <JoinButton :property="'Hive'" :id="hiveData.id" />
-        </button>
-      </div>
-    </div>
+
+
 
     <!-- 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 -->
     <div v-for="(partyData, index) in partyDatas" :key="index">
@@ -301,7 +292,7 @@ export default {
   display: flex;
   width: 100%;
   margin-top: 15px;
-  margin-left: 130px;
+  margin-left: 8%;
   flex-direction: row;
 }
 
@@ -309,13 +300,25 @@ export default {
   margin: 10px 10px 10px 10px;
 }
 
+.main-content {
+  display: flex; /* 가로로 배치 */
+  width: 100%;
+}
+
+.left-section {
+  margin-left: 8%;
+  margin-top: 4.5%;
+  width: 50%;
+  display: flex;
+  flex-direction: column; /* 세로로 쌓기 */
+}
+
 .hive-top{
   display: flex;
-  margin: 50px auto;
   background-color: ivory;
   flex-direction: column;
   align-items: center;
-  width: 800px;
+  width: 100%;
   padding: 30px;
   border: 2px solid grey;
   border-radius: 8px;
@@ -339,16 +342,20 @@ export default {
 }
 
 .Data{
-  padding: 20px 55px;
+  margin-top: 4%;
+  width: 100%;
+  padding: 20px 40px;
+  height: 160px;
   max-height: 160px; /* 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
   border: 1px solid #313131;
-  border-radius: 5px;
+  border-radius: 8px;
   color: #434343;
 }
 
 .people-container{
   margin-top: 30px;
+  margin-bottom: 15px;
   display: flex;
   width: 300px;
   flex-direction: column;
@@ -376,28 +383,43 @@ export default {
   color: #434343;
 }
 
-.regularmeeting {
-  width: 90%;
+.all-meeting{
+  margin: 2.5% 8%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.regular-meeting {
+  padding: 30px;
+  border: 2px solid grey;
+  border-radius: 8px;
+  width: 100%;
   height: auto;
-  border-radius: 5px;
-  background-color: rgb(212, 206, 231);
+  border-radius: 8px;
+  background-color: ivory;
 }
 
 .regularmeetingdetail {
-  margin: 10px 10px 10px 20px;
+  margin-top: 15px;
+  border: 1px solid #313131;
+  border-radius: 8px;
+  padding: 15px;
+  color: #313131;
 }
 
-.regularmeetingdetail {
-  padding: 30px 15px 0px 15px;
+.meet-btn{
+  display: flex;
+  justify-content: flex-end;
 }
 
-.board {
-  width: 90%;
-  height: auto;
-
-  border-radius: 5px;
-  margin: 10px 10px 10px 10px;
-  background-color: rgb(212, 206, 231);
+.board-container{
+  padding: 30px;
+  margin-top: 2%;
+  width: 100%;;
+  border: 2px solid grey;
+  border-radius: 8px;
+  background-color: ivory
 }
 
 .card {
@@ -408,13 +430,15 @@ export default {
 }
 
 .card-body {
-  margin: auto;
-  padding: auto;
+  margin-left: 10px;
 }
 
-.joinbtnform {
-  width: 100%;
-  text-align: center;
-  display: inline-block;
+.board-btn{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.join-btn{
+  margin: 10px auto;
 }
 </style>

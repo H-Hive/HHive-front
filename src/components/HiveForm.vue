@@ -37,6 +37,8 @@ export default {
     border-radius: 15px;
     margin: 20px 10px 10px 10px;
     background-color: ivory;
+    max-height: 150px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
   }
   .jumbotron{
     padding: 10px;

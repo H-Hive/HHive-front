@@ -2,7 +2,15 @@
 // 하이브의 가입인지 파티의 가입인지 props로 확인받고, 그 id에 해당하는 하이브/파티 에 가입한다.
 
 <template>
-  <button @click="handleJoinClick">가입하기</button>
+  <button class="btn btn-warning"
+          style="
+            --bs-btn-padding-y: 0.5rem;
+            --bs-btn-padding-x: 1rem;
+            --bs-btn-font-size: 1rem;
+            margin: 10px 10px 10px 10px;
+            width: 100px
+          "
+          @click="handleJoinClick">가입하기</button>
 
   <YesOrNoModal
     :is-visible="isModalVisible"

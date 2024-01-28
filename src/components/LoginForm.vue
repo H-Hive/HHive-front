@@ -20,7 +20,7 @@
             <button
                 type="submit"
                 class="btn btn-outline-warning"
-                style="width: 100%"
+                style="width: 100%; color:black;"
                 text-align:
                 center
                 @click="handleLogin"

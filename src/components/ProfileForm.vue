@@ -45,16 +45,16 @@
         @submitOrToggle="submitOrToggle"
         class="btn btn-warning"
       />
+      <button v-if="isEditMode" @click="cancelEdit" style="margin-left: 10px" class="btn btn-warning">
+        수정 취소
+      </button>
       <div v-if="isEditMode" class="profileBtn">
-        <button @click="showUpdatePasswordModal">비밀번호 변경</button>
+        <button @click="showUpdatePasswordModal" class="btn btn-warning" style="margin-top: 20px">비밀번호 변경</button>
         <UpdatePasswordModal
             :is-visible="isUpdatePasswordModalVisible"
             @justCloseModal="justCloseUpdatePasswordModal"
         />
         <ResignButton :property="'User'" />
-        <button @click="cancelEdit" class="cancel-edit-btn">
-          수정 취소
-        </button>
       </div>
     </div>
     <div>
