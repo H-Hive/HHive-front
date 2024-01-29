@@ -8,7 +8,17 @@
       <h1>파티 주최자: {{ partyData.username }}</h1>
       <h1>파티 내용: {{ partyData.content }}</h1>
       <h1>파티 일시: {{ partyData.dateTime }}</h1>
-      <h1>여기 멤버 수만 넣을까?</h1>
+      <h1>우리 멤버들: {{ partyMember }}</h1>
+    </div>
+    <div class="join-btn" v-if="isHiveUser">
+      <div>
+        <JoinButton
+          :property="'Party'"
+          :id="partyData.id"
+          v-if="!isPartyUser"
+        />
+        <ResignButton :property="'Party'" :id="partyData.id" v-else />
+      </div>
     </div>
     <button v-if="isPartyHost" type="click" @click="openUpdatePartyModal">
       수정하기
@@ -16,14 +26,27 @@
     <button v-if="isPartyHost" type="click" @click="openDeletePartyModal">
       삭제하기
     </button>
-    <button v-if="isPartyHost"  @click="openSendNotToHIveModal" class="btn btn-outline-dark">알림 전송</button>
+    <button
+      v-if="isPartyHost"
+      @click="openSendNotToHIveModal"
+      class="btn btn-outline-dark"
+    >
+      알림 전송
+    </button>
     <UpdatePartyModal
       :id="partyData.id"
       v-if="showUpdatePartyModal"
       @modal-Closed="closeUpdatePartyModal"
       @update-Success="handleUpdatePartyModalClosed"
     />
-    <SendNotificationForm-modal v-if="showSendNotModal" :is-visible="showSendNotModal" :id="partyData.id" :type="groupType" @closeModal="closeSendNotModal" @send-Success="handleNotModalClosed"/>
+    <SendNotificationForm-modal
+      v-if="showSendNotModal"
+      :is-visible="showSendNotModal"
+      :id="partyData.id"
+      :type="groupType"
+      @closeModal="closeSendNotModal"
+      @send-Success="handleNotModalClosed"
+    />
     <AlertModal
       v-if="showAlertModal"
       :is-visible="showAlertModal"
@@ -48,6 +71,9 @@ import DeletePartyModal from "./DeletePartyModal.vue";
 import UpdatePartyModal from "./UpdatePartyModal.vue";
 import AlertModal from "./AlertModal.vue";
 import SendNotificationForm from "./SendNotificationForm.vue";
+import JoinButton from "./JoinButton.vue";
+import ResignButton from "./ResignButton.vue";
+import hiveService from "@/services/hive.service";
 
 export default {
   data() {
@@ -58,7 +84,8 @@ export default {
       showAlertModal: false,
       showDeletePartyModal: false,
       showSendNotModal: false,
-      groupType:"",
+      groupType: "",
+      partyMember: [],
     };
   },
 
@@ -68,12 +95,26 @@ export default {
     AlertModal,
     UpdatePartyModal,
     DeletePartyModal,
+    JoinButton,
+    ResignButton,
     "SendNotificationForm-modal": SendNotificationForm,
   },
 
   computed: {
+    isHiveUser() {
+      return hiveService.isHiveUser(this.hiveId);
+    },
     isPartyHost() {
       return userService.getUserInfo()["username"] == this.partyData.username;
+    },
+    isPartyUser() {
+      const partyMembers = this.partyData.members;
+      const currentUser = userService.getUserInfo()["username"];
+
+      for (const key in partyMembers) {
+        if (partyMembers[key]["username"] === currentUser) return true;
+      }
+      return false;
     },
   },
 
@@ -86,6 +127,11 @@ export default {
         .then((response) => {
           this.partyData = response.data["payload"];
           console.log("partyDatas = ", this.partyData);
+
+          const partyMembers = this.partyData.members;
+          for (const key in partyMembers) {
+            this.partyMember.push(partyMembers[key]["username"]);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -129,22 +175,22 @@ export default {
       if (this.modalMessage == "업데이트 성공") {
         this.showAlertModal = false;
         window.location.reload();
-      }else{
+      } else {
         this.showAlertModal = false;
       }
     },
-    closeSendNotModal(){
+    closeSendNotModal() {
       this.showSendNotModal = false;
     },
-    openSendNotToHIveModal(){
-      this.groupType="party";
+    openSendNotToHIveModal() {
+      this.groupType = "party";
       this.showSendNotModal = true;
     },
-    handleNotModalClosed(modalMessage){
+    handleNotModalClosed(modalMessage) {
       this.modalMessage = modalMessage;
       this.closeSendNotModal();
       this.showAlertModal = true;
-    }
+    },
   },
 };
 </script>

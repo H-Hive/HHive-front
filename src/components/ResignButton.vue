@@ -2,9 +2,13 @@
 // 하이브의 가입인지 파티의 가입인지 props로 확인받고, 그 id에 해당하는 하이브/파티 에 가입한다.
 
 <template>
-  <button @click="handleResignClick"
-          style="color: black"
-          class="btn btn-outline-warning">탈퇴하기</button>
+  <button
+    @click="handleResignClick"
+    style="color: black"
+    class="btn btn-outline-warning"
+  >
+    탈퇴하기
+  </button>
 
   <YesOrNoModal
     :is-visible="isModalVisible"
@@ -62,17 +66,41 @@ export default {
 
     closeModalAndReload() {
       if (this.property === "Hive") {
-        hiveService.resignHive(this.id);
+        hiveService
+          .resignHive(this.id)
+          .then((response) => {
+            console.log(response);
+            this.showModal("하이브 탈퇴에 성공하셨습니다");
+            window.location.reload();
+          })
+          .catch((error) => {
+            this.showModal(error.response.data.message);
+          });
       } else if (this.property === "Party") {
-        partyService.resignParty(this.id);
+        partyService
+          .resignParty(this.id)
+          .then((response) => {
+            console.log(response);
+            this.showModal("파티 탈퇴에 성공하셨습니다");
+            window.location.reload();
+          })
+          .catch((error) => {
+            this.showModal(error.response.data.message);
+          });
       } else if (this.property === "User") {
-        userService.deleteUser(userService.getUserId());
+        userService
+          .deleteUser(userService.getUserId())
+          .then((response) => {
+            console.log(response);
+            this.showModal("탈퇴에 성공하셨습니다");
+          })
+          .catch((error) => {
+            this.showModal(error.response.data.message);
+          });
         authService.logout();
       }
       this.isModalVisible = false;
       //오류 처리 해줘야함
-      alert("탈퇴가 완료되었습니다.");
-      window.location.reload();
     },
 
     justCloseModal() {

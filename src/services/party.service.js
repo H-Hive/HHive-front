@@ -19,7 +19,7 @@ class PartyService {
 
   getParty(hiveId, partyId) {
 
-    return axios.get(API_URL +`/${hiveId}` + `/${partyId}`, {headers: {'Authorization': localStorage.getItem("token")}});
+    return axios.get(API_URL + `/${partyId}` + "/hives" + `/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
   updateParty(data, partyId) {
@@ -33,7 +33,7 @@ class PartyService {
   }
 
   joinParty(partyId) {
-
+    console.log("왜 안되냥고")
     return axios.post(API_URL + `/${partyId}` + "/join", {headers: {'Authorization': localStorage.getItem("token")}});
   }
 

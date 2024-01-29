@@ -5,18 +5,11 @@
   <div>
     <PartyForm :hiveId="this.hiveId" :partyId="this.partyId" />
   </div>
-  <div>
-    <!-- 파티에 가입된 유저인지 구분해야함 추후 구현 -->
-    <JoinButton v-if="isHiveUser" :property="'Party'" :id="this.id" />
-    <ResignButton v-if="isHiveUser" :property="'Party'" :id="this.id" />
-  </div>
 </template>
 
 <script>
 import authService from "@/services/auth.service";
 import PartyForm from "@/components/PartyForm.vue";
-import JoinButton from "@/components/JoinButton.vue";
-import ResignButton from "@/components/ResignButton.vue";
 import hiveService from "@/services/hive.service";
 
 export default {
@@ -38,8 +31,6 @@ export default {
 
   components: {
     PartyForm,
-    JoinButton,
-    ResignButton,
   },
 
   mounted() {
