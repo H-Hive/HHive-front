@@ -6,15 +6,15 @@
       <button class="btn-search" type="button" id="button-addon2">조회</button>
     </div>
     <div class="btn-container">
-      <button type="button" class="btn btn-outline-dark">전체</button>
-      <button type="button" class="btn btn-outline-dark">운동</button>
-      <button type="button" class="btn btn-outline-dark">아웃도어/여행</button>
-      <button type="button" class="btn btn-outline-dark">음악/악기</button>
-      <button type="button" class="btn btn-outline-dark">봉사활동</button>
-      <button type="button" class="btn btn-outline-dark">댄스/무용</button>
-      <button type="button" class="btn btn-outline-dark">사교/인맥</button>
-      <button type="button" class="btn btn-outline-dark">사진/영상</button>
-      <button type="button" class="btn btn-outline-dark">반려동물</button>
+      <button type="button" class="btn btn-outline-dark" @click="showAllHives">전체</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('SPORTS')">스포츠</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('')">아웃도어/여행</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('')">음악/악기</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('GAME')">게임</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('')">댄스/무용</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('')">사교/인맥</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('')">사진/영상</button>
+      <button type="button" class="btn btn-outline-dark" @click="showHives('')">반려동물</button>
       <button type="button" @click="openCreateHiveModal" class="btn btn-warning">모임 만들기</button>
       <CreateHiveForm-Modal class="create-modal" v-if="showCreateHiveModal" @modal-Closed="closeCreateHiveModal" @create-Success = "handleModalClosed"/>
       <Alert-Modal class="close-modal" v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
@@ -74,7 +74,25 @@ export default {
       this.showAlertModal = false;
       this.$router.push({ path: this.redirectPath });
     },
+    showHives(category){
+      hiveService.getHiveByCategories(category)
+      .then((response) => {
+          this.hiveDatas = response.data["payload"];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   },
+  showAllHives(){
+    hiveService.getAllHives()
+    .then((response) => {
+    this.hiveDatas = response.data["payload"];
+    })
+    .catch((error) => {
+    console.log(error);
+  });
+  },
+},
 
   components: {
     KakaoMap,

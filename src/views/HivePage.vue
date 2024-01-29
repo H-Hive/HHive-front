@@ -12,6 +12,7 @@
     </div>
     <UpdateHive-Modal
       :id="hiveData.id"
+      :is-info="isInfo"
       v-if="showUpdateHiveModal"
       @modal-Closed="closeUpdateHiveModal"
       @update-Success="handleModalClosed"
@@ -35,6 +36,7 @@
       @modal-Closed="closeCreatePartyModal"
       @create-Success="handleCreatePartyModalClosed"
     />
+    <SendNotificationForm-modal v-if="showSendNotModal" :is-visible="showSendNotModal" :id="this.id" :type="groupType" @closeModal="closeSendNotModal" @send-Success="handleNotModalClosed"/>
 
     <div class="main-content">
       <div class="left-section">
@@ -47,10 +49,18 @@
               <button
                 type="button"
                 v-if="hiveData.hostId == userId"
-                @click="openUpdateHiveModal"
+                @click="openUpdateHiveTitleModal"
                 class="btn btn-outline-dark"
               >
-                수정
+                모임 이름 수정
+              </button>
+              <button
+                type="button"
+                v-if="hiveData.hostId == userId"
+                @click="openUpdateHiveInfoModal"
+                class="btn btn-outline-dark"
+              >
+                모임 소개 수정
               </button>
               <button
                 type="button"
@@ -68,6 +78,7 @@
               >
                 파티 생성
               </button>
+              <button type="button" v-if="(hiveData.hostId==userId)" @click="openSendNotToHIveModal" class="btn btn-outline-dark">알림 전송</button>
             </div>
           </div>
           <p class="hostName">방장 : {{ hiveData.hostName }}</p>
@@ -200,6 +211,7 @@ import AlertModal from "@/components/AlertModal.vue";
 import deleteModal from "@/components/DeleteHiveModal.vue";
 import UserInfoForm from "@/components/UserInfoForm.vue";
 import userService from "@/services/user.service";
+import SendNotificationForm from "@/components/SendNotificationForm.vue";
 import CreatePartyFormModal from "@/components/CreatePartyFormModal.vue";
 
 export default {
@@ -211,11 +223,14 @@ export default {
       isHiveUser: false,
       modalMessage: "",
       showUpdateHiveModal: false,
-      showAlertModal: false,
-      showDeleteModal: false,
+      showAlertModal:false,
+      showDeleteModal:false,
       showCreatePartyModal: false,
-      viewHostMenu: false,
-      userId: "",
+      viewHostMenu:false,
+      userId:"",
+      isInfo:"",
+      groupType:"",
+      showSendNotModal: false,
     };
   },
 
@@ -227,6 +242,7 @@ export default {
     ResignButton,
     deleteModal,
     "UpdateHive-Modal": UpateHiveModal,
+    "SendNotificationForm-modal": SendNotificationForm,
     "Alert-Modal": AlertModal,
     UserInfoForm,
     CreatePartyFormModal,
@@ -261,7 +277,12 @@ export default {
     closeAlertModal() {
       this.showAlertModal = false;
     },
-    openUpdateHiveModal() {
+    openUpdateHiveTitleModal() {
+      this.isInfo = "title";
+      this.showUpdateHiveModal = true;
+    },
+    openUpdateHiveInfoModal() {
+      this.isInfo = "info";
       this.showUpdateHiveModal = true;
     },
     checkDeleteModal() {
@@ -310,6 +331,18 @@ export default {
       this.closeCreatePartyModal();
       this.showAlertModal = true;
     },
+    closeSendNotModal(){
+      this.showSendNotModal = false;
+    },
+    openSendNotToHIveModal(){
+      this.groupType="hive";
+      this.showSendNotModal = true;
+    },
+    handleNotModalClosed(modalMessage){
+      this.modalMessage = modalMessage;
+      this.closeSendNotModal();
+      this.showAlertModal = true;
+    }
   },
 
   mounted() {

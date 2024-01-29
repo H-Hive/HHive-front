@@ -1,9 +1,11 @@
 <template class="body">
   <div class="container">
     <header class="jumbotron">
-      <h3>
-        <strong>{{ hiveData.title }}</strong>
-      </h3>
+      <h5 class="card-title" @click="goToHivePage(hiveData.id)">
+            <button type="button" >
+              {{ hiveData.title }}
+            </button>
+          </h5>
     </header>
     <p>
       <strong>introduction:</strong>
@@ -23,6 +25,11 @@ export default {
   props: {
     hiveData: {
       type: Object,
+    },
+  },
+  methods: {
+    goToHivePage(hiveId) {
+      this.$router.push(`/hive/${hiveId}`);
     },
   },
 
