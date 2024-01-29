@@ -28,8 +28,12 @@
           />
         </form>
         <div class="button-container">
-          <button @click="closeModalAndReload" class="btn btn-outline-dark">수정</button>
-          <button @click="justCloseModal" class="btn btn-outline-dark">취소</button>
+          <button @click="closeModalAndReload" class="btn btn-outline-dark">
+            수정
+          </button>
+          <button @click="justCloseModal" class="btn btn-outline-dark">
+            취소
+          </button>
         </div>
       </div>
     </div>
@@ -66,7 +70,7 @@ export default {
           alert("비밀번호를 수정하였습니다");
           window.location.reload();
         })
-        .catch((error) => console.log(error));
+        .catch((error) => alert(error.response.data.message));
     },
     justCloseModal() {
       this.$emit("justCloseModal");

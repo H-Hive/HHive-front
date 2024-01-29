@@ -89,21 +89,16 @@ export default {
         .login(this.user)
         .then((response) => {
           console.log(response.status);
-          if (response.status >= 200 && response.status < 300) {
-            // 회원가입 성공 시 모달 표시
-            // this.userId = userService.getUserInfo()["userId"];
-            this.userId = userService.getUserInfo()["userId"];
-            console.log(userService.getUserInfo());
-            console.log(this.userId);
-            this.showModal("로그인에 성공하셨습니다.", `/profile`);
-          } else {
-            console.error("서버 응답 오류:", response.data);
-          }
+          // 회원가입 성공 시 모달 표시
+          // this.userId = userService.getUserInfo()["userId"];
+          this.userId = userService.getUserInfo()["userId"];
+          console.log(userService.getUserInfo());
+          console.log(this.userId);
+          this.showModal("로그인에 성공하셨습니다.", `/profile`);
         })
         .catch((error) => {
           // 에러 핸들링 및 모달 표시
-          this.showModal("로그인 오류", "/home");
-          console.error("로그인 오류:", error);
+          this.showModal(error.response.data.message, "/login");
         });
     },
 
