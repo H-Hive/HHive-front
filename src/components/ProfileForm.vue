@@ -18,12 +18,26 @@
       <h5>
         <strong>Email : </strong>
         {{ profileData.email }}
-        <button v-if="isLoggedInUser"
-                class="btn btn-outline-warning"
-                style="color: black; margin-left: 5px"
-                @click="doEmailConfirm">
+
+        <!-- 이메일 인증 section -->
+        <button v-if="isKakaoUser" type="button">카카오 유저</button>
+        <button v-else-if="isEmailVerified" type="button">
+          이메일 인증 완료
+        </button>
+        <button
+          v-else-if="isLoggedInUser"
+          class="btn btn-outline-warning"
+          style="color: black; margin-left: 5px"
+          @click="requestVerificationCode"
+        >
           이메일 인증
         </button>
+        <EmailVerificationModal
+          v-if="isEmailVerificationModalVisible"
+          @verification-Success="handleEmailVerificationSuccess"
+          @modal-Closed="closeEmailVerificationModal"
+          :email="profileData.email"
+        />
       </h5>
       <h5>
         <strong>자기소개 : </strong>
@@ -61,7 +75,6 @@
         class="btn btn-warning"
         style="margin-left: 10px"
         @click="showUpdateUserCategoryModal"
-        v-if="!isEditMode"
       >
         관심사 수정
       </button>
@@ -76,8 +89,8 @@
       <div v-if="isEditMode" class="profileBtn">
         <button
           @click="showUpdatePasswordModal"
-          class="btn btn-outline-warning"
-          style="margin-top: 20px; color: black"
+          class="btn btn-warning"
+          style="margin-top: 20px"
         >
           비밀번호 변경
         </button>
@@ -118,6 +131,7 @@ import HiveCardForm from "@/components/HiveCardForm.vue";
 import UpdatePasswordModal from "./UpdatePasswordModal.vue";
 import ResignButton from "./ResignButton.vue";
 import UpdateUserCategoryModal from "./UpdateUserCategoryModal.vue";
+import EmailVerificationModal from "./EmailVerificationModal.vue";
 
 export default {
   name: "profile-form",
@@ -129,6 +143,7 @@ export default {
       isEditMode: false,
       isUpdatePasswordModalVisible: false,
       isUpdateUserCategoryModalVisible: false,
+      isEmailVerificationModalVisible: false,
     };
   },
 
@@ -138,6 +153,7 @@ export default {
     UpdatePasswordModal,
     ResignButton,
     UpdateUserCategoryModal,
+    EmailVerificationModal,
   },
 
   props: {
@@ -148,6 +164,13 @@ export default {
   computed: {
     isLoggedInUser() {
       return userService.getUserId() === this.userId;
+    },
+    isEmailVerified() {
+      console.log(this.profileData);
+      return this.profileData.emailVerified;
+    },
+    isKakaoUser() {
+      return userService.isKakaoUser();
     },
   },
 
@@ -191,9 +214,19 @@ export default {
       this.isUpdatePasswordModalVisible = false;
     },
 
-    doEmailConfirm() {
-      console.log("clicked");
-      authService.doEmailConfirm(this.profileData.email);
+    //이메일 인증 관련
+    requestVerificationCode() {
+      authService.requestVerificationCode(this.profileData.email);
+      this.isEmailVerificationModalVisible = true;
+    },
+
+    handleEmailVerificationSuccess(modalMessage) {
+      this.closeEmailVerificationModal;
+      alert(modalMessage);
+    },
+
+    closeEmailVerificationModal() {
+      this.isEmailVerificationModalVisible = false;
     },
 
     //카테고리 수정 모달

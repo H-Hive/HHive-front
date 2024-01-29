@@ -1,4 +1,5 @@
 import axios from 'axios';
+import userService from './user.service';
 // import Cookies from 'js-cookie';
 
 const API_URL = 'http://localhost:8080/api/users'
@@ -43,6 +44,10 @@ class AuthService {
         "token",
         response.headers.get("Authorization")
       );
+      localStorage.setItem(
+        "kakaoUser",
+        true
+      );
     });
   }
 
@@ -71,6 +76,7 @@ class AuthService {
     //헤더 버전
     localStorage.removeItem('userinfo');
     localStorage.removeItem('token');
+    localStorage.removeItem('kakaoUser');
 
     // // 모든 쿠키 가져오기
     // var cookies = document.cookie.split(";");
@@ -85,12 +91,31 @@ class AuthService {
     window.location.reload();
   }
 
-  doEmailConfirm(email) {
-    return axios.post(API_URL + "/email-confirm", {email: email}).then((response) => {
+  requestVerificationCode(email) {
+
+    const userId = userService.getUserId();
+    console.log(userId);
+
+    return axios.post(API_URL + `/${userId}` + "/email-verification", {email: email}).then((response) => {
       console.log(response);
       alert("메일이 발송되었습니다!");
+    })
+    .catch((error) => {console.log(error)})
+  }
+
+  sendVerificationCode(email, verificationCode) {
+
+    const userId = userService.getUserId();
+
+    return axios.post(API_URL + `/${userId}` + "/email-verification" + "/verify", {email: email, verificationCode: verificationCode})
+    .then((response) => {
+      console.log(response);
+      alert("이메일 인증에 성공하셨습니다.");
       window.location.reload();
     })
+    .catch((error) => {
+      alert(error.response.data.message);
+    });
   }
 
   isLoggedIn() {

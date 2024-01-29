@@ -75,6 +75,10 @@ class UserService {
   getUserId() {
     return this.getUserInfo()['userId'];
   }
+
+  isKakaoUser() {
+    return localStorage.getItem('kakaoUser');
+  }
 }
 
 export default new UserService();
