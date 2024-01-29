@@ -21,12 +21,14 @@
       <input id="description" type="text" v-model="user.description" />
     </div>
 
-    <button type="submit" class="btn btn-outline-warning" style="color:black;">회원가입</button>
+    <button type="submit" class="btn btn-outline-warning" style="color: black">
+      회원가입
+    </button>
     <img
-        src="../images/kakao_login_medium_wide.png"
-        alt="카카오 계정으로 회원가입"
-        @click="kakaoLogin"
-        class="kakao-login-button"
+      src="../images/kakao_login_medium_wide.png"
+      alt="카카오 계정으로 회원가입"
+      @click="kakaoLogin"
+      class="kakao-login-button"
     />
 
     <!-- 모달 사용 -->
@@ -76,6 +78,10 @@ export default {
           this.showModal("회원가입 오류");
           console.error("회원가입 오류:", error);
         });
+    },
+
+    kakaoLogin() {
+      authService.kakaoLogin();
     },
 
     showModal(message, redirectPath) {
@@ -139,5 +145,4 @@ button {
   cursor: pointer; /* 마우스 오버 시 커서를 포인터로 변경 */
   margin-top: 20px; /* 버튼과의 상단 간격 조정 */
 }
-
 </style>

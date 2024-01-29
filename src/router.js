@@ -7,6 +7,7 @@ import HivePage from "./views/HivePage.vue";
 import ProfilePage from "./views/ProfilePage.vue";
 import PartyPage from "./views/PartyPage.vue"
 import MyHivePage from "./views/MyHivePage.vue"
+import KakaoPage from "./views/KakaoPage.vue"
 import authService from "./services/auth.service";
 // lazy-loaded
 // const Profile = () => import("./components/Profile.vue")
@@ -16,6 +17,13 @@ const routes = [
     path: "/",
     name: "home",
     component: Home,
+    afterEach(to, from, next) {
+      if(from.path === '/kakao-login') {
+        window.location.reload();
+      } else {
+        next();
+      }
+    }
   },
   {
     path: "/home",
@@ -53,6 +61,10 @@ const routes = [
     path: "/myhives",
     component: MyHivePage
   },
+  {
+    path: "/kakao-login",
+    component: KakaoPage,
+  }
 ];
 
 const router = createRouter({
@@ -62,7 +74,7 @@ const router = createRouter({
 
 //다른 페이지로 이동하기 전 로그인 여부 확인
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/','/login', '/register', '/home'];
+  const publicPages = ['/','/login', '/register', '/home', '/kakao-login'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = authService.isLoggedIn() ? true : false;
 

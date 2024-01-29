@@ -26,6 +26,5 @@ app.config.globalProperties.emitter = emitter;
 app
   .use(router)
   .use(vuetify)
-  // .use(store)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");

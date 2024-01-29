@@ -11,9 +11,25 @@ class PartyService {
     return axios.get(API_URL + `/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
+  createParty(data, hiveId) {
+    console.log(data, hiveId);
+
+    return axios.post(API_URL + `/hives` + `/${hiveId}`, data, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
+
   getParty(hiveId, partyId) {
 
     return axios.get(API_URL +`/${hiveId}` + `/${partyId}`, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
+
+  updateParty(data, partyId) {
+
+    return axios.patch(API_URL + `/${partyId}`, data, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
+
+  deleteParty(partyId) {
+
+    return axios.delete(API_URL + `/${partyId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
   joinParty(partyId) {

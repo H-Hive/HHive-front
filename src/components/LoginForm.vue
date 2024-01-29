@@ -2,9 +2,9 @@
   <div class="col-md-12">
     <div class="card card-container">
       <img
-          id="profile-img"
-          src="../images/HiveLogo.png"
-          class="profile-img-card"
+        id="profile-img"
+        src="../images/HiveLogo.png"
+        class="profile-img-card"
       />
       <div id="loginBox">
         <form v-on:submit.prevent="handleLogin">
@@ -18,16 +18,22 @@
           </div>
           <div class="button-login-box">
             <button
-                type="submit"
-                class="btn btn-outline-warning"
-                style="width: 100%; color:black;"
-                text-align:
-                center
-                @click="handleLogin"
+              type="submit"
+              class="btn btn-outline-warning"
+              style="width: 100%; color: black"
+              text-align:
+              center
+              @click="handleLogin"
             >
               로그인
             </button>
           </div>
+          <img
+            src="../images/kakao_login_medium_wide.png"
+            alt="카카오 계정으로 회원가입"
+            @click="kakaoLogin"
+            class="kakao-login-button"
+          />
 
           <div class="form-group">
             <div v-if="message" class="alert alert-danger" role="alert">
@@ -38,9 +44,9 @@
       </div>
     </div>
     <AlertModal
-        :is-visible="isModalVisible"
-        :message="modalMessage"
-        @closeModalAndRedirect="closeModalAndRedirect"
+      :is-visible="isModalVisible"
+      :message="modalMessage"
+      @closeModalAndRedirect="closeModalAndRedirect"
     />
   </div>
 </template>
@@ -80,25 +86,25 @@ export default {
   methods: {
     handleLogin() {
       authService
-          .login(this.user)
-          .then((response) => {
-            console.log(response.status);
-            if (response.status >= 200 && response.status < 300) {
-              // 회원가입 성공 시 모달 표시
-              // this.userId = userService.getUserInfo()["userId"];
-              this.userId = userService.getUserInfo()["userId"];
-              console.log(userService.getUserInfo());
-              console.log(this.userId);
-              this.showModal("로그인에 성공하셨습니다.", `/profile`);
-            } else {
-              console.error("서버 응답 오류:", response.data);
-            }
-          })
-          .catch((error) => {
-            // 에러 핸들링 및 모달 표시
-            this.showModal("로그인 오류", "/home");
-            console.error("로그인 오류:", error);
-          });
+        .login(this.user)
+        .then((response) => {
+          console.log(response.status);
+          if (response.status >= 200 && response.status < 300) {
+            // 회원가입 성공 시 모달 표시
+            // this.userId = userService.getUserInfo()["userId"];
+            this.userId = userService.getUserInfo()["userId"];
+            console.log(userService.getUserInfo());
+            console.log(this.userId);
+            this.showModal("로그인에 성공하셨습니다.", `/profile`);
+          } else {
+            console.error("서버 응답 오류:", response.data);
+          }
+        })
+        .catch((error) => {
+          // 에러 핸들링 및 모달 표시
+          this.showModal("로그인 오류", "/home");
+          console.error("로그인 오류:", error);
+        });
     },
 
     showModal(message, redirectPath) {
@@ -123,6 +129,10 @@ export default {
         this.$router.push({ path: this.redirectPath });
       }
     },
+
+    kakaoLogin() {
+      authService.kakaoLogin();
+    },
   },
 };
 </script>
@@ -139,7 +149,7 @@ export default {
   max-width: 800px; /* 최대 너비 설정 */
   flex-direction: column; /* 항목들을 세로로 나열 */
   align-items: center; /* 세로 방향에서 중앙 정렬 */
-  justify-content: center;  /* 가로 방향에서 중앙 정렬 */
+  justify-content: center; /* 가로 방향에서 중앙 정렬 */
   text-align: center; /* 텍스트를 가운데 정렬 */
   margin-top: 100px; /* 컨테이너 위쪽에 여백 추가 */
   border: 1px solid black; /* 테두리 추가 */

@@ -15,7 +15,6 @@
       <h3>
         <strong>{{ profileData.username }}</strong>
       </h3>
-      <p>서울특별시 / 1993.1.29</p>
       <h5>
         <strong>Email : </strong>
         {{ profileData.email }}
@@ -26,6 +25,16 @@
       <h5>
         <strong>자기소개 : </strong>
         {{ profileData.description }}
+      </h5>
+      <h5>
+        <strong>주요 관심사 : </strong>
+        <span v-if="!profileData.majorCategory">없음</span>
+        <span v-else>{{ profileData.majorCategory }}</span>
+      </h5>
+      <h5>
+        <strong>세부 관심사 : </strong>
+        <span v-if="!profileData.subCategory">없음</span>
+        <span v-else>{{ profileData.subCategory }}</span>
       </h5>
     </div>
 
@@ -45,18 +54,40 @@
         @submitOrToggle="submitOrToggle"
         class="btn btn-warning"
       />
-      <button v-if="isEditMode" @click="cancelEdit" style="margin-left: 10px" class="btn btn-warning">
+      <button
+        class="btn btn-warning"
+        style="margin-left: 10px"
+        @click="showUpdateUserCategoryModal"
+      >
+        관심사 수정
+      </button>
+      <button
+        v-if="isEditMode"
+        @click="cancelEdit"
+        style="margin-left: 10px"
+        class="btn btn-warning"
+      >
         수정 취소
       </button>
       <div v-if="isEditMode" class="profileBtn">
-        <button @click="showUpdatePasswordModal" class="btn btn-warning" style="margin-top: 20px">비밀번호 변경</button>
+        <button
+          @click="showUpdatePasswordModal"
+          class="btn btn-warning"
+          style="margin-top: 20px"
+        >
+          비밀번호 변경
+        </button>
         <UpdatePasswordModal
-            :is-visible="isUpdatePasswordModalVisible"
-            @justCloseModal="justCloseUpdatePasswordModal"
+          :is-visible="isUpdatePasswordModalVisible"
+          @justCloseModal="justCloseUpdatePasswordModal"
         />
         <ResignButton :property="'User'" />
       </div>
     </div>
+    <UpdateUserCategoryModal
+      v-if="isUpdateUserCategoryModalVisible"
+      @modal-Closed="closeModal"
+    />
     <div>
       <div v-if="!isEditMode">
         <h6 class="hive-section-title">내가 참여한 모임들</h6>
@@ -82,6 +113,7 @@ import EditButton from "./EditButton.vue";
 import HiveCardForm from "@/components/HiveCardForm.vue";
 import UpdatePasswordModal from "./UpdatePasswordModal.vue";
 import ResignButton from "./ResignButton.vue";
+import UpdateUserCategoryModal from "./UpdateUserCategoryModal.vue";
 
 export default {
   name: "profile-form",
@@ -92,6 +124,7 @@ export default {
       originProfileData: {},
       isEditMode: false,
       isUpdatePasswordModalVisible: false,
+      isUpdateUserCategoryModalVisible: false,
     };
   },
 
@@ -100,6 +133,7 @@ export default {
     HiveCardForm,
     UpdatePasswordModal,
     ResignButton,
+    UpdateUserCategoryModal,
   },
 
   props: {
@@ -157,6 +191,15 @@ export default {
       console.log("clicked");
       authService.doEmailConfirm(this.profileData.email);
     },
+
+    //카테고리 수정 모달
+    showUpdateUserCategoryModal() {
+      this.isUpdateUserCategoryModalVisible = true;
+    },
+
+    closeModal() {
+      this.isUpdateUserCategoryModalVisible = false;
+    },
   },
 };
 </script>
@@ -191,7 +234,7 @@ export default {
   margin-bottom: 40px; /* 하단 마진 추가 */
 }
 
-.profileBtn{
+.profileBtn {
   display: flex;
   flex-direction: column;
   margin-top: 15px;

@@ -6,15 +6,18 @@
     <PartyForm :hiveId="this.hiveId" :partyId="this.partyId" />
   </div>
   <div>
-    <JoinButton :property="'Party'" :id="this.id" />
+    <!-- 파티에 가입된 유저인지 구분해야함 추후 구현 -->
+    <JoinButton v-if="isHiveUser" :property="'Party'" :id="this.id" />
+    <ResignButton v-if="isHiveUser" :property="'Party'" :id="this.id" />
   </div>
-  <div>왜 안보여?</div>
 </template>
 
 <script>
 import authService from "@/services/auth.service";
 import PartyForm from "@/components/PartyForm.vue";
 import JoinButton from "@/components/JoinButton.vue";
+import ResignButton from "@/components/ResignButton.vue";
+import hiveService from "@/services/hive.service";
 
 export default {
   data() {
@@ -23,9 +26,20 @@ export default {
 
   props: ["hiveId", "partyId"],
 
+  created() {
+    hiveService.isHiveUser(this.hiveId).then((result) => {
+      if (result) {
+        this.isHiveUser = true;
+      } else {
+        this.isHiveUser = false;
+      }
+    });
+  },
+
   components: {
     PartyForm,
     JoinButton,
+    ResignButton,
   },
 
   mounted() {

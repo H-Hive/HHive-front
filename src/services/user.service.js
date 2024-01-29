@@ -47,6 +47,11 @@ class UserService {
     return axios.delete(API_URL + `/${userId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
 
+  updateUserCategory(userId, majorCategory, subCategory) {
+
+    return axios.post(API_URL + `/${userId}` + "/category", {majorCategory: majorCategory, subCategory: subCategory}, {headers: {'Authorization': localStorage.getItem("token")}})
+  }
+
   //쿠키에서 유저 정보 추출 json 형식으로 반환.
   getUserInfo() {
     // const cookieName = 'userinfo';

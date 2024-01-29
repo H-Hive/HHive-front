@@ -1,7 +1,8 @@
 <template>
   <v-app-bar class="app-bar" fixed v-if="!isLoggedIn">
     <v-app-bar-title class="title-name" @click="$router.push('/')"
-      >H-HIVE 🍯</v-app-bar-title>
+      >H-HIVE 🍯</v-app-bar-title
+    >
     <div class="app-container">
       <v-icon> <font-awesome-icon icon="user-plus" /></v-icon>
       <router-link to="/register" class="custom-router-link">
@@ -16,7 +17,8 @@
 
   <v-app-bar class="app-bar" fixed v-else>
     <v-app-bar-title class="title-name" @click="$router.push('/')"
-      >H-HIVE 🍯</v-app-bar-title>
+      >H-HIVE 🍯</v-app-bar-title
+    >
     <div class="app-container">
       <button @click="openNotificationModal">
         <v-icon><font-awesome-icon icon="bell" /></v-icon>
@@ -60,12 +62,8 @@ export default {
       eventSource: null,
       sseSetupCompleted: false,
       NotificationCount: 0,
+      isLoggedIn: false,
     };
-  },
-  computed: {
-    isLoggedIn() {
-      return userService.getUserInfo();
-    },
   },
   methods: {
     logout() {
@@ -145,7 +143,7 @@ export default {
   components: {
     NotificationNumBox,
     "notification-modal": NotificationModal,
-    "new-notification-modal":NewNotificationModal,
+    "new-notification-modal": NewNotificationModal,
   },
   mounted() {
     if (userService.getUserInfo && !this.sseSetupCompleted) {
@@ -153,6 +151,8 @@ export default {
       this.setupSSE();
       this.sseSetupCompleted = true;
     }
+
+    this.isLoggedIn = userService.getUserInfo();
   },
   beforeUnmount() {
     this.closeSSE();
@@ -160,19 +160,21 @@ export default {
 };
 </script>
 <style scoped>
-
-.app-container{
+.app-container {
   display: flex;
   align-items: center;
   margin-right: 5%;
 }
 
-.custom-router-link, .custom-router-link:visited, .custom-router-link:hover, .custom-router-link:active {
+.custom-router-link,
+.custom-router-link:visited,
+.custom-router-link:hover,
+.custom-router-link:active {
   text-decoration: none;
   color: black;
 }
 
-.findbtn{
+.findbtn {
   padding: 0px 10px;
   margin: 20px;
   color: black;
@@ -181,7 +183,7 @@ export default {
   border-radius: 5px;
 }
 
-.title-name{
+.title-name {
   cursor: pointer;
   color: orange;
   font-size: 30px;
@@ -189,5 +191,4 @@ export default {
   position: relative; /* 또는 absolute, fixed 중 선택 */
   left: 5%; /* 왼쪽에서부터의 거리 */
 }
-
 </style>

@@ -2,8 +2,9 @@ import axios from 'axios';
 // import Cookies from 'js-cookie';
 
 const API_URL = 'http://localhost:8080/api/users'
+const KAKAO_AUTH_URL = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3fe6481f8db240a6d244c091c05a9181&redirect_uri=http://localhost:8082/kakao-login'
 // const API_URL = 'https://hhive.shop/api/users'
-
+// const KAKAO_AUTH_URL = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3fe6481f8db240a6d244c091c05a9181&redirect_uri=https://hhive.store/kakao-login'
 // let userInfoCookieName = 'userinfo';
 
 class AuthService {
@@ -23,7 +24,27 @@ class AuthService {
     })
   }
 
-  kakaoSignup
+  kakaoLogin() {
+    
+    window.location.href = KAKAO_AUTH_URL;
+  }
+
+  sendKakaoCode(code) {
+    console.log("카카오 로그인 시도");
+
+    return axios.get(API_URL + '/kakao/callback?code=' + `${code}`)
+    .then(response => {
+      console.log("카카오 로그인: ", response);
+      localStorage.setItem(
+        "userinfo",
+        JSON.stringify(response.data["payload"])
+      );
+      localStorage.setItem(
+        "token",
+        response.headers.get("Authorization")
+      );
+    });
+  }
 
   login(user) {
     return axios
@@ -65,7 +86,7 @@ class AuthService {
   }
 
   doEmailConfirm(email) {
-    return axios.post(API_URL + "/emailConfirm", {email: email}).then((response) => {
+    return axios.post(API_URL + "/email-confirm", {email: email}).then((response) => {
       console.log(response);
       alert("메일이 발송되었습니다!");
       window.location.reload();

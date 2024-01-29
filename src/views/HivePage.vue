@@ -10,9 +10,31 @@
       <button type="button" class="btn btn-outline-dark">사진첩</button>
       <button type="button" class="btn btn-outline-dark">채팅</button>
     </div>
-    <UpdateHive-Modal :id="hiveData.id" v-if="showUpdateHiveModal" @modal-Closed="closeUpdateHiveModal" @update-Success= "handleModalClosed"/>
-      <Alert-Modal v-if="showAlertModal" :is-visible="showAlertModal" :message="modalMessage" @closeModalAndRedirect="closeModalAndRedirect"/>
-      <deleteModal v-if="showDeleteModal" :is-visible="showDeleteModal" :id="this.id" @delete-Success="closeDeleteModalAndRedirect" @closeModal="closeDeleteModal"/>
+    <UpdateHive-Modal
+      :id="hiveData.id"
+      v-if="showUpdateHiveModal"
+      @modal-Closed="closeUpdateHiveModal"
+      @update-Success="handleModalClosed"
+    />
+    <Alert-Modal
+      v-if="showAlertModal"
+      :is-visible="showAlertModal"
+      :message="modalMessage"
+      @closeModalAndRedirect="closeModalAndRedirect"
+    />
+    <deleteModal
+      v-if="showDeleteModal"
+      :is-visible="showDeleteModal"
+      :id="this.id"
+      @delete-Success="closeDeleteModalAndRedirect"
+      @closeModal="closeDeleteModal"
+    />
+    <CreatePartyFormModal
+      :hiveId="hiveData.id"
+      v-if="showCreatePartyModal"
+      @modal-Closed="closeCreatePartyModal"
+      @create-Success="handleCreatePartyModalClosed"
+    />
 
     <div class="main-content">
       <div class="left-section">
@@ -22,8 +44,30 @@
               {{ hiveData.title }}
             </h1>
             <div class="title-buttons">
-              <button type="button" v-if="(hiveData.hostId==userId)" @click="openUpdateHiveModal" class="btn btn-outline-dark">수정</button>
-              <button type="button" v-if="(hiveData.hostId==userId)" @click="openDeleteModal" class="btn btn-outline-dark">모임 삭제</button>
+              <button
+                type="button"
+                v-if="hiveData.hostId == userId"
+                @click="openUpdateHiveModal"
+                class="btn btn-outline-dark"
+              >
+                수정
+              </button>
+              <button
+                type="button"
+                v-if="hiveData.hostId == userId"
+                @click="openDeleteModal"
+                class="btn btn-outline-dark"
+              >
+                모임 삭제
+              </button>
+              <button
+                type="button"
+                v-if="isHiveUser"
+                @click="openCreatePartyModal"
+                class="btn btn-outline-dark"
+              >
+                파티 주선
+              </button>
             </div>
           </div>
           <p class="hostName">방장 : {{ hiveData.hostName }}</p>
@@ -45,97 +89,93 @@
         <div class="join-btn">
           <div>
             <JoinButton
-                :property="'Hive'"
-                :id="hiveData.id"
-                v-if="!isHiveUser"
+              :property="'Hive'"
+              :id="hiveData.id"
+              v-if="!isHiveUser"
             />
-            <ResignButton :property="'Hive'" :id="hiveData.id" v-else/>
+            <ResignButton :property="'Hive'" :id="hiveData.id" v-else />
           </div>
         </div>
       </div>
 
-
-          <div class="all-meeting">
-            <div class="r-meeting">
-              <div class="regular-meeting">
-                <h2 class="title text-center">정기모임</h2>
-                <div class="regularmeetingdetail">
-                  <h4>일시 : 2024.03.05</h4>
-                  <h4>내용 : 스파르타 수료파티</h4>
-                  <h4>위치 : 서울시 강남구 한신포차</h4>
-                  <h4>참석 : 4/20</h4>
-                </div>
-                <div class="meet-btn">
-                  <button
-                      type="button"
-                      class="btn btn-warning"
-                      style="
-
+      <div class="all-meeting">
+        <div class="r-meeting">
+          <div class="regular-meeting">
+            <h2 class="title text-center">정기모임</h2>
+            <div class="regularmeetingdetail">
+              <h4>일시 : 2024.03.05</h4>
+              <h4>내용 : 스파르타 수료파티</h4>
+              <h4>위치 : 서울시 강남구 한신포차</h4>
+              <h4>참석 : 4/20</h4>
+            </div>
+            <div class="meet-btn">
+              <button
+                type="button"
+                class="btn btn-warning"
+                style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 30px;
                   width: auto;
                 "
-                  >
-                    참여하기
-                  </button>
-                  <button
-                      type="button"
-                      class="btn btn-warning"
-                      style="
+              >
+                참여하기
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
                 "
-                  >
-                    불참 🥲
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="board-container">
-              <h2 class="title text-center">게시판</h2>
-
-              <div class="board">
-                <div class="card">
-                  <div type="button" class="card-body">
-                    [공지] 우리동네 모임에 오신걸 환영합니다!
-                  </div>
-                </div>
-                <div class="card">
-                  <div type="button" class="card-body">
-                    [공지] 모임 시 주의사항!!!
-                  </div>
-                </div>
-                <div class="card">
-                  <div type="button" class="card-body">
-                    [공지] 이번주 행운의 주인공!!!
-                  </div>
-                </div>
-                <div class="board-btn">
-                  <button
-                      type="button"
-                      class="btn btn-warning"
-                      style="
-                  --bs-btn-padding-y: 0.5rem;
-                  --bs-btn-padding-x: 1rem;
-                  --bs-btn-font-size: 1rem;
-                  margin: 10px 10px 10px 10px;
-                  width: auto;
-                "
-                  >
-                    더 보러가기
-                  </button>
-                </div>
-              </div>
+              >
+                불참 🥲
+              </button>
             </div>
           </div>
+        </div>
+        <div class="board-container">
+          <h2 class="title text-center">게시판</h2>
+
+          <div class="board">
+            <div class="card">
+              <div type="button" class="card-body">
+                [공지] 우리동네 모임에 오신걸 환영합니다!
+              </div>
+            </div>
+            <div class="card">
+              <div type="button" class="card-body">
+                [공지] 모임 시 주의사항!!!
+              </div>
+            </div>
+            <div class="card">
+              <div type="button" class="card-body">
+                [공지] 이번주 행운의 주인공!!!
+              </div>
+            </div>
+            <div class="board-btn">
+              <button
+                type="button"
+                class="btn btn-warning"
+                style="
+                  --bs-btn-padding-y: 0.5rem;
+                  --bs-btn-padding-x: 1rem;
+                  --bs-btn-font-size: 1rem;
+                  margin: 10px 10px 10px 10px;
+                  width: auto;
+                "
+              >
+                더 보러가기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-
 
     <!-- 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 -->
     <div v-for="(partyData, index) in partyDatas" :key="index">
@@ -154,11 +194,12 @@ import authService from "@/services/auth.service";
 import partyService from "@/services/party.service";
 import JoinButton from "@/components/JoinButton.vue";
 import ResignButton from "@/components/ResignButton.vue";
-import UpateHiveModal from "@/components/UpdateHiveFormModal.vue"
+import UpateHiveModal from "@/components/UpdateHiveFormModal.vue";
 import AlertModal from "@/components/AlertModal.vue";
-import deleteModal from "@/components/DeleteHiveModal.vue"
+import deleteModal from "@/components/DeleteHiveModal.vue";
 import UserInfoForm from "@/components/UserInfoForm.vue";
 import userService from "@/services/user.service";
+import CreatePartyFormModal from "@/components/CreatePartyFormModal.vue";
 
 export default {
   data() {
@@ -167,12 +208,13 @@ export default {
       partyDatas: {},
       userList: [],
       isHiveUser: false,
-      modalMessage:"",
+      modalMessage: "",
       showUpdateHiveModal: false,
-      showAlertModal:false,
-      showDeleteModal:false,
-      viewHostMenu:false,
-      userId:"",
+      showAlertModal: false,
+      showDeleteModal: false,
+      showCreatePartyModal: false,
+      viewHostMenu: false,
+      userId: "",
     };
   },
 
@@ -186,6 +228,7 @@ export default {
     "UpdateHive-Modal": UpateHiveModal,
     "Alert-Modal": AlertModal,
     UserInfoForm,
+    CreatePartyFormModal,
   },
 
   created() {
@@ -198,30 +241,31 @@ export default {
     });
   },
   methods: {
-    getUserInfo(){
-      hiveService.getHiveUsers(this.id)
-      .then((Response)=>{
-      this.userList = Response.data.payload;            
-    })         
-    .catch((error)=>{        
-      console.log(error);     
-    })
+    getUserInfo() {
+      hiveService
+        .getHiveUsers(this.id)
+        .then((Response) => {
+          this.userList = Response.data.payload;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    openDeleteModal(){
+    openDeleteModal() {
       this.showDeleteModal = true;
     },
-    closeDeleteModal(){
+    closeDeleteModal() {
       this.showDeleteModal = false;
     },
     closeAlertModal() {
-      this.showAlertModal = false;  
+      this.showAlertModal = false;
     },
     openUpdateHiveModal() {
       this.showUpdateHiveModal = true;
     },
     checkDeleteModal() {
       this.modalMessage = "정말 모임을 삭제 하시겠습니까?";
-      this.showAlertModal = true;  
+      this.showAlertModal = true;
     },
     closeUpdateHiveModal() {
       this.showUpdateHiveModal = false;
@@ -234,16 +278,35 @@ export default {
     closeModalAndRedirect() {
       // 모달 닫기
       this.showAlertModal = false;
-      if(this.modalMessage =="삭제가 완료 되었습니다")
-      {
+      console.log(this.redirectPath);
+      if (this.modalMessage == "삭제가 완료 되었습니다") {
         this.$router.push("/hives");
-      }else{
-      this.$router.go(0);
+      } else if (this.modalMessage == "파티가 생성되었습니다.") {
+        this.$router.push(this.redirectPath);
+      } else {
+        this.$router.go(0);
       }
     },
-    closeDeleteModalAndRedirect(){
+    closeDeleteModalAndRedirect() {
       this.showDeleteModal = false;
-      this.modalMessage = "삭제가 완료 되었습니다"
+      this.modalMessage = "삭제가 완료 되었습니다";
+      this.showAlertModal = true;
+    },
+
+    //CreatePartyModal Part
+
+    openCreatePartyModal() {
+      this.showCreatePartyModal = true;
+    },
+
+    closeCreatePartyModal() {
+      this.showCreatePartyModal = false;
+    },
+
+    handleCreatePartyModalClosed(modalMessage, redirectPath) {
+      this.modalMessage = modalMessage;
+      this.redirectPath = redirectPath;
+      this.closeCreatePartyModal();
       this.showAlertModal = true;
     },
   },
@@ -269,7 +332,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-        this.userId=userService.getUserId();
+      this.userId = userService.getUserId();
     }
     this.getUserInfo();
   },
@@ -277,7 +340,6 @@ export default {
 </script>
 
 <style scoped>
-
 .body {
   width: 100%;
   height: 100%;
@@ -296,7 +358,7 @@ export default {
   flex-direction: row;
 }
 
-.category-btn button{
+.category-btn button {
   margin: 10px 10px 10px 10px;
 }
 
@@ -313,7 +375,7 @@ export default {
   flex-direction: column; /* 세로로 쌓기 */
 }
 
-.hive-top{
+.hive-top {
   display: flex;
   background-color: ivory;
   flex-direction: column;
@@ -322,7 +384,6 @@ export default {
   padding: 30px;
   border: 2px solid grey;
   border-radius: 8px;
-;
 }
 
 .title-container {
@@ -333,15 +394,15 @@ export default {
   margin-bottom: 10px; /* 제목과 버튼 사이의 간격을 줄입니다. */
 }
 
-.title-buttons button{
+.title-buttons button {
   margin: 10px 10px 10px 10px;
 }
 
-.hostName{
+.hostName {
   margin-top: 10px;
 }
 
-.Data{
+.Data {
   margin-top: 4%;
   width: 100%;
   padding: 20px 40px;
@@ -353,7 +414,7 @@ export default {
   color: #434343;
 }
 
-.people-container{
+.people-container {
   margin-top: 30px;
   margin-bottom: 15px;
   display: flex;
@@ -364,7 +425,7 @@ export default {
   border-radius: 5px;
   background-color: #fffcd9;
 }
-.people{
+.people {
   width: 100%;
   margin: 10px 0px;
   text-align: center;
@@ -376,14 +437,14 @@ export default {
   width: 100%;
 }
 
-.people-contents{
+.people-contents {
   padding: 15px 100px;
   max-height: 100px; /* 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
   color: #434343;
 }
 
-.all-meeting{
+.all-meeting {
   margin: 2.5% 8%;
   display: flex;
   flex-direction: column;
@@ -408,18 +469,18 @@ export default {
   color: #313131;
 }
 
-.meet-btn{
+.meet-btn {
   display: flex;
   justify-content: flex-end;
 }
 
-.board-container{
+.board-container {
   padding: 30px;
   margin-top: 2%;
-  width: 100%;;
+  width: 100%;
   border: 2px solid grey;
   border-radius: 8px;
-  background-color: ivory
+  background-color: ivory;
 }
 
 .card {
@@ -433,12 +494,12 @@ export default {
   margin-left: 10px;
 }
 
-.board-btn{
+.board-btn {
   display: flex;
   justify-content: flex-end;
 }
 
-.join-btn{
+.join-btn {
   margin: 20px auto;
 }
 </style>
