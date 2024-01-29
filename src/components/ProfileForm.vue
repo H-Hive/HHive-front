@@ -18,7 +18,10 @@
       <h5>
         <strong>Email : </strong>
         {{ profileData.email }}
-        <button v-if="isLoggedInUser" @click="doEmailConfirm">
+        <button v-if="isLoggedInUser"
+                class="btn btn-outline-warning"
+                style="color: black; margin-left: 5px"
+                @click="doEmailConfirm">
           이메일 인증
         </button>
       </h5>
@@ -224,9 +227,10 @@ export default {
   align-items: center; /* 가로 방향에서 중앙 정렬 */
   width: 100%; /* 컨테이너의 너비 (필요에 따라 조정 가능) */
   max-width: 800px; /* 최대 너비 설정 */
-  margin-top: 100px; /* 자동 마진으로 페이지 중앙에 위치 */
+  margin-top: 100px;
+  margin-bottom: 50px;
   padding: 50px; /* 컨테이너 내부의 여백 */
-  border: 1px solid black; /* 테두리 추가 */
+  border: 0.9px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
 }
 .jumbotron {

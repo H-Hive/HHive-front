@@ -146,7 +146,7 @@ label {
 }
 input {
   width: 50%; /* input의 너비 (필요에 따라 조정)  */
-  border: 1px solid black; /* 테두리 추가 */
+  border: 0.9px solid black; /* 테두리 추가 */
   border-radius: 5px;
   height: 30px;
 }

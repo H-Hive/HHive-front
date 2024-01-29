@@ -66,7 +66,7 @@
                 @click="openCreatePartyModal"
                 class="btn btn-outline-dark"
               >
-                파티 주선
+                파티 생성
               </button>
             </div>
           </div>
@@ -102,7 +102,7 @@
       <div class="all-meeting">
         <div class="r-meeting">
           <div class="regular-meeting">
-            <h2 class="title text-center">정기모임</h2>
+            <h2 class="title text-center">최신 모임</h2>
             <div class="regularmeetingdetail">
               <h4>일시 : 2024.03.05</h4>
               <h4>내용 : 스파르타 수료파티</h4>
@@ -140,7 +140,7 @@
           </div>
         </div>
         <div class="board-container">
-          <h2 class="title text-center">게시판</h2>
+          <h2 class="title text-center">모임 목록</h2>
 
           <div class="board">
             <div class="card">

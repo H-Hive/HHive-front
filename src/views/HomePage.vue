@@ -16,9 +16,11 @@
       </button>
     </div>
 
+<!--
     <div class="content-container">
       <MyHivePage />
     </div>
+-->
 
   </div>
 
@@ -31,24 +33,26 @@
     <div></div>
     <br />
     <div class="intro">
-      인터넷의 발달로 인해 서로 욕하기 바쁘고 삭막한 세상... 대한민국을 감싸안던
-      2002년도의 온기가 그립지 않으십니까.. <br />
-      우리 주변(아직 구현 안됐지만) 같은 취미를 가진 사람들을 만나 행복한
-      인간생활을 누려보아요...
-      <br />
-      <span class="intro-main">H-Hive</span>
-      와 함께...
+      <div>
+        H-Hive는 동일한 취미와 관심사를 가진 사람들이 만나 서로의 삶을 더욱 풍요롭게 할 수 있는 커뮤 니티를 지향 합니다.
+      </div>
+      <div>
+        우리의 삶 속에 새로운 인연을 만들고, 함께 성장하며, 일상에 작은 기쁨을 더하는 그런 공간.
+      </div>
+      <div class="info-3">
+        H-Hive와 함께, 새로운 시작을 만나 보세요.
+      </div>
     </div>
 
     <!-- 로그인되어있지 않다면 로고와 회원가입 링크 보여주기 -->
     <router-link to="/register" v-if="!isLoggedIn">
-      <v-btn class="fixed-bottom">회원가입으로 HHive 시작하기 </v-btn>
+      <v-btn class="fixed-bottom"> HHive 시작하기 </v-btn>
     </router-link>
   </div>
 </template>
 
 <script>
-import MyHivePage from "./MyHivePage.vue";
+/*import MyHivePage from "./MyHivePage.vue";*/
 import authService from "../services/auth.service.js";
 
 export default {
@@ -60,7 +64,7 @@ export default {
   },
 
   components: {
-    MyHivePage,
+/*    MyHivePage,*/
   },
 
   mounted() {
@@ -104,17 +108,33 @@ export default {
 }
 
 .fixed-bottom {
+  font-size: 15px;
   position: fixed;
-  bottom: 40px;
-  margin: 30px;
+  margin: 0px auto 300px;
+  width: 50%;
+  background-color: white;
 }
 
 .intro {
+  background-color: white;
+  width: 50%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 0.5px solid grey;
+  border-radius: 10px;
+  color: #51514C;
+  font-size: 20px;
+  font-weight: 600;
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
 }
-.intro-main {
-  font-size: 100px;
+.intro > div {
+  margin: 15px;
 }
+
+.info-3 {
+  font-size: 25px;
+  font-weight: 700;
+  color: orange;
+}
+
 </style>
