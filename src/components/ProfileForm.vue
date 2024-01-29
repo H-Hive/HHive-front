@@ -58,6 +58,7 @@
         class="btn btn-warning"
         style="margin-left: 10px"
         @click="showUpdateUserCategoryModal"
+        v-if="!isEditMode"
       >
         관심사 수정
       </button>
@@ -72,8 +73,8 @@
       <div v-if="isEditMode" class="profileBtn">
         <button
           @click="showUpdatePasswordModal"
-          class="btn btn-warning"
-          style="margin-top: 20px"
+          class="btn btn-outline-warning"
+          style="margin-top: 20px; color: black"
         >
           비밀번호 변경
         </button>

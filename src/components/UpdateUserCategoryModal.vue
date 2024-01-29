@@ -10,15 +10,19 @@
       <div>
         <h2>관심사 수정</h2>
         <div class="line"></div>
-        <!-- 백엔드 API 수정예상되므로 미작동 -->
-        <CategoryForm @categories-selected="handleCategories" />
+        <div class="content-top">
+          <!-- 백엔드 API 수정예상되므로 미작동 -->
+          <CategoryForm @categories-selected="handleCategories" />
+        </div>
 
-        <p :class="{ hidden: !errorMessage, red: errorMessage }">
-          {{ errorMessage }}
-        </p>
-        <button @click="updateUserCategory" class="btn btn-outline-dark">
-          관심사 수정완료
-        </button>
+        <div class="content-bottom">
+          <p :class="{ hidden: !errorMessage, red: errorMessage }">
+            {{ errorMessage }}
+          </p>
+          <button @click="updateUserCategory" class="btn btn-outline-dark">
+            수정 완료
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -82,7 +86,8 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  width: 300px; /* 모달의 너비 조절 */
+  width: 500px; /* 모달의 너비 조절 */
+  height: 350px;
   padding: 20px;
   background-color: white;
   border: 1px solid #ccc;
@@ -111,9 +116,19 @@ export default {
   margin-bottom: 15px;
 }
 
-.btn {
-  margin-top: 20%;
+.content-top {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 45px;
 }
+
+.content-bottom {
+  margin-top: 60px;
+  width: 100%;
+}
+
 .hidden {
   margin-top: 40px;
 }

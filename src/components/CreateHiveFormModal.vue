@@ -115,6 +115,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
   width: 50%;
+  height: 30px;
 }
 
 .content-bottom {

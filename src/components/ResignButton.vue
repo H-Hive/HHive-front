@@ -2,7 +2,9 @@
 // 하이브의 가입인지 파티의 가입인지 props로 확인받고, 그 id에 해당하는 하이브/파티 에 가입한다.
 
 <template>
-  <button @click="handleResignClick" class="btn btn-warning">탈퇴하기</button>
+  <button @click="handleResignClick"
+          style="color: black"
+          class="btn btn-outline-warning">탈퇴하기</button>
 
   <YesOrNoModal
     :is-visible="isModalVisible"

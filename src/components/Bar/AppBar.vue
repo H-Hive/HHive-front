@@ -1,8 +1,7 @@
 <template>
   <v-app-bar class="app-bar" fixed v-if="!isLoggedIn">
     <v-app-bar-title class="title-name" @click="$router.push('/')"
-      >H-HIVE 🍯</v-app-bar-title
-    >
+      >H-HIVE 🍯</v-app-bar-title>
     <div class="app-container">
       <v-icon> <font-awesome-icon icon="user-plus" /></v-icon>
       <router-link to="/register" class="custom-router-link">
@@ -17,8 +16,7 @@
 
   <v-app-bar class="app-bar" fixed v-else>
     <v-app-bar-title class="title-name" @click="$router.push('/')"
-      >H-HIVE 🍯</v-app-bar-title
-    >
+      >H-HIVE 🍯</v-app-bar-title>
     <div class="app-container">
       <button @click="openNotificationModal">
         <v-icon><font-awesome-icon icon="bell" /></v-icon>

@@ -92,8 +92,9 @@
               :property="'Hive'"
               :id="hiveData.id"
               v-if="!isHiveUser"
+
             />
-            <ResignButton :property="'Hive'" :id="hiveData.id" v-else />
+            <ResignButton :property="'Hive'" :id="hiveData.id" v-else/>
           </div>
         </div>
       </div>

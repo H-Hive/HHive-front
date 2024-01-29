@@ -54,16 +54,10 @@ import hiveService from '@/services/hive.service';
     max-width: 500px; 
     text-align: center; 
   }
-  .modal-content button {
-    padding: 10px 20px; 
-    border: black; 
-    background: rgb(128, 128, 128); 
-    width: 20%; 
-    padding: 5px;
-    margin: auto;
-    margin-top: 7px;
+
+  .button-container button {
+    margin: 10px;
+    width: 80px;
   }
-  .button-container button{
-    margin: 0 5px; 
-}
+
   </style>

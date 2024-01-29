@@ -1,5 +1,8 @@
 <template>
   <form>
+    <div class="title">
+      H-HIVE 🍯
+    </div>
     <div>
       <label for="username">아이디: </label>
       <input id="username" type="text" v-model="user.username" />
@@ -107,6 +110,16 @@ export default {
 </script>
 
 <style scoped>
+
+.title {
+  margin-bottom: 40px;
+  color: orange;
+  font-weight: 700;
+  font-size: 40px;
+  position: relative; /* 또는 absolute, fixed 중 선택 */
+  left: 25%; /* 왼쪽에서부터의 거리 */
+}
+
 form {
   display: flex; /* Flexbox 레이아웃 사용 */
   flex-direction: column; /* 항목들을 세로로 나열 */
@@ -115,7 +128,7 @@ form {
   width: 100%; /* 폼의 너비 (필요에 따라 조정) */
   max-width: 500px; /* 최대 너비를 설정하여 너무 넓게 퍼지는 것을 방지 */
   margin: auto; /* 자동 마진으로 페이지 중앙에 위치 */
-  margin-top: 100px; /* 컨테이너 위쪽에 50px의 여백 추가 */
+  margin-top: 150px; /* 컨테이너 위쪽에 50px의 여백 추가 */
   padding: 55px; /* 폼 내부의 여백 */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
@@ -135,6 +148,7 @@ input {
   width: 50%; /* input의 너비 (필요에 따라 조정)  */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 5px;
+  height: 30px;
 }
 button {
   width: 300px; /* 버튼의 너비를 설정 (필요에 따라 조정) */

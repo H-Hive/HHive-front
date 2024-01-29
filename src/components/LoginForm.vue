@@ -170,11 +170,15 @@ input {
   width: 50%; /* input의 너비 (필요에 따라 조정) */
   border: 1px solid black; /* 테두리 추가 */
   border-radius: 5px;
+  height: 30px;
 }
 
 button {
   width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
-  margin-top: 10px;
-  margin-bottom: 30px; /* 버튼 아래쪽에 30px의 여백 추가 */
+  margin-top: 10px; /* 버튼 아래쪽에 30px의 여백 추가 */
+}
+
+.kakao-login-button{
+  margin-bottom: 30px;
 }
 </style>
