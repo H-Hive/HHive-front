@@ -12,7 +12,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">{{ hiveData.introduction }}</li>
-          <li class="list-group-item">하이브 카테고리 들어갈 듯</li>
+          <li class="list-group-item">{{hiveData.majorCategory}} - {{ hiveData.subCategory }}</li>
           <li class="list-group-item">Host: {{ hiveData.hostName }}</li>
         </ul>
       </div>

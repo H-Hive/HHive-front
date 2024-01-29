@@ -16,13 +16,15 @@
     <button v-if="isPartyHost" type="click" @click="openDeletePartyModal">
       삭제하기
     </button>
+    <button v-if="isPartyHost"  @click="openSendNotToHIveModal" class="btn btn-outline-dark">알림 전송</button>
     <UpdatePartyModal
       :id="partyData.id"
       v-if="showUpdatePartyModal"
       @modal-Closed="closeUpdatePartyModal"
       @update-Success="handleUpdatePartyModalClosed"
     />
-    <Alert-Modal
+    <SendNotificationForm-modal v-if="showSendNotModal" :is-visible="showSendNotModal" :id="partyData.id" :type="groupType" @closeModal="closeSendNotModal" @send-Success="handleNotModalClosed"/>
+    <AlertModal
       v-if="showAlertModal"
       :is-visible="showAlertModal"
       :message="modalMessage"
@@ -45,6 +47,7 @@ import userService from "@/services/user.service";
 import DeletePartyModal from "./DeletePartyModal.vue";
 import UpdatePartyModal from "./UpdatePartyModal.vue";
 import AlertModal from "./AlertModal.vue";
+import SendNotificationForm from "./SendNotificationForm.vue";
 
 export default {
   data() {
@@ -54,6 +57,8 @@ export default {
       showUpdatePartyModal: false,
       showAlertModal: false,
       showDeletePartyModal: false,
+      showSendNotModal: false,
+      groupType:"",
     };
   },
 
@@ -63,6 +68,7 @@ export default {
     AlertModal,
     UpdatePartyModal,
     DeletePartyModal,
+    "SendNotificationForm-modal": SendNotificationForm,
   },
 
   computed: {
@@ -123,8 +129,22 @@ export default {
       if (this.modalMessage == "업데이트 성공") {
         this.showAlertModal = false;
         window.location.reload();
+      }else{
+        this.showAlertModal = false;
       }
     },
+    closeSendNotModal(){
+      this.showSendNotModal = false;
+    },
+    openSendNotToHIveModal(){
+      this.groupType="party";
+      this.showSendNotModal = true;
+    },
+    handleNotModalClosed(modalMessage){
+      this.modalMessage = modalMessage;
+      this.closeSendNotModal();
+      this.showAlertModal = true;
+    }
   },
 };
 </script>
