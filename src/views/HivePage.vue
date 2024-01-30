@@ -152,9 +152,8 @@
         </div>
         <div class="board-container">
           <h2 class="title text-center">모임 목록</h2>
-
           <div class="board">
-            <div class="party-container" v-for="(partyData, index) in partyDatas" :key="index">
+            <div class="party-container" v-for="(partyData, index) in partyDatas.slice(0, 3)" :key="index">
               <PartyCardForm :partyData="partyData" :hiveId="this.id" />
             </div>
             <div class="board-btn">
@@ -206,7 +205,7 @@ export default {
   data() {
     return {
       hiveData: {},
-      partyDatas: {},
+      partyDatas: [],
       userList: [],
       isHiveUser: false,
       modalMessage: "",
@@ -523,10 +522,6 @@ export default {
 
 .join-btn {
   margin: 20px auto;
-}
-
-.party-container{
-  margin-left: 200px
 }
 
 </style>
