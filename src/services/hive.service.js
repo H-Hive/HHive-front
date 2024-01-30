@@ -26,12 +26,11 @@ class HiveService {
       { headers: { 'Authorization': localStorage.getItem("token") } }
     );
   }
-  updateHive(hiveId,hiveTitle,hiveIntroduction){
-    const updateRequest = {
-      title: hiveTitle,
-      introduction: hiveIntroduction
-    }
-    return axios.patch(API_URL+`/${hiveId}`+"/update",updateRequest , {headers: {'Authorization': localStorage.getItem("token")}})
+  updateHiveTitle(hiveId,hiveTitle){
+    return axios.patch(API_URL+`/${hiveId}`+"/title",{title: hiveTitle} , {headers: {'Authorization': localStorage.getItem("token")}})
+  }
+  updateHiveInfo(hiveId,hiveIntroduction){
+    return axios.patch(API_URL+`/${hiveId}`+"/info",{introduction: hiveIntroduction} , {headers: {'Authorization': localStorage.getItem("token")}})
   }
   deleteHive(hiveId){
     return axios.delete(API_URL+`/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}})
@@ -39,6 +38,17 @@ class HiveService {
   getHiveUsers(hiveId){
     return axios.get(API_URL+`/${hiveId}`+"/hiveUsers",{headers: {'Authorization': localStorage.getItem("token")}})
   }
+ getHiveByCategories(majorCategory, subCategory) {
+  return axios.get(API_URL + "/search", {
+    params: {
+      majorCategory: majorCategory,
+      subCategory: subCategory,
+    },
+    headers: {
+      'Authorization': localStorage.getItem("token")
+    }
+  });
+}
 
   joinHive(hiveId) {
 

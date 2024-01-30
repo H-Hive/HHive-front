@@ -194,9 +194,16 @@ export default {
   methods: {
     submitOrToggle() {
       if (this.isEditMode) {
-        userService.modifyProfile(this.userId, this.profileData);
-        alert("수정이 완료되었습니다");
-        window.location.reload();
+        userService
+          .modifyProfile(this.userId, this.profileData)
+          .then((response) => {
+            console.log(response);
+            alert("수정이 완료되었습니다");
+            window.location.reload();
+          })
+          .catch((error) => {
+            alert(error.response.data);
+          });
       }
       this.isEditMode = !this.isEditMode;
     },

@@ -2,8 +2,8 @@
   <div class="body">
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username"
-        aria-describedby="button-addon2">
-      <button class="btn-search" type="button" id="button-addon2">조회</button>
+        aria-describedby="button-addon2" v-model="searchHive">
+      <button class="btn-search" type="button" id="button-addon2" @click="searchHives">조회</button>
     </div>
     <div class="btn-container">
       <button type="button" class="btn btn-outline-dark" @click="showAllHives">전체</button>
@@ -51,6 +51,7 @@ export default {
       showAlertModal: false,
       modalMessage: "",
       redirectPath: "",
+      searchHive: "",
     };
   },
 
@@ -92,6 +93,15 @@ export default {
     console.log(error);
   });
   },
+  searchHives() {
+    if(this.searchHive){
+      this.hiveDatas = this.hiveDatas.filter(hiveData =>
+        hiveData.title.toLowerCase().includes(this.searchHive.toLowerCase())
+      );
+    }else{
+      this.showAllHives();
+    }
+    },
 },
 
   components: {

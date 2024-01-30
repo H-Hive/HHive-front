@@ -1,8 +1,6 @@
 <template>
   <form>
-    <div class="title">
-      H-HIVE 🍯
-    </div>
+    <div class="title">H-HIVE 🍯</div>
     <div>
       <label for="username">아이디: </label>
       <input id="username" type="text" v-model="user.username" />
@@ -79,7 +77,7 @@ export default {
         })
         .catch((error) => {
           // 에러 핸들링 및 모달 표시
-          this.showModal(error.response.data.message, "/register");
+          this.showModal(error.response.data, "/register");
         });
     },
 
@@ -110,7 +108,6 @@ export default {
 </script>
 
 <style scoped>
-
 .title {
   margin-bottom: 40px;
   color: orange;

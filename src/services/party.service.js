@@ -33,8 +33,7 @@ class PartyService {
   }
 
   joinParty(partyId) {
-    console.log("왜 안되냥고")
-    return axios.post(API_URL + `/${partyId}` + "/join", {headers: {'Authorization': localStorage.getItem("token")}});
+    return axios.post(API_URL + `/${partyId}` + "/join",{},{headers: {'Authorization': localStorage.getItem("token")}});
   }
 
   resignParty(partyId) {
