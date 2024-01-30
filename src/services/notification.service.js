@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:8080/api/notifications'
-// const API_URL = 'https://hhive.shop/api/notifications'
+// const API_URL = 'http://localhost:8080/api/notifications'
+const API_URL = 'https://hhive.shop/api/notifications'
 
 class notificationService{
 
@@ -13,6 +13,15 @@ class notificationService{
     }
     readNotification(){
         return axios.get(API_URL +"/read", {headers: {'Authorization': localStorage.getItem("token")}});
+    }
+    sendNotification(Notmessage,groupId,groupType){
+        return axios.post(API_URL+"/send"
+        ,{
+            message:Notmessage,
+            id:groupId,
+            type:groupType
+        }
+        ,{headers: {'Authorization': localStorage.getItem("token")}});
     }
 
 
