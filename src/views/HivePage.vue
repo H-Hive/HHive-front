@@ -154,20 +154,8 @@
           <h2 class="title text-center">모임 목록</h2>
 
           <div class="board">
-            <div class="card">
-              <div type="button" class="card-body">
-                [공지] 우리동네 모임에 오신걸 환영합니다!
-              </div>
-            </div>
-            <div class="card">
-              <div type="button" class="card-body">
-                [공지] 모임 시 주의사항!!!
-              </div>
-            </div>
-            <div class="card">
-              <div type="button" class="card-body">
-                [공지] 이번주 행운의 주인공!!!
-              </div>
+            <div class="party-container" v-for="(partyData, index) in partyDatas" :key="index">
+              <PartyCardForm :partyData="partyData" :hiveId="this.id" />
             </div>
             <div class="board-btn">
               <button
@@ -189,10 +177,10 @@
       </div>
     </div>
 
-    <!-- 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 -->
+<!--    &lt;!&ndash; 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 &ndash;&gt;
     <div class="party-container" v-for="(partyData, index) in partyDatas" :key="index">
       <PartyCardForm :partyData="partyData" :hiveId="this.id" />
-    </div>
+    </div>-->
     <!-- <div>
       <PartyCardForm :partyData="this.partyDatas" />
     </div> -->

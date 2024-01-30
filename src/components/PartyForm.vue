@@ -14,7 +14,7 @@
         <button
             v-if="isPartyHost"
             @click="openSendNotToHIveModal"
-            class="btn btn-outline-dark"
+            class="btn btn-secondary"
         >
           알림 전송
         </button>
@@ -260,6 +260,10 @@ export default {
   padding-left: 25px;
 }
 
+.party-host-data {
+  margin-left: 20px;
+}
+
 .datetime {
   display: flex;
   align-items: center; /* 세로 방향에서 중앙 정렬 */
@@ -272,6 +276,7 @@ export default {
 }
 
 .party-datetime-data {
+  margin-left: 20px;
 }
 
 .content {
@@ -284,7 +289,7 @@ export default {
   display: flex;
   align-items: center; /* 세로 방향에서 중앙 정렬 */
   justify-content: center; /* 가로 방향에서 중앙 정렬 */
-  width: 30%;
+  width: 10%;
   border-right: 1px solid #aaaaaa;
   margin-bottom: -1px;
   max-height: 400px; /* 최대 높이 설정 */
@@ -292,6 +297,7 @@ export default {
 }
 
 .content-data {
+  width: 90%;
   padding: 20px;
 }
 
@@ -314,6 +320,7 @@ export default {
   width: 90%;
   max-height: 100px; /* 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
+  margin-left: 20px;
 }
 
 .join-btn {
