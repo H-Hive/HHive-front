@@ -2,9 +2,13 @@
 // 하이브의 가입인지 파티의 가입인지 props로 확인받고, 그 id에 해당하는 하이브/파티 에 가입한다.
 
 <template>
-  <button class="btn btn-outline-warning"
-          style="color: black"
-          @click="handleJoinClick">가입하기</button>
+  <button
+    class="btn btn-outline-warning"
+    style="color: black"
+    @click="handleJoinClick"
+  >
+    가입하기
+  </button>
 
   <YesOrNoModal
     :is-visible="isModalVisible"
@@ -55,14 +59,29 @@ export default {
 
     closeModalAndReload() {
       if (this.property == "Hive") {
-        hiveService.joinHive(this.id);
+        hiveService
+          .joinHive(this.id)
+          .then((response) => {
+            console.log(response);
+            this.showModal("하이브 가입에 성공하셨습니다");
+            window.location.reload();
+          })
+          .catch((error) => {
+            this.showModal(error.response.data.message);
+          });
       } else if (this.property == "Party") {
-        partyService.joinParty(this.id);
+        partyService
+          .joinParty(this.id)
+          .then((response) => {
+            console.log(response);
+            this.showModal("파티 가입에 성공하셨습니다");
+            window.location.reload();
+          })
+          .catch((error) => {
+            this.showModal(error.response.data.message);
+          });
       }
       this.isModalVisible = false;
-      //오류 처리 해줘야함
-      alert("가입이 완료되었습니다.");
-      window.location.reload();
     },
 
     justCloseModal() {

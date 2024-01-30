@@ -89,21 +89,16 @@ export default {
         .login(this.user)
         .then((response) => {
           console.log(response.status);
-          if (response.status >= 200 && response.status < 300) {
-            // 회원가입 성공 시 모달 표시
-            // this.userId = userService.getUserInfo()["userId"];
-            this.userId = userService.getUserInfo()["userId"];
-            console.log(userService.getUserInfo());
-            console.log(this.userId);
-            this.showModal("로그인에 성공하셨습니다.", `/profile`);
-          } else {
-            console.error("서버 응답 오류:", response.data);
-          }
+          // 회원가입 성공 시 모달 표시
+          // this.userId = userService.getUserInfo()["userId"];
+          this.userId = userService.getUserInfo()["userId"];
+          console.log(userService.getUserInfo());
+          console.log(this.userId);
+          this.showModal("로그인에 성공하셨습니다.", `/profile`);
         })
         .catch((error) => {
           // 에러 핸들링 및 모달 표시
-          this.showModal("로그인 오류", "/home");
-          console.error("로그인 오류:", error);
+          this.showModal(error.response.data.message, "/login");
         });
     },
 
@@ -168,7 +163,7 @@ label {
 }
 input {
   width: 50%; /* input의 너비 (필요에 따라 조정) */
-  border: 1px solid black; /* 테두리 추가 */
+  border: 0.9px solid black; /* 테두리 추가 */
   border-radius: 5px;
   height: 30px;
 }

@@ -18,9 +18,26 @@
       <h5>
         <strong>Email : </strong>
         {{ profileData.email }}
-        <button v-if="isLoggedInUser" @click="doEmailConfirm">
+
+        <!-- 이메일 인증 section -->
+        <button v-if="isKakaoUser" type="button">카카오 유저</button>
+        <button v-else-if="isEmailVerified" type="button">
+          이메일 인증 완료
+        </button>
+        <button
+          v-else-if="isLoggedInUser"
+          class="btn btn-outline-warning"
+          style="color: black; margin-left: 5px"
+          @click="requestVerificationCode"
+        >
           이메일 인증
         </button>
+        <EmailVerificationModal
+          v-if="isEmailVerificationModalVisible"
+          @verification-Success="handleEmailVerificationSuccess"
+          @modal-Closed="closeEmailVerificationModal"
+          :email="profileData.email"
+        />
       </h5>
       <h5>
         <strong>자기소개 : </strong>
@@ -58,7 +75,6 @@
         class="btn btn-warning"
         style="margin-left: 10px"
         @click="showUpdateUserCategoryModal"
-        v-if="!isEditMode"
       >
         관심사 수정
       </button>
@@ -73,8 +89,8 @@
       <div v-if="isEditMode" class="profileBtn">
         <button
           @click="showUpdatePasswordModal"
-          class="btn btn-outline-warning"
-          style="margin-top: 20px; color: black"
+          class="btn btn-warning"
+          style="margin-top: 20px"
         >
           비밀번호 변경
         </button>
@@ -115,6 +131,7 @@ import HiveCardForm from "@/components/HiveCardForm.vue";
 import UpdatePasswordModal from "./UpdatePasswordModal.vue";
 import ResignButton from "./ResignButton.vue";
 import UpdateUserCategoryModal from "./UpdateUserCategoryModal.vue";
+import EmailVerificationModal from "./EmailVerificationModal.vue";
 
 export default {
   name: "profile-form",
@@ -126,6 +143,7 @@ export default {
       isEditMode: false,
       isUpdatePasswordModalVisible: false,
       isUpdateUserCategoryModalVisible: false,
+      isEmailVerificationModalVisible: false,
     };
   },
 
@@ -135,6 +153,7 @@ export default {
     UpdatePasswordModal,
     ResignButton,
     UpdateUserCategoryModal,
+    EmailVerificationModal,
   },
 
   props: {
@@ -145,6 +164,13 @@ export default {
   computed: {
     isLoggedInUser() {
       return userService.getUserId() === this.userId;
+    },
+    isEmailVerified() {
+      console.log(this.profileData);
+      return this.profileData.emailVerified;
+    },
+    isKakaoUser() {
+      return userService.isKakaoUser();
     },
   },
 
@@ -168,9 +194,16 @@ export default {
   methods: {
     submitOrToggle() {
       if (this.isEditMode) {
-        userService.modifyProfile(this.userId, this.profileData);
-        alert("수정이 완료되었습니다");
-        window.location.reload();
+        userService
+          .modifyProfile(this.userId, this.profileData)
+          .then((response) => {
+            console.log(response);
+            alert("수정이 완료되었습니다");
+            window.location.reload();
+          })
+          .catch((error) => {
+            alert(error.response.data);
+          });
       }
       this.isEditMode = !this.isEditMode;
     },
@@ -188,9 +221,19 @@ export default {
       this.isUpdatePasswordModalVisible = false;
     },
 
-    doEmailConfirm() {
-      console.log("clicked");
-      authService.doEmailConfirm(this.profileData.email);
+    //이메일 인증 관련
+    requestVerificationCode() {
+      authService.requestVerificationCode(this.profileData.email);
+      this.isEmailVerificationModalVisible = true;
+    },
+
+    handleEmailVerificationSuccess(modalMessage) {
+      this.closeEmailVerificationModal;
+      alert(modalMessage);
+    },
+
+    closeEmailVerificationModal() {
+      this.isEmailVerificationModalVisible = false;
     },
 
     //카테고리 수정 모달
@@ -224,9 +267,10 @@ export default {
   align-items: center; /* 가로 방향에서 중앙 정렬 */
   width: 100%; /* 컨테이너의 너비 (필요에 따라 조정 가능) */
   max-width: 800px; /* 최대 너비 설정 */
-  margin-top: 100px; /* 자동 마진으로 페이지 중앙에 위치 */
+  margin-top: 100px;
+  margin-bottom: 50px;
   padding: 50px; /* 컨테이너 내부의 여백 */
-  border: 1px solid black; /* 테두리 추가 */
+  border: 0.9px solid black; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
 }
 .jumbotron {

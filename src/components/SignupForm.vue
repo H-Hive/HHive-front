@@ -1,8 +1,6 @@
 <template>
   <form>
-    <div class="title">
-      H-HIVE 🍯
-    </div>
+    <div class="title">H-HIVE 🍯</div>
     <div>
       <label for="username">아이디: </label>
       <input id="username" type="text" v-model="user.username" />
@@ -24,7 +22,12 @@
       <input id="description" type="text" v-model="user.description" />
     </div>
 
-    <button type="submit" class="btn btn-outline-warning" style="color: black">
+    <button
+      type="button"
+      class="btn btn-outline-warning"
+      style="color: black"
+      @click="submitForm"
+    >
       회원가입
     </button>
     <img
@@ -33,8 +36,6 @@
       @click="kakaoLogin"
       class="kakao-login-button"
     />
-
-    <!-- 모달 사용 -->
   </form>
 
   <AlertModal
@@ -66,20 +67,17 @@ export default {
   },
   methods: {
     submitForm() {
+      console.log("왜안뒈");
       authService
         .signup(this.user)
         .then((response) => {
-          if (response.status >= 200 && response.status < 300) {
-            // 회원가입 성공 시 모달 표시
-            this.showModal("회원가입이 성공했습니다.", "/");
-          } else {
-            console.error("서버 응답 오류:", response.status);
-          }
+          // 회원가입 성공 시 모달 표시
+          console.log(response);
+          this.showModal("회원가입이 성공했습니다.", "/");
         })
         .catch((error) => {
           // 에러 핸들링 및 모달 표시
-          this.showModal("회원가입 오류");
-          console.error("회원가입 오류:", error);
+          this.showModal(error.response.data, "/register");
         });
     },
 
@@ -110,7 +108,6 @@ export default {
 </script>
 
 <style scoped>
-
 .title {
   margin-bottom: 40px;
   color: orange;
@@ -146,7 +143,7 @@ label {
 }
 input {
   width: 50%; /* input의 너비 (필요에 따라 조정)  */
-  border: 1px solid black; /* 테두리 추가 */
+  border: 0.9px solid black; /* 테두리 추가 */
   border-radius: 5px;
   height: 30px;
 }
