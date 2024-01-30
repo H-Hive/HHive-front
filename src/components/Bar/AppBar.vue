@@ -105,7 +105,7 @@ export default {
 
         this.eventSource.onerror = (error) => {
           this.closeSSE();
-          console.error("SSE 에러", error);
+          console.log("알림 재연결", error);
           this.retrySSE();
         };
 
