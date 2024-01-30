@@ -2,7 +2,7 @@
 // 파티에 대한 상세 정보 PartyForm(파티 조회) + 파티 가입/탈퇴 버튼(가입 여부에 따라 다름 눌렀을 시 정말 하시겠습니까 모달 창 뜸)
 
 <template>
-  <div>
+  <div class="party-container">
     <PartyForm :hiveId="this.hiveId" :partyId="this.partyId" />
   </div>
 </template>
@@ -40,3 +40,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.party-container {
+  display: flex;
+  align-items: center; /* 세로 방향에서 중앙 정렬 */
+  justify-content: center; /* 가로 방향에서 중앙 정렬 */
+  margin-top: 150px;
+}
+
+</style>

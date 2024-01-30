@@ -12,11 +12,12 @@
         </div>
       </div>
         <div v-if="!isTitle">
-          <div class="content-top">
           <h2>모임 소개 변경</h2>
-          <label for="hiveTitle">모임 소개:</label>
-          <input type="text" id="hiveIntroduction" v-model="hiveIntroduction" />
-        </div>
+          <div class="line"></div>
+          <div class="content-top">
+            <label for="hiveTitle">모임 소개:</label>
+            <input type="text" id="hiveIntroduction" v-model="hiveIntroduction" />
+          </div>
         </div>
         <div class="content-bottom">
           <p :class="{ 'hidden': !errorMessage, 'red': errorMessage }">{{ errorMessage }}</p>
@@ -101,7 +102,7 @@ mounted() {
   transform: translate(-50%, -50%);
   z-index: 1;
   width: 500px; /* 모달의 너비 조절 */
-  height: 400px;
+  height: 300px;
   padding: 20px;
   background-color: white;
   border: 1px solid #ccc;
@@ -131,7 +132,7 @@ mounted() {
 }
 
 .content-top {
-  height: 180px;
+  height: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;

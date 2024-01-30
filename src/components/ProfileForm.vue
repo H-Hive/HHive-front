@@ -270,7 +270,7 @@ export default {
   margin-top: 100px;
   margin-bottom: 50px;
   padding: 50px; /* 컨테이너 내부의 여백 */
-  border: 0.9px solid black; /* 테두리 추가 */
+  border: 1px solid #aaaaaa; /* 테두리 추가 */
   border-radius: 10px; /* 컨테이너 모서리를 10px 둥글게 처리 */
 }
 .jumbotron {
