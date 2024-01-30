@@ -52,7 +52,7 @@
                 @click="openUpdateHiveTitleModal"
                 class="btn btn-outline-dark"
               >
-                모임 이름 수정
+                제목 수정
               </button>
               <button
                 type="button"
@@ -60,7 +60,7 @@
                 @click="openUpdateHiveInfoModal"
                 class="btn btn-outline-dark"
               >
-                모임 소개 수정
+                소개 수정
               </button>
               <button
                 type="button"
@@ -190,7 +190,7 @@
     </div>
 
     <!-- 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 -->
-    <div v-for="(partyData, index) in partyDatas" :key="index">
+    <div class="party-container" v-for="(partyData, index) in partyDatas" :key="index">
       <PartyCardForm :partyData="partyData" :hiveId="this.id" />
     </div>
     <!-- <div>
@@ -536,4 +536,9 @@ export default {
 .join-btn {
   margin: 20px auto;
 }
+
+.party-container{
+  margin-left: 200px
+}
+
 </style>
