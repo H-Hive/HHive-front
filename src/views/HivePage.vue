@@ -416,7 +416,7 @@ export default {
   align-items: center;
   width: 100%;
   padding: 30px;
-  border: 2px solid grey;
+  border: 1.5px solid grey;
   border-radius: 8px;
 }
 
@@ -487,7 +487,7 @@ export default {
 
 .regular-meeting {
   padding: 30px;
-  border: 2px solid grey;
+  border: 1.5px solid grey;
   border-radius: 8px;
   width: 100%;
   height: auto;
@@ -512,7 +512,7 @@ export default {
   padding: 30px;
   margin-top: 2%;
   width: 100%;
-  border: 2px solid grey;
+  border: 1.5px solid grey;
   border-radius: 8px;
   background-color: ivory;
 }
