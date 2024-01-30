@@ -3,23 +3,23 @@
 // 파티 이름 + 파티 시간 + 멤버 수
 
 <template>
-  <div class="card" style="width: 18rem">
-    <img src="" class="card-img-top" alt="..." /> 여기 사진 들어갈 듯
+  <div class="card">
+<!--    <img src="" class="card-img-top" alt="..." /> 여기 사진 들어갈 듯-->
     <div class="card-body">
-      <h5
+      <p
         class="card-title"
         @click="goToPartyPage(partyData.partyList[0].id, hiveId)"
       >
         {{ partyData.partyList[0].title }}
-      </h5>
-      {{ partyData.partyList[0].content }}
+      </p>
+<!--      {{ partyData.partyList[0].content }}-->
     </div>
-    <ul class="list-group list-group-flush">
+<!--    <ul class="list-group list-group-flush">
       <li class="list-group-item">
         약속 일시: {{ partyData.partyList[0].dateTime }}
       </li>
       <li class="list-group-item">Host:{{ partyData.user.username }}</li>
-    </ul>
+    </ul>-->
   </div>
 </template>
 
@@ -40,4 +40,7 @@ export default {
 </script>
 
 <style scoped>
+
+.card {
+}
 </style>
