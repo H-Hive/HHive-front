@@ -11,14 +11,14 @@
 import authService from "@/services/auth.service";
 
 export default {
-  created() {
+  async created() {
     if (authService.isLoggedIn()) {
       this.$router.push(`/`);
       return;
     }
     const code = new URL(window.location.href).searchParams.get("code");
     console.log(code);
-    authService.sendKakaoCode(code);
+    await authService.sendKakaoCode(code);
     alert("로그인이 완료되었습니다.");
     window.location.reload();
   },
