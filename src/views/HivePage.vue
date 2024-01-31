@@ -126,7 +126,7 @@
               <h4>{{partyDatas[0].partyList[0].title}}</h4>
               <h4>일시 : {{ partyDatas[0].partyList[0].dateTime}}</h4>
               <h4>내용 : {{ partyDatas[0].partyList[0].content }}</h4>
-              <h4>참석 예정 인원:{{ partyDatas[0].partyList[0].members.length }}/{{ userList.length }}</h4>
+              <h4>참석 예정 인원:{{ partyDatas[0].partyList[0].members.length }}</h4>
             </div>
             <div class="meet-btn">
               <JoinButton
@@ -230,11 +230,7 @@ export default {
       userId: "",
       isInfo: "",
       groupType: "",
-      viewHostMenu:false,
-      userId:"",
       userName:"",
-      isInfo:"",
-      groupType:"",
       showSendNotModal: false,
       partyMember: [],
     };
