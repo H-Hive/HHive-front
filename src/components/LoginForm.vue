@@ -35,6 +35,19 @@
             class="kakao-login-button"
           />
 
+          <div class="button-login-box">
+            <button
+              type="submit"
+              class="btn btn-outline-warning"
+              style="width: 100%; color: black"
+              text-align:
+              center
+              @click="goToSignupPage"
+            >
+              회원가입으로 시작하기
+            </button>
+          </div>
+
           <div class="form-group">
             <div v-if="message" class="alert alert-danger" role="alert">
               {{ message }}
@@ -128,6 +141,10 @@ export default {
     kakaoLogin() {
       authService.kakaoLogin();
     },
+
+    goToSignupPage() {
+      this.$router.push("/register");
+    },
   },
 };
 </script>
@@ -173,7 +190,7 @@ button {
   margin-top: 10px; /* 버튼 아래쪽에 30px의 여백 추가 */
 }
 
-.kakao-login-button{
+.kakao-login-button {
   margin-bottom: 30px;
 }
 </style>
