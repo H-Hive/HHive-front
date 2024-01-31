@@ -58,26 +58,27 @@ export default {
     },
 
     closeModalAndReload() {
-      if (this.property == "Hive") {
+      if (this.property === "Hive") {
         hiveService
           .joinHive(this.id)
           .then((response) => {
             console.log(response);
-            this.showModal("하이브 가입에 성공하셨습니다");
+            alert("하이브 가입에 성공하셨습니다");
             window.location.reload();
           })
           .catch((error) => {
             this.showModal(error.response.data.message);
           });
-      } else if (this.property == "Party") {
+      } else if (this.property === "Party") {
         partyService
           .joinParty(this.id)
           .then((response) => {
             console.log(response);
-            this.showModal("파티 가입에 성공하셨습니다");
+            alert("파티 가입에 성공하셨습니다");
             window.location.reload();
           })
           .catch((error) => {
+            console.log(error);
             this.showModal(error.response.data.message);
           });
       }
