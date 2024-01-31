@@ -243,6 +243,7 @@ export default {
 
     closeModal() {
       this.isUpdateUserCategoryModalVisible = false;
+      window.location.reload();
     },
   },
 };
