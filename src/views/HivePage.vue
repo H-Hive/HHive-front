@@ -4,12 +4,6 @@
 
 <template >
   <div class="body">
-    <div class="category-btn">
-      <button type="button" class="btn btn-outline-dark">홈</button>
-      <button type="button" class="btn btn-outline-dark">게시판</button>
-      <button type="button" class="btn btn-outline-dark">사진첩</button>
-      <button type="button" class="btn btn-outline-dark">채팅</button>
-    </div>
     <UpdateHive-Modal
       :id="hiveData.id"
       :is-info="isInfo"
@@ -113,17 +107,19 @@
       <div class="all-meeting">
         <div class="r-meeting">
           <div class="regular-meeting">
-            <h2 class="title text-center">최신 모임</h2>
+            <div class="party-container" v-if="partyDatas.length">
+              <h2 class="title text-center">최신 모임</h2>
             <div class="regularmeetingdetail">
-              <h4>일시 : 2024.03.05</h4>
-              <h4>내용 : 스파르타 수료파티</h4>
-              <h4>위치 : 서울시 강남구 한신포차</h4>
-              <h4>참석 : 4/20</h4>
+              <h4>{{partyDatas[0].partyList[0].title}}</h4>
+              <h4>일시 : {{ partyDatas[0].partyList[0].dateTime}}</h4>
+              <h4>내용 : {{ partyDatas[0].partyList[0].content }}</h4>
+              <h4>참석 예정 인원:{{ partyDatas[0].partyList[0].members.length }}/{{ userList.length }}</h4>
             </div>
             <div class="meet-btn">
-              <button
-                type="button"
-                class="btn btn-warning"
+              <JoinButton
+              :property="'Party'"
+              :id="partyDatas[0].partyList[0].id"
+              class="btn btn-warning"
                 style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
@@ -131,23 +127,22 @@
                   margin: 10px 10px 10px 30px;
                   width: auto;
                 "
-              >
-                참여하기
-              </button>
-              <button
-                type="button"
-                class="btn btn-warning"
+              v-if="!partyDatas[0].partyList[0].members.find(member => member.username == userName )"
+            />
+            <ResignButton :property="'Party'" :id="partyDatas[0].partyList[0].id" class="btn btn-warning"
                 style="
                   --bs-btn-padding-y: 0.5rem;
                   --bs-btn-padding-x: 1rem;
                   --bs-btn-font-size: 1rem;
                   margin: 10px 10px 10px 10px;
                   width: auto;
-                "
-              >
-                불참 🥲
-              </button>
+                " v-else />
+             
             </div>
+          </div>
+          <div v-if="!partyDatas.length">
+            <h2 class="title text-center">아직 모임이 없어요~</h2>
+          </div>
           </div>
         </div>
         <div class="board-container">
@@ -215,9 +210,11 @@ export default {
       showCreatePartyModal: false,
       viewHostMenu:false,
       userId:"",
+      userName:"",
       isInfo:"",
       groupType:"",
       showSendNotModal: false,
+      partyMember: [],
     };
   },
 
@@ -354,6 +351,7 @@ export default {
           console.log(error);
         });
       this.userId = userService.getUserId();
+      this.userName = userService.getUserInfo()['username'];
     }
     this.getUserInfo();
   },
