@@ -36,7 +36,14 @@
       @modal-Closed="closeCreatePartyModal"
       @create-Success="handleCreatePartyModalClosed"
     />
-    <SendNotificationForm-modal v-if="showSendNotModal" :is-visible="showSendNotModal" :id="this.id" :type="groupType" @closeModal="closeSendNotModal" @send-Success="handleNotModalClosed"/>
+    <SendNotificationForm-modal
+      v-if="showSendNotModal"
+      :is-visible="showSendNotModal"
+      :id="this.id"
+      :type="groupType"
+      @closeModal="closeSendNotModal"
+      @send-Success="handleNotModalClosed"
+    />
 
     <div class="main-content">
       <div class="left-section">
@@ -78,7 +85,14 @@
               >
                 파티 생성
               </button>
-              <button type="button" v-if="(hiveData.hostId==userId)" @click="openSendNotToHIveModal" class="btn btn-outline-dark">알림 전송</button>
+              <button
+                type="button"
+                v-if="hiveData.hostId == userId"
+                @click="openSendNotToHIveModal"
+                class="btn btn-outline-dark"
+              >
+                알림 전송
+              </button>
             </div>
           </div>
           <p class="hostName">방장 : {{ hiveData.hostName }}</p>
@@ -103,9 +117,8 @@
               :property="'Hive'"
               :id="hiveData.id"
               v-if="!isHiveUser"
-
             />
-            <ResignButton :property="'Hive'" :id="hiveData.id" v-else/>
+            <ResignButton :property="'Hive'" :id="hiveData.id" v-else />
           </div>
         </div>
       </div>
@@ -153,7 +166,11 @@
         <div class="board-container">
           <h2 class="title text-center">모임 목록</h2>
           <div class="board">
-            <div class="party-container" v-for="(partyData, index) in partyDatas.slice(0, 3)" :key="index">
+            <div
+              class="party-container"
+              v-for="(partyData, index) in partyDatas.slice(0, 3)"
+              :key="index"
+            >
               <PartyCardForm :partyData="partyData" :hiveId="this.id" />
             </div>
             <div class="board-btn">
@@ -167,6 +184,7 @@
                   margin: 10px 10px 10px 10px;
                   width: auto;
                 "
+                @click="goToHivePartyPage(this.id)"
               >
                 더 보러가기
               </button>
@@ -176,7 +194,7 @@
       </div>
     </div>
 
-<!--    &lt;!&ndash; 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 &ndash;&gt;
+    <!--    &lt;!&ndash; 추후 하이브 파티 전체조회 나오면 메소드랑 같이 수정할 것 &ndash;&gt;
     <div class="party-container" v-for="(partyData, index) in partyDatas" :key="index">
       <PartyCardForm :partyData="partyData" :hiveId="this.id" />
     </div>-->
@@ -210,13 +228,13 @@ export default {
       isHiveUser: false,
       modalMessage: "",
       showUpdateHiveModal: false,
-      showAlertModal:false,
-      showDeleteModal:false,
+      showAlertModal: false,
+      showDeleteModal: false,
       showCreatePartyModal: false,
-      viewHostMenu:false,
-      userId:"",
-      isInfo:"",
-      groupType:"",
+      viewHostMenu: false,
+      userId: "",
+      isInfo: "",
+      groupType: "",
       showSendNotModal: false,
     };
   },
@@ -318,18 +336,23 @@ export default {
       this.closeCreatePartyModal();
       this.showAlertModal = true;
     },
-    closeSendNotModal(){
+    closeSendNotModal() {
       this.showSendNotModal = false;
     },
-    openSendNotToHIveModal(){
-      this.groupType="hive";
+    openSendNotToHIveModal() {
+      this.groupType = "hive";
       this.showSendNotModal = true;
     },
-    handleNotModalClosed(modalMessage){
+    handleNotModalClosed(modalMessage) {
       this.modalMessage = modalMessage;
       this.closeSendNotModal();
       this.showAlertModal = true;
-    }
+    },
+
+    //HivePartyPage Part
+    goToHivePartyPage(hiveId) {
+      this.$router.push(`/hive/${hiveId}/parties`);
+    },
   },
 
   mounted() {
@@ -523,5 +546,4 @@ export default {
 .join-btn {
   margin: 20px auto;
 }
-
 </style>
