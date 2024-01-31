@@ -21,23 +21,23 @@
             <input type="text" v-model="partyData.content" />
           </div>
           <div>
-            <label for="partyYear">연도:</label>
+            <label for="partyYear">연도 (2024 ~ ):</label>
             <input type="text" v-model="partyData.year" />
           </div>
           <div>
-            <label for="partyMonth">월:</label>
+            <label for="partyMonth">월 (1 ~ 12):</label>
             <input type="text" v-model="partyData.month" />
           </div>
           <div>
-            <label for="partyDay">일:</label>
+            <label for="partyDay">일 (1 ~ 31):</label>
             <input type="text" v-model="partyData.day" />
           </div>
           <div>
-            <label for="partyHours">시:</label>
+            <label for="partyHours">시 (0 ~ 23):</label>
             <input type="text" v-model="partyData.hours" />
           </div>
           <div>
-            <label for="partyMinutes">분:</label>
+            <label for="partyMinutes">분 (0 ~ 59):</label>
             <input type="text" v-model="partyData.minutes" />
           </div>
         </div>
@@ -145,7 +145,7 @@ export default {
   width: 90%; /* div의 너비를 폼의 너비에 맞춤 */
 }
 
-.content-top input{
+.content-top input {
   border: 1px solid black;
   border-radius: 5px;
   margin-top: 10px;
