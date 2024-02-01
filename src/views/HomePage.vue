@@ -9,14 +9,14 @@
       <img class="mainlogo" alt="HTML" src="../images/HiveLogo.png" />
     </header>
     <div class="button-container">
-      <button type="button" class="btn btn-warning" >
+      <button type="button" class="btn btn-warning">
         <router-link to="/hives" class="nav-link">
           모임 찾으러 가기
         </router-link>
       </button>
     </div>
 
-<!--
+    <!--
     <div class="content-container">
       <MyHivePage />
     </div>
@@ -34,19 +34,25 @@
     <br />
     <div class="intro">
       <div>
-        H-Hive는 동일한 취미와 관심사를 가진 사람들이 만나 서로의 삶을 더욱 풍요롭게 할 수 있는 커뮤 니티를 지향 합니다.
+        H-Hive는 동일한 취미와 관심사를 가진 사람들이 만나 서로의 삶을 더욱
+        풍요롭게 할 수 있는 커뮤 니티를 지향 합니다.
       </div>
       <div>
-        우리의 삶 속에 새로운 인연을 만들고, 함께 성장하며, 일상에 작은 기쁨을 더하는 그런 공간.
+        우리의 삶 속에 새로운 인연을 만들고, 함께 성장하며, 일상에 작은 기쁨을
+        더하는 그런 공간.
       </div>
-      <div class="info-3">
-        H-Hive와 함께, 새로운 시작을 만나 보세요.
-      </div>
+      <div class="info-3">H-Hive와 함께, 새로운 시작을 만나 보세요.</div>
     </div>
 
     <!-- 로그인되어있지 않다면 로고와 회원가입 링크 보여주기 -->
-    <router-link to="/register" v-if="!isLoggedIn">
-      <v-btn class="fixed-bottom"> HHive 시작하기 </v-btn>
+    <router-link to="/register" v-if="!isLoggedIn" style="text-decoration: none;">
+      <v-btn class="btn btn-warning"
+             style="
+             display: flex;
+             width: 50%;
+             margin: 50px auto;
+             ">
+        HHive 시작하기 </v-btn>
     </router-link>
   </div>
 </template>
@@ -64,7 +70,7 @@ export default {
   },
 
   components: {
-/*    MyHivePage,*/
+    /*    MyHivePage,*/
   },
 
   mounted() {
@@ -107,14 +113,6 @@ export default {
   background-color: rgb(255, 243, 161);
 }
 
-.fixed-bottom {
-  font-size: 15px;
-  position: fixed;
-  margin: 0px auto 300px;
-  width: 50%;
-  background-color: white;
-}
-
 .intro {
   background-color: white;
   width: 50%;
@@ -136,5 +134,4 @@ export default {
   font-weight: 700;
   color: orange;
 }
-
 </style>

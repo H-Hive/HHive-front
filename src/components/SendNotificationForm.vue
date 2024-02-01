@@ -2,7 +2,7 @@
     <div class="modal" v-if="isVisible">
       <div class="modal-content">
         <p>알림 내용을 작성해주세요</p>
-        <textarea v-model="notificationMessage" id="notificationMessage"></textarea>
+        <textarea class="content" v-model="notificationMessage" id="notificationMessage"></textarea>
         <div class="button-container">
           <button @click="sendNotification" type="button" class="btn btn-outline-dark">전송</button>
           <button @click="closeModal" type="button" class="btn btn-outline-dark">취소</button>
@@ -74,15 +74,20 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 60%;
+    height: 300px;
     max-width: 500px; 
     text-align: center; 
   }
+
+  .content{
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
   
   .modal-content button {
-    padding: 10px 20px; 
-    border: black; 
-    background: rgb(128, 128, 128); 
-    width: 20%; 
+    width: 20%;
     padding: 5px;
     margin: auto;
     margin-top: 7px;
@@ -91,5 +96,6 @@
   .button-container button {
     margin: 0 5px; 
   }
+
   </style>
   

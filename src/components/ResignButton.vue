@@ -70,32 +70,32 @@ export default {
           .resignHive(this.id)
           .then((response) => {
             console.log(response);
-            this.showModal("하이브 탈퇴에 성공하셨습니다");
+            alert("하이브 탈퇴에 성공하셨습니다");
             window.location.reload();
           })
           .catch((error) => {
-            this.showModal(error.response.data.message);
+            alert(error.response.data.message);
           });
       } else if (this.property === "Party") {
         partyService
           .resignParty(this.id)
           .then((response) => {
             console.log(response);
-            this.showModal("파티 탈퇴에 성공하셨습니다");
+            alert("파티 탈퇴에 성공하셨습니다");
             window.location.reload();
           })
           .catch((error) => {
-            this.showModal(error.response.data.message);
+            alert(error.response.data.message);
           });
       } else if (this.property === "User") {
         userService
           .deleteUser(userService.getUserId())
           .then((response) => {
             console.log(response);
-            this.showModal("탈퇴에 성공하셨습니다");
+            alert("탈퇴에 성공하셨습니다");
           })
           .catch((error) => {
-            this.showModal(error.response.data.message);
+            alert(error.response.data.message);
           });
         authService.logout();
       }

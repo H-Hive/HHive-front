@@ -150,7 +150,7 @@
                   margin: 10px 10px 10px 10px;
                   width: auto;
                 " v-else />
-             
+
             </div>
           </div>
           <div v-if="!partyDatas.length">
@@ -392,14 +392,6 @@ export default {
   justify-content: center;
 }
 
-.category-btn {
-  display: flex;
-  width: 100%;
-  margin-top: 15px;
-  margin-left: 8%;
-  flex-direction: row;
-}
-
 .category-btn button {
   margin: 10px 10px 10px 10px;
 }
@@ -407,6 +399,7 @@ export default {
 .main-content {
   display: flex; /* 가로로 배치 */
   width: 100%;
+  margin-top: 50px;
 }
 
 .left-section {
@@ -451,7 +444,7 @@ export default {
   height: 160px;
   max-height: 160px; /* 최대 높이 설정 */
   overflow-y: auto; /* 세로 스크롤바가 필요할 때만 표시 */
-  border: 1px solid #313131;
+  border: 1px solid grey;
   border-radius: 8px;
   color: #434343;
 }
@@ -463,19 +456,19 @@ export default {
   width: 300px;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #313131;
+  border: 1px solid grey;
   border-radius: 5px;
   background-color: #fffcd9;
 }
 .people {
-  width: 100%;
+  width: 100px;
   margin: 10px 0px;
   text-align: center;
   font-weight: bold;
 }
 
 .line {
-  border-bottom: 1px solid #313131;
+  border-bottom: 1px solid grey;
   width: 100%;
 }
 
@@ -505,7 +498,7 @@ export default {
 
 .regularmeetingdetail {
   margin-top: 15px;
-  border: 1px solid #313131;
+  border: 1px solid grey;
   border-radius: 8px;
   padding: 15px;
   color: #313131;

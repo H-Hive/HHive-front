@@ -75,6 +75,7 @@
         class="btn btn-warning"
         style="margin-left: 10px"
         @click="showUpdateUserCategoryModal"
+        v-if="!isEditMode"
       >
         관심사 수정
       </button>
