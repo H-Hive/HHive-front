@@ -21,7 +21,6 @@
       <MyHivePage />
     </div>
 -->
-
   </div>
 
   <!-- 로그인되어있지 않다면 로고와 회원가입 링크 보여주기 -->
@@ -45,14 +44,13 @@
     </div>
 
     <!-- 로그인되어있지 않다면 로고와 회원가입 링크 보여주기 -->
-    <router-link to="/register" v-if="!isLoggedIn" style="text-decoration: none;">
-      <v-btn class="btn btn-warning"
-             style="
-             display: flex;
-             width: 50%;
-             margin: 50px auto;
-             ">
-        HHive 시작하기 </v-btn>
+    <router-link to="/login" v-if="!isLoggedIn" style="text-decoration: none">
+      <v-btn
+        class="btn btn-warning"
+        style="display: flex; width: 50%; margin: 50px auto"
+      >
+        HHive 시작하기
+      </v-btn>
     </router-link>
   </div>
 </template>
@@ -120,7 +118,7 @@ export default {
   padding: 20px;
   border: 0.5px solid grey;
   border-radius: 10px;
-  color: #51514C;
+  color: #51514c;
   font-size: 20px;
   font-weight: 600;
   text-align: center;

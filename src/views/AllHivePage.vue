@@ -19,7 +19,12 @@
       </button>
     </div>
     <div class="btn-container">
-      <button type="button" class="btn btn-outline-dark" style="height: 100%" @click="showAllHives">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        style="height: 100%"
+        @click="showAllHives"
+      >
         전체
       </button>
       <div v-for="(majorCategory, mIndex) in categories" :key="mIndex">
@@ -51,6 +56,13 @@
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        @click="openCreateHiveModal"
+        class="btn btn-warning"
+      >
+        모임 만들기
+      </button>
       <CreateHiveForm-Modal
         class="create-modal"
         v-if="showCreateHiveModal"
@@ -333,5 +345,4 @@ export default {
   border-radius: 5px;
   margin-top: 2px;
 }
-
 </style>
