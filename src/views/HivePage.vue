@@ -153,7 +153,7 @@
             </div>
           </div>
           <div v-if="!partyDatas.length">
-            <h2 class="title text-center">아직 모임이 없어요~</h2>
+            <h4 class="title text-center"> 파티를 생성해 주세요 🎉</h4>
           </div>
           </div>
         </div>

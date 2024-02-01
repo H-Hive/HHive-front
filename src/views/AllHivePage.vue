@@ -19,7 +19,7 @@
       </button>
     </div>
     <div class="btn-container">
-      <button type="button" class="btn btn-outline-dark" @click="showAllHives">
+      <button type="button" class="btn btn-outline-dark" style="height: 100%" @click="showAllHives">
         전체
       </button>
       <div v-for="(majorCategory, mIndex) in categories" :key="mIndex">
@@ -34,14 +34,14 @@
           {{ majorCategory.title }}
         </button>
 
-        <div v-if="majorCategory.showSubCategories">
+        <div v-if="majorCategory.showSubCategories" class="sub-container">
           <div
             v-for="(subCategory, sIndex) in majorCategory.subCategories"
             :key="sIndex"
           >
             <button
               type="button"
-              class="btn btn-outline-dark"
+              style="margin: 5px"
               @click="
                 showHivesBySubCategory(majorCategory.name, subCategory.name)
               "
@@ -325,4 +325,13 @@ export default {
   flex-direction: column; /* 서브 카테고리들을 세로로 나열 */
   margin-top: 5px; /* 서브 카테고리 간격 조절 */
 }
+
+.sub-container {
+  background-color: #eeeeee;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
 </style>
