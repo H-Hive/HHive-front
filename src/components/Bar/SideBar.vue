@@ -26,7 +26,7 @@
       <router-link to="/myparties" class="custom-router-link">
         <v-list-item
           prepend-icon="mdi-party-popper"
-          title="예정 파티들"
+          title="내가 참여한 파티"
           class="icon-btn"
         ></v-list-item>
       </router-link>

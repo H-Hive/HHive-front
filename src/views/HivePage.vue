@@ -121,7 +121,7 @@
         <div class="r-meeting">
           <div class="regular-meeting">
             <div class="party-container" v-if="partyDatas.length">
-              <h2 class="title text-center">최신 모임</h2>
+              <h2 class="title text-center">최신 파티</h2>
             <div class="regularmeetingdetail">
               <h4>{{partyDatas[0].partyList[0].title}}</h4>
               <h4>일시 : {{ partyDatas[0].partyList[0].dateTime}}</h4>
@@ -158,7 +158,7 @@
           </div>
         </div>
         <div class="board-container">
-          <h2 class="title text-center">모임 목록</h2>
+          <h2 class="title text-center">파티 목록</h2>
           <div class="board">
             <div
               class="party-container"
