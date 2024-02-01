@@ -10,6 +10,7 @@ import MyHivePage from "./views/MyHivePage.vue"
 import KakaoPage from "./views/KakaoPage.vue"
 import HivePartyPage from "./views/HivePartyPage.vue"
 import authService from "./services/auth.service";
+import MyPartyPage from "./views/MyPartyPage.vue"
 // lazy-loaded
 // const Profile = () => import("./components/Profile.vue")
 
@@ -61,6 +62,10 @@ const routes = [
   {
     path: "/myhives",
     component: MyHivePage
+  },
+  {
+    path: "/myparties",
+    component: MyPartyPage
   },
   {
     path: "/kakao-login",
