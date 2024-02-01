@@ -40,7 +40,10 @@ class PartyService {
 
     return axios.delete(API_URL + `/${partyId}` + "/resign", {headers: {'Authorization': localStorage.getItem("token")}});
   }
-
+  getMyParties(userId)
+  {
+    return axios.get(API_URL+"/users"+`/${userId}`, {headers: {'Authorization': localStorage.getItem("token")}});
+  }
 }
 
 export default new PartyService();

@@ -23,12 +23,13 @@
             class="icon-btn"
         ></v-list-item>
       </router-link>
-      <!-- <router-link to="/myparties">
+      <router-link to="/myparties" class="custom-router-link">
         <v-list-item
           prepend-icon="mdi-party-popper"
           title="예정 파티들"
+          class="icon-btn"
         ></v-list-item>
-      </router-link> -->
+      </router-link>
     </v-list>
   </v-navigation-drawer>
 
