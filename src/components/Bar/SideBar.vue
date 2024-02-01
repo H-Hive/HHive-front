@@ -19,7 +19,7 @@
       <router-link to="/myhives" class="custom-router-link">
         <v-list-item
             prepend-icon="mdi-beehive-outline"
-            title="내 하이브들"
+            title="내가 참여한 모임"
             class="icon-btn"
         ></v-list-item>
       </router-link>

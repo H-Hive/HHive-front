@@ -27,25 +27,25 @@
             >
               로그인
             </button>
-          </div>
-          <img
-            src="../images/kakao_login_medium_wide.png"
-            alt="카카오 계정으로 회원가입"
-            @click="kakaoLogin"
-            class="kakao-login-button"
-          />
 
-          <div class="button-login-box">
-            <button
-              type="submit"
-              class="btn btn-outline-warning"
-              style="width: 100%; color: black"
-              text-align:
-              center
-              @click="goToSignupPage"
-            >
-              회원가입으로 시작하기
-            </button>
+              <button
+                  type="submit"
+                  class="btn btn-outline-warning"
+                  style="width: 100%; color: black"
+                  text-align:
+                  center
+                  @click="goToSignupPage"
+              >
+                회원 가입
+              </button>
+
+            <img
+                src="../images/kakao_login_wide.png"
+                alt="카카오 계정으로 회원가입"
+                @click="kakaoLogin"
+                class="kakao-login-button"
+            />
+
           </div>
 
           <div class="form-group">
@@ -185,12 +185,15 @@ input {
   height: 30px;
 }
 
-button {
-  width: 100px; /* 버튼의 너비를 설정 (필요에 따라 조정) */
-  margin-top: 10px; /* 버튼 아래쪽에 30px의 여백 추가 */
+
+.button-login-box {
+  display: flex;
+  flex-direction: column;
 }
 
-.kakao-login-button {
-  margin-bottom: 30px;
+.button-login-box button {
+  width: 100px;
+  margin-bottom: 15px;
 }
+
 </style>
