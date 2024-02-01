@@ -150,7 +150,6 @@
                   margin: 10px 10px 10px 10px;
                   width: auto;
                 " v-else />
-
             </div>
           </div>
           <div v-if="!partyDatas.length">
@@ -507,6 +506,7 @@ export default {
 .meet-btn {
   display: flex;
   justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .board-container {
@@ -534,7 +534,12 @@ export default {
   justify-content: flex-end;
 }
 
+.party-container {
+  margin-top: 10px;
+}
+
 .join-btn {
   margin: 20px auto;
 }
+
 </style>
