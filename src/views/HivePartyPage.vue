@@ -1,11 +1,23 @@
 <template>
   <div class="body">
-    <div
-      class="party-container"
-      v-for="(partyData, index) in partyDatas"
-      :key="index"
-    >
-      <PartyCardForm :partyData="partyData" :hiveId="this.hiveId" />
+    <div class="board">파티 게시판 🎉</div>
+    <div class="party">
+      <div
+          class="party-container"
+          v-for="(partyData, index) in paginatedData"
+          :key="index"
+      >
+        <PartyCardForm :partyData="partyData" :hiveId="this.hiveId" />
+      </div>
+    </div>
+    <div class="pagination">
+      <button
+          v-for="page in totalPages"
+          :key="page"
+          @click="setPage(page)"
+      >
+        {{ page }}
+      </button>
     </div>
   </div>
 </template>
@@ -19,6 +31,8 @@ export default {
   data() {
     return {
       partyDatas: [],
+      currentPage: 1,
+      itemsPerPage: 7,
     };
   },
 
@@ -44,7 +58,23 @@ export default {
     }
   },
 
-  method: {},
+  methods: {
+    setPage(pageNumber) {
+      this.currentPage = pageNumber;
+    },
+  },
+
+  computed: {
+    paginatedData() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.partyDatas.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.partyDatas.length / this.itemsPerPage);
+    },
+  },
+
 };
 </script>
 
@@ -58,4 +88,34 @@ export default {
   background-color: rgb(255, 243, 161);
   justify-content: center;
 }
+
+.board{
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.party {
+  display: flex;
+  flex-direction: column;
+  margin: 100px auto;
+  width: 50%;
+  height: 500px;
+}
+
+.party-container {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  margin-right: 10px;
+}
+
 </style>
