@@ -15,13 +15,14 @@ class HiveService {
 
     return axios.get(API_URL + `/${hiveId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
-  createHive(hiveTitle,MajorCategory,SubCategory) {
+  createHive(hiveTitle,MajorCategory,SubCategory,roadAddress) {
     return axios.post(
       API_URL,
       {
         title: hiveTitle,
         majorCategoryName: MajorCategory,
-        subCategoryName: SubCategory
+        subCategoryName: SubCategory,
+        roadAddress:roadAddress
       },
       { headers: { 'Authorization': localStorage.getItem("token") } }
     );

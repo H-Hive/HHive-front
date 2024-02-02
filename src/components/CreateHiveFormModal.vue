@@ -35,10 +35,15 @@ export default {
       subCategory:"",
     };
   },
+  props: {
+    roadAddress: {
+        type: String,
+      },
+    },
   methods: {
     createHive() {
       console.log(this.majorCategory);
-      hiveService.createHive(this.hiveTitle,this.majorCategory,this.subCategory)
+      hiveService.createHive(this.hiveTitle,this.majorCategory,this.subCategory,this.roadAddress)
         .then((response) => {
           const hiveId=response.data.payload.id;
           this.modalMessage = response.data.message;
@@ -55,6 +60,7 @@ export default {
       this.subCategory = selectedSubCategory;
     },
     closeModal() {
+      console.log("zzzzzz"+this.roadAddress);
       this.$emit('modal-Closed');
     },
   },

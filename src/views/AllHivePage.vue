@@ -19,12 +19,7 @@
       </button>
     </div>
     <div class="btn-container">
-      <button
-        type="button"
-        class="btn btn-outline-dark"
-        style="height: 100%"
-        @click="showAllHives"
-      >
+      <button type="button" class="btn btn-outline-dark" style="height: 100%" @click="showAllHives">
         전체
       </button>
       <div v-for="(majorCategory, mIndex) in categories" :key="mIndex">
@@ -61,11 +56,12 @@
         @click="openCreateHiveModal"
         class="btn btn-warning"
       >
-        모임 만들기
+        일반 모임 만들기
       </button>
       <CreateHiveForm-Modal
         class="create-modal"
         v-if="showCreateHiveModal"
+        :roadAddress="roadAddress"
         @modal-Closed="closeCreateHiveModal"
         @create-Success="handleModalClosed"
       />
@@ -86,7 +82,8 @@
         </template>
       </div>
       <div class="kakao-map">
-        <KakaoMap />
+        <h3 style="font-weight: bold; text-align: center;">모임을 만드실 위치를 클릭해 주세요</h3>
+        <KakaoMap @getAddress-Success="openCreateHiveByAddressModal"/>
       </div>
     </div>
   </div>
@@ -109,6 +106,7 @@ export default {
       modalMessage: "",
       redirectPath: "",
       searchHive: "",
+      roadAddress:"",
       categories: [
         {
           title: "게임",
@@ -196,6 +194,11 @@ export default {
       this.showAlertModal = false;
     },
     openCreateHiveModal() {
+      this.roadAddress = "주소 미정"
+      this.showCreateHiveModal = true;
+      },
+    openCreateHiveByAddressModal(address){
+      this.roadAddress = address;
       this.showCreateHiveModal = true;
     },
     closeCreateHiveModal() {
@@ -345,4 +348,5 @@ export default {
   border-radius: 5px;
   margin-top: 2px;
 }
+
 </style>
