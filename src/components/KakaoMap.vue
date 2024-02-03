@@ -132,8 +132,6 @@ export default {
       this.map = new window.kakao.maps.Map(container, options);
 
       window.kakao.maps.event.addListener(this.map, 'click', this.handleMapClick);
-
-      this.loadMarker(33.450701, 126.570667);
     }
   },
 }; </script>
