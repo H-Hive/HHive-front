@@ -72,7 +72,7 @@ export default {
           });
       } else if (this.property === "Party") {
         partyService
-          .joinParty(this.id)
+          .joinParty(this.hiveId, this.id)
           .then((response) => {
             console.log(response);
             alert("파티 가입에 성공하셨습니다");
