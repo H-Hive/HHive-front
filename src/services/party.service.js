@@ -31,9 +31,8 @@ class PartyService {
 
     return axios.delete(API_URL + `/${partyId}`, {headers: {'Authorization': localStorage.getItem("token")}});
   }
-
-  joinParty(partyId) {
-    return axios.post(API_URL + `/${partyId}` + "/join",{},{headers: {'Authorization': localStorage.getItem("token")}});
+  joinParty(hiveId,partyId) {
+    return axios.post(API_URL + `/${partyId}` + "/hives" + `/${hiveId}` + "/join",{},{headers: {'Authorization': localStorage.getItem("token")}});
   }
 
   resignParty(partyId) {

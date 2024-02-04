@@ -80,6 +80,7 @@
             <JoinButton
                 :property="'Party'"
                 :id="partyData.id"
+                :hiveId="hiveId"
                 v-if="!isPartyUser"
             />
             <ResignButton :property="'Party'" :id="partyData.id" v-else />
