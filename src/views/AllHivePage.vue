@@ -82,7 +82,7 @@
         </template>
       </div>
       <div class="kakao-map">
-        <h3 style="font-weight: bold; text-align: center;">모임을 만드실 위치를 클릭해 주세요</h3>
+        <h2 style="font-weight: bold; text-align: center;">모임을 만드실 위치를 클릭해 주세요</h2>
         <KakaoMap @getAddress-Success="openCreateHiveByAddressModal"/>
       </div>
     </div>

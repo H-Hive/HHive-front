@@ -38,6 +38,7 @@ export default {
   props: {
     property: String,
     id: Number,
+    hiveId: String,
   },
 
   methods: {

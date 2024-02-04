@@ -12,7 +12,6 @@
       return {
         zonecode: "",
         roadAddress: "",
-        detailAddress: "",
       };
     },
     setup() {},
