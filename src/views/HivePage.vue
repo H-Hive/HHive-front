@@ -87,6 +87,14 @@
               >
                 알림 전송
               </button>
+              <button
+                type="button"
+                v-if="isHiveUser"
+                @click="goToChatPage"
+                class="btn btn-outline-dark"
+              >
+                채팅방 입장
+              </button>
             </div>
           </div>
           <p class="hostName">방장 : {{ hiveData.hostName }}</p>
@@ -122,39 +130,50 @@
           <div class="regular-meeting">
             <div class="party-container" v-if="partyDatas.length">
               <h2 class="title text-center">최신 파티</h2>
-            <div class="regularmeetingdetail">
-              <h4>{{partyDatas[0].partyList[0].title}}</h4>
-              <h4>일시 : {{ partyDatas[0].partyList[0].dateTime}}</h4>
-              <h4>내용 : {{ partyDatas[0].partyList[0].content }}</h4>
-              <h4>참석 예정 인원:{{ partyDatas[0].partyList[0].members.length }}</h4>
+              <div class="regularmeetingdetail">
+                <h4>{{ partyDatas[0].partyList[0].title }}</h4>
+                <h4>일시 : {{ partyDatas[0].partyList[0].dateTime }}</h4>
+                <h4>내용 : {{ partyDatas[0].partyList[0].content }}</h4>
+                <h4>
+                  참석 예정 인원:{{ partyDatas[0].partyList[0].members.length }}
+                </h4>
+              </div>
+              <div class="meet-btn">
+                <JoinButton
+                  :property="'Party'"
+                  :id="partyDatas[0].partyList[0].id"
+                  class="btn btn-warning"
+                  style="
+                    --bs-btn-padding-y: 0.5rem;
+                    --bs-btn-padding-x: 1rem;
+                    --bs-btn-font-size: 1rem;
+                    margin: 10px 10px 10px 30px;
+                    width: auto;
+                  "
+                  v-if="
+                    !partyDatas[0].partyList[0].members.find(
+                      (member) => member.username == userName
+                    )
+                  "
+                />
+                <ResignButton
+                  :property="'Party'"
+                  :id="partyDatas[0].partyList[0].id"
+                  class="btn btn-warning"
+                  style="
+                    --bs-btn-padding-y: 0.5rem;
+                    --bs-btn-padding-x: 1rem;
+                    --bs-btn-font-size: 1rem;
+                    margin: 10px 10px 10px 10px;
+                    width: auto;
+                  "
+                  v-else
+                />
+              </div>
             </div>
-            <div class="meet-btn">
-              <JoinButton
-              :property="'Party'"
-              :id="partyDatas[0].partyList[0].id"
-              class="btn btn-warning"
-                style="
-                  --bs-btn-padding-y: 0.5rem;
-                  --bs-btn-padding-x: 1rem;
-                  --bs-btn-font-size: 1rem;
-                  margin: 10px 10px 10px 30px;
-                  width: auto;
-                "
-              v-if="!partyDatas[0].partyList[0].members.find(member => member.username == userName )"
-            />
-            <ResignButton :property="'Party'" :id="partyDatas[0].partyList[0].id" class="btn btn-warning"
-                style="
-                  --bs-btn-padding-y: 0.5rem;
-                  --bs-btn-padding-x: 1rem;
-                  --bs-btn-font-size: 1rem;
-                  margin: 10px 10px 10px 10px;
-                  width: auto;
-                " v-else />
+            <div v-if="!partyDatas.length">
+              <h4 class="title text-center">파티를 생성해 주세요 🎉</h4>
             </div>
-          </div>
-          <div v-if="!partyDatas.length">
-            <h4 class="title text-center"> 파티를 생성해 주세요 🎉</h4>
-          </div>
           </div>
         </div>
         <div class="board-container">
@@ -229,7 +248,7 @@ export default {
       userId: "",
       isInfo: "",
       groupType: "",
-      userName:"",
+      userName: "",
       showSendNotModal: false,
       partyMember: [],
     };
@@ -349,6 +368,11 @@ export default {
     goToHivePartyPage(hiveId) {
       this.$router.push(`/hive/${hiveId}/parties`);
     },
+
+    //ChatPage Part
+    goToChatPage() {
+      this.$router.push(`/hive/${this.id}/chat`);
+    },
   },
 
   mounted() {
@@ -373,7 +397,7 @@ export default {
           console.log(error);
         });
       this.userId = userService.getUserId();
-      this.userName = userService.getUserInfo()['username'];
+      this.userName = userService.getUserInfo()["username"];
     }
     this.getUserInfo();
   },
@@ -541,5 +565,4 @@ export default {
 .join-btn {
   margin: 20px auto;
 }
-
 </style>
