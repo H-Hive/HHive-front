@@ -10,7 +10,7 @@
             <a href="https://github.com/EUNCHAEv1006" target="_blank">김은채</a>
             <a href="https://github.com/mixedtape" target="_blank">박시원</a>
             <a href="https://github.com/de123456sdf" target="_blank">창다은</a>
-            <a href="https://github.com/" target="_blank">김대영</a>
+            <a href="https://github.com/kdy9960" target="_blank">김대영</a>
           </p>
         </div>
       </div>

@@ -4,19 +4,24 @@ import axios from "axios";
 const API_URL = 'https://hhive.shop/api/notifications'
 
 class notificationService{
+    getEmitter(userId){
+        return new EventSource(
+            API_URL + `/${userId}`
+          );
+    }
 
     getAllNotifications(){
-        return axios.get(API_URL +"/getAll", {headers: {'Authorization': localStorage.getItem("token")}});
+        return axios.get(API_URL ,{headers: {'Authorization': localStorage.getItem("token")}});
     }
     getAllNotificationsCount(){
-        return axios.get(API_URL+"/count", {headers: {'Authorization': localStorage.getItem("token")}});
+        return axios.get(API_URL+"/unread", {headers: {'Authorization': localStorage.getItem("token")}});
     }
     readNotification(){
-        return axios.get(API_URL +"/read", {headers: {'Authorization': localStorage.getItem("token")}});
+        return axios.patch(API_URL +"/read",{}, {headers: {'Authorization': localStorage.getItem("token")}});
     }
     sendNotification(Notmessage,groupId,groupType){
-        return axios.post(API_URL+"/send"
-        ,{
+        return axios.post(API_URL,
+        {
             message:Notmessage,
             id:groupId,
             type:groupType
